@@ -13,12 +13,14 @@ namespace DiceBotsGame.WorldLevels {
 
       public int CurrentFaceIndex { get; private set; }
       private int Size { get; set; }
+
       private List<WorldCubeTile> Tiles { get; } = new List<WorldCubeTile>();
       private WorldCubeTile[] EntryTiles { get; } = new WorldCubeTile[Cubes.FaceCount];
       private WorldCubeTile[] ExitTiles { get; } = new WorldCubeTile[Cubes.FaceCount];
       public WorldCubeTile SpawnTile => EntryTiles[0];
       private Coroutine RotateRoutine { get; set; }
       private bool Built => Tiles.Count > 0;
+      public float InnerSphereRadius { get; private set; }
 
       public WorldCubeTile this[int face, int x, int y] => Tiles[face * Size * Size + x * Size + y];
 
@@ -35,6 +37,7 @@ namespace DiceBotsGame.WorldLevels {
          }
 
          Size = pattern.CubeSize;
+         InnerSphereRadius = pattern.CubeSize * .5f * pattern.TileOffset;
          center.localScale = Vector3.one * Size * pattern.TileOffset * .99f;
 
          for (var faceIndex = 0; faceIndex < Cubes.FaceCount; ++faceIndex) {
@@ -46,7 +49,7 @@ namespace DiceBotsGame.WorldLevels {
 
             var face = new GameObject($"Face {faceIndex}").transform;
             face.SetParent(faceRotator);
-            face.localPosition = new Vector3(0, pattern.CubeSize * .5f * pattern.TileOffset, 0);
+            face.localPosition = new Vector3(0, InnerSphereRadius, 0);
             face.localRotation = Quaternion.identity;
             face.localScale = Vector3.one;
 

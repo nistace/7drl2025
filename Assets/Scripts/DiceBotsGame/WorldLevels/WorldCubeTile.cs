@@ -1,15 +1,10 @@
-﻿using DiceBotsGame.WorldLevels.Activities;
+﻿using DiceBotsGame.Visuals3D.TileHighlights;
 using UnityEngine;
 
 namespace DiceBotsGame.WorldLevels {
    public class WorldCubeTile : MonoBehaviour {
-      public enum HighlightType {
-         None = 0,
-         Hover = 1,
-         Path = 2
-      }
-
-      [SerializeField] protected MeshRenderer highlightRenderer;
+      [SerializeField] protected TileHighlight highlight;
+      [SerializeField] protected WorldCubeTileConfig config;
       [SerializeField] protected Transform playerAnchorTransform;
       [SerializeField] protected bool applyAnchorForwardToPlayer;
 
@@ -25,10 +20,12 @@ namespace DiceBotsGame.WorldLevels {
 
       private void Start() {
          Activity = GetComponent<WorldCubeTileActivity>();
-         SetHighlight(HighlightType.None);
+         SetHighlight(WorldCubeTileConfig.HighlightType.None, true);
       }
 
-      public void SetHighlight(HighlightType highlightType) => highlightRenderer.gameObject.SetActive(highlightType != HighlightType.None);
+      public void SetHighlight(WorldCubeTileConfig.HighlightType highlightType, bool snap = false) {
+         highlight.ChangeHighlight(config.GetHighlight(highlightType), snap);
+      }
 
       public void SetUp(int faceIndex, int xInFace, int yInFace) {
          Coordinates = new Vector3Int(xInFace, yInFace, faceIndex);

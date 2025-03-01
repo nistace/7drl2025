@@ -33,9 +33,9 @@ namespace DiceBotsGame.DiceBots {
       public void SetWorldPosition(WorldCubeTile newTile) {
          if (CurrentTile == newTile) return;
 
-         transform.position = newTile.PlayerAnchorTransform.position;
          transform.rotation = newTile.ApplyAnchorForwardToPlayer ? newTile.PlayerAnchorTransform.rotation :
-            CurrentTile ? Quaternion.LookRotation(newTile.transform.position - transform.position, Vector3.up) : Quaternion.identity;
+            CurrentTile ? Quaternion.LookRotation(newTile.PlayerAnchorTransform.position - transform.position, Vector3.up) : Quaternion.identity;
+         transform.position = newTile.PlayerAnchorTransform.position;
          CurrentTile = newTile;
       }
    }
