@@ -1,0 +1,89 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using DiceBotsGame.Utils;
+using UnityEngine;
+using UnityEngine.Events;
+using Random = UnityEngine.Random;
+
+namespace DiceBotsGame.WorldLevels {
+   public class WorldCube : MonoBehaviour {
+      [SerializeField] protected Transform center;
+      [SerializeField] protected float rotationSpeed = 30;
+
+      public int CurrentFaceIndex { get; private set; }
+      private int Size { get; set; }
+      private List<WorldCubeTile> Tiles { get; } = new List<WorldCubeTile>();
+      public WorldCubeTile SpawnTile { get; private set; }
+      private Coroutine RotateRoutine { get; set; }
+
+      public WorldCubeTile this[int face, int x, int y] => Tiles[face * Size * Size + x * Size + y];
+
+      public bool Exists(int x, int y) => x >= 0 && y >= 0 && x < Size && y < Size;
+
+      private void Start() {
+         RotateToFace(0);
+      }
+
+      public void Build(WorldCubePattern pattern) {
+         Size = pattern.CubeSize;
+         center.localScale = Vector3.one * Size * pattern.TileOffset * .99f;
+
+         for (var faceIndex = 0; faceIndex < Cubes.FaceCount; ++faceIndex) {
+            var faceRotator = new GameObject($"FaceRotator {faceIndex}").transform;
+            faceRotator.SetParent(transform);
+            faceRotator.localPosition = Vector3.zero;
+            faceRotator.localRotation = Cubes.faceRotations[faceIndex];
+            faceRotator.localScale = Vector3.one;
+
+            var face = new GameObject($"Face {faceIndex}").transform;
+            face.SetParent(faceRotator);
+            face.localPosition = new Vector3(0, pattern.CubeSize * .5f * pattern.TileOffset, 0);
+            face.localRotation = Quaternion.identity;
+            face.localScale = Vector3.one;
+
+            var tiles = new List<WorldCubeTile>();
+
+            if (faceIndex == 0) {
+               SpawnTile = Instantiate(pattern.SpawnTilePrefab, face.transform);
+               tiles.Add(SpawnTile);
+            }
+            if (faceIndex < Cubes.FaceCount - 1) tiles.Add(Instantiate(pattern.FaceExitTilePrefab, face.transform));
+            if (faceIndex > 0) tiles.Add(Instantiate(pattern.FaceEntryTilePrefab, face.transform));
+            tiles.AddRange(pattern.FacePresets[faceIndex].MandatoryFaces.Take(Size * Size - tiles.Count).Select(t => Instantiate(t, face.transform)));
+            tiles.AddRange(Enumerable.Repeat(pattern.DefaultTilePrefab, Size * Size - tiles.Count).Select(t => Instantiate(t, face.transform)));
+
+            var tileQueue = new Queue<WorldCubeTile>(tiles.OrderBy(_ => Random.value));
+
+            for (var x = 0; x < pattern.CubeSize; ++x)
+            for (var y = 0; y < pattern.CubeSize; ++y) {
+               var tile = tileQueue.Dequeue();
+               tile.SetUp(faceIndex, x, y);
+               tile.transform.localPosition = new Vector3((x - (pattern.CubeSize - 1) * .5f) * pattern.TileOffset, 0, (y - (pattern.CubeSize - 1) * .5f) * pattern.TileOffset);
+               tile.transform.localRotation = Quaternion.identity;
+               tile.transform.localScale = Vector3.one;
+               Tiles.Add(tile);
+            }
+         }
+      }
+
+      public void RotateToFace(int faceIndex, UnityAction callback = null) {
+         if (RotateRoutine != null) StopCoroutine(RotateRoutine);
+         RotateRoutine = StartCoroutine(DoRotateToFace(faceIndex, callback));
+      }
+
+      private IEnumerator DoRotateToFace(int faceIndex, UnityAction callback) {
+         CurrentFaceIndex = faceIndex;
+
+         var targetRotation = Quaternion.Inverse(Cubes.faceRotations[CurrentFaceIndex]);
+         while (!Mathf.Approximately(Quaternion.Angle(transform.rotation, targetRotation), 0)) {
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            yield return null;
+         }
+
+         transform.rotation = targetRotation;
+         RotateRoutine = null;
+         callback?.Invoke();
+      }
+   }
+}
