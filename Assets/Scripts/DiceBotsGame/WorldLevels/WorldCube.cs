@@ -14,8 +14,11 @@ namespace DiceBotsGame.WorldLevels {
       public int CurrentFaceIndex { get; private set; }
       private int Size { get; set; }
       private List<WorldCubeTile> Tiles { get; } = new List<WorldCubeTile>();
-      public WorldCubeTile SpawnTile { get; private set; }
+      private WorldCubeTile[] EntryTiles { get; } = new WorldCubeTile[Cubes.FaceCount];
+      private WorldCubeTile[] ExitTiles { get; } = new WorldCubeTile[Cubes.FaceCount];
+      public WorldCubeTile SpawnTile => EntryTiles[0];
       private Coroutine RotateRoutine { get; set; }
+      private bool Built => Tiles.Count > 0;
 
       public WorldCubeTile this[int face, int x, int y] => Tiles[face * Size * Size + x * Size + y];
 
@@ -26,6 +29,11 @@ namespace DiceBotsGame.WorldLevels {
       }
 
       public void Build(WorldCubePattern pattern) {
+         if (Built) {
+            Debug.LogError("WorldCube is already built. Cannot built twice.", this);
+            return;
+         }
+
          Size = pattern.CubeSize;
          center.localScale = Vector3.one * Size * pattern.TileOffset * .99f;
 
@@ -45,11 +53,20 @@ namespace DiceBotsGame.WorldLevels {
             var tiles = new List<WorldCubeTile>();
 
             if (faceIndex == 0) {
-               SpawnTile = Instantiate(pattern.SpawnTilePrefab, face.transform);
+               var spawnTile = Instantiate(pattern.SpawnTilePrefab, face.transform);
+               EntryTiles[faceIndex] = spawnTile;
                tiles.Add(SpawnTile);
             }
-            if (faceIndex < Cubes.FaceCount - 1) tiles.Add(Instantiate(pattern.FaceExitTilePrefab, face.transform));
-            if (faceIndex > 0) tiles.Add(Instantiate(pattern.FaceEntryTilePrefab, face.transform));
+            if (faceIndex < Cubes.FaceCount - 1) {
+               var exitTile = Instantiate(pattern.FaceExitTilePrefab, face.transform);
+               ExitTiles[faceIndex] = exitTile;
+               tiles.Add(exitTile);
+            }
+            if (faceIndex > 0) {
+               var entryTile = Instantiate(pattern.FaceEntryTilePrefab, face.transform);
+               EntryTiles[faceIndex] = entryTile;
+               tiles.Add(entryTile);
+            }
             tiles.AddRange(pattern.FacePresets[faceIndex].MandatoryFaces.Take(Size * Size - tiles.Count).Select(t => Instantiate(t, face.transform)));
             tiles.AddRange(Enumerable.Repeat(pattern.DefaultTilePrefab, Size * Size - tiles.Count).Select(t => Instantiate(t, face.transform)));
 
@@ -85,5 +102,7 @@ namespace DiceBotsGame.WorldLevels {
          RotateRoutine = null;
          callback?.Invoke();
       }
+
+      public WorldCubeTile GetFaceEntryInCurrentFace() => EntryTiles[CurrentFaceIndex];
    }
 }

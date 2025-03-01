@@ -10,17 +10,21 @@ namespace DiceBotsGame.WorldLevels {
       }
 
       [SerializeField] protected MeshRenderer highlightRenderer;
+      [SerializeField] protected Transform playerAnchorTransform;
+      [SerializeField] protected bool applyAnchorForwardToPlayer;
 
       private Vector3Int Coordinates { get; set; }
-      public IWorldCubeTileActivity Activity { get; private set; }
+      public WorldCubeTileActivity Activity { get; private set; }
 
       public int FaceIndex => Coordinates.z;
       public int XInFace => Coordinates.x;
       public int YInFace => Coordinates.y;
-      public bool IsTraversable => Activity == null || Activity.IsTraversable;
+      public bool IsTraversable => Activity == null || Activity.Solved || Activity.IsOptional(out _);
+      public Transform PlayerAnchorTransform => playerAnchorTransform;
+      public bool ApplyAnchorForwardToPlayer => applyAnchorForwardToPlayer;
 
       private void Start() {
-         Activity = GetComponent<IWorldCubeTileActivity>();
+         Activity = GetComponent<WorldCubeTileActivity>();
          SetHighlight(HighlightType.None);
       }
 

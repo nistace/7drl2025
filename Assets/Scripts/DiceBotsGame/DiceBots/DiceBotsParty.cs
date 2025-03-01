@@ -7,11 +7,11 @@ namespace DiceBotsGame.DiceBots {
    public class DiceBotsParty : MonoBehaviour {
       [SerializeField] private Transform[] diceBotSlots;
 
-      public WorldCubeTile CurrentTile { get; set; }
+      public WorldCubeTile CurrentTile { get; private set; }
       private readonly List<DiceBot> diceBotsInParty = new List<DiceBot>();
 
       public bool IsFull => diceBotsInParty.Count == diceBotSlots.Length;
-      public bool AllBotsAtWorldTarget => diceBotsInParty.All(t=> t.AtWorldTarget);
+      public bool AllBotsAtWorldTarget => diceBotsInParty.All(t => t.AtWorldTarget);
 
       public void AddToParty(DiceBot diceBot) {
          diceBotsInParty.Add(diceBot);
@@ -22,6 +22,21 @@ namespace DiceBotsGame.DiceBots {
          foreach (var bot in diceBotsInParty) {
             bot.UpdateWorldPosition();
          }
+      }
+
+      public void SnapBotsToWorldPosition() {
+         foreach (var bot in diceBotsInParty) {
+            bot.SnapToWorldTarget();
+         }
+      }
+
+      public void SetWorldPosition(WorldCubeTile newTile) {
+         if (CurrentTile == newTile) return;
+
+         transform.position = newTile.PlayerAnchorTransform.position;
+         transform.rotation = newTile.ApplyAnchorForwardToPlayer ? newTile.PlayerAnchorTransform.rotation :
+            CurrentTile ? Quaternion.LookRotation(newTile.transform.position - transform.position, Vector3.up) : Quaternion.identity;
+         CurrentTile = newTile;
       }
    }
 }

@@ -4,15 +4,18 @@ using UnityEngine;
 using UnityEngine.Events;
 
 namespace DiceBotsGame.UI {
-   [RequireComponent(typeof(Animator))]
+   [RequireComponent(typeof(InOutUiAnimator))]
    public class PromptUi : MonoBehaviour {
-      private static readonly int activeAnimParam = Animator.StringToHash("Active");
-      [SerializeField] protected Animator animator;
+      [SerializeField] protected InOutUiAnimator animator;
       [SerializeField] protected TMP_Text promptText;
       [SerializeField] protected Transform buttonsContainer;
       [SerializeField] protected TextualButton buttonPrefab;
 
       private readonly List<TextualButton> buttons = new List<TextualButton>();
+
+      private void Start() {
+         animator.SnapOut();
+      }
 
       public void ShowPrompt(string prompt, params (string label, UnityAction callback)[] buttonInfos) {
          promptText.text = prompt;
@@ -29,9 +32,9 @@ namespace DiceBotsGame.UI {
             buttons[i].gameObject.SetActive(false);
          }
 
-         animator.SetBool(activeAnimParam, true);
+         animator.Enter();
       }
 
-      public void Hide() => animator.SetBool(activeAnimParam, false);
+      public void Hide() => animator.Exit();
    }
 }

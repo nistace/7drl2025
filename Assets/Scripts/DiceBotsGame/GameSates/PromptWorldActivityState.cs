@@ -3,17 +3,24 @@ using DiceBotsGame.WorldLevels.Activities;
 
 namespace DiceBotsGame.GameSates {
    public class PromptWorldActivityState : GameState {
-      private readonly IWorldCubeTileActivity activity;
+      private readonly WorldCubeTileActivity activity;
 
-      public PromptWorldActivityState(IWorldCubeTileActivity activity) {
+      public PromptWorldActivityState(WorldCubeTileActivity activity) {
          this.activity = activity;
       }
 
-      protected override void Enable() => WorldUi.Prompt.ShowPrompt(activity.PromptText, (activity.ContinueLabel, HandleContinueClicked), (activity.CancelLabel, HandleCancelClicked));
-      private void HandleContinueClicked() => StartWorldActivityState(activity);
+      protected override void Enable() {
+         if (activity.IsOptional(out var optionalInfo)) {
+            WorldUi.Prompt.ShowPrompt(optionalInfo.PromptText, (optionalInfo.ContinueLabel, HandleContinueClicked), (optionalInfo.CancelLabel, HandleCancelClicked));
+         }
+         else {
+            ChangeToWorldActivity(activity);
+         }
+      }
+
+      private void HandleContinueClicked() => ChangeState(GetWorldActivityState(activity));
       private static void HandleCancelClicked() => ChangeState(WorldState.Instance);
       protected override void Disable() => WorldUi.Prompt.Hide();
-
       protected override void Update() { }
    }
 }

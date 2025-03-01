@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc5c161121d1413a8c3e205bc310723f, type: 3}
-  m_Name: DefaultDiceBotConfig
+  m_Script: {fileID: 11500000, guid: ae0b5624e476476e80308cc174e7f834, type: 3}
+  m_Name: ExitFaceOptionalInfo
   m_EditorClassIdentifier: 
-  worldMovementSpeed: 4
-  worldMovementMaxAngle: 20
-  worldRotationSpeed: 180
+  promptText: Do you want to move on to the next face of the Cube? This face will
+    become inaccessible.
+  continueLabel: Continue
+  cancelLabel: Cancel

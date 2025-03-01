@@ -41,7 +41,7 @@ namespace DiceBotsGame.DiceBots {
 
       public static DiceBotsParty InstantiateParty(WorldCubeTile spawnTile, bool snapBots, params DiceBot[] bots) {
          var party = Instantiate(instance.partyPrefab, spawnTile.transform.position, Quaternion.identity);
-         party.CurrentTile = spawnTile;
+         party.SetWorldPosition(spawnTile);
          foreach (var bot in bots) {
             party.AddToParty(bot);
             if (snapBots) {

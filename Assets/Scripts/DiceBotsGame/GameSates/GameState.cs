@@ -1,4 +1,5 @@
-﻿using DiceBotsGame.WorldLevels.Activities;
+﻿using System;
+using DiceBotsGame.WorldLevels.Activities;
 
 namespace DiceBotsGame.GameSates {
    public abstract class GameState {
@@ -16,10 +17,14 @@ namespace DiceBotsGame.GameSates {
       protected abstract void Disable();
       protected abstract void Update();
 
-      protected static void StartWorldActivityState(IWorldCubeTileActivity activity) {
-         if (activity is ExitFaceWorldCubeTileActivity exitFace) {
-            ChangeState(new ExitFaceState());
-         }
+      protected static void ChangeToWorldActivity(WorldCubeTileActivity activity) => ChangeState(GetWorldActivityState(activity));
+
+      protected static GameState GetWorldActivityState(WorldCubeTileActivity activity) {
+         return activity.Type switch {
+            WorldCubeTileActivity.EType.None => WorldState.Instance,
+            WorldCubeTileActivity.EType.ExitFace => new ExitFaceState(activity),
+            _ => throw new ArgumentException($"Activities of type {activity.GetType().Name} are not supported.")
+         };
       }
    }
 }

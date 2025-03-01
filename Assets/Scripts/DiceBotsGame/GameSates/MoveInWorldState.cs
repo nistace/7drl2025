@@ -22,17 +22,17 @@ namespace DiceBotsGame.GameSates {
                var nextNode = path.Dequeue();
                GameInfo.PlayerParty.transform.rotation = Quaternion.LookRotation(nextNode.transform.position - GameInfo.PlayerParty.CurrentTile.transform.position, Vector3.up);
                GameInfo.PlayerParty.transform.position = nextNode.transform.position;
-               GameInfo.PlayerParty.CurrentTile = nextNode;
+               GameInfo.PlayerParty.SetWorldPosition(nextNode);
             }
             else {
                if (GameInfo.PlayerParty.CurrentTile.Activity == null || GameInfo.PlayerParty.CurrentTile.Activity.Solved) {
                   ChangeState(WorldState.Instance);
                }
-               else if (GameInfo.PlayerParty.CurrentTile.Activity.CanRevert) {
+               else if (GameInfo.PlayerParty.CurrentTile.Activity.IsOptional(out _)) {
                   ChangeState(new PromptWorldActivityState(GameInfo.PlayerParty.CurrentTile.Activity));
                }
                else {
-                  StartWorldActivityState(GameInfo.PlayerParty.CurrentTile.Activity);
+                  ChangeState(GetWorldActivityState(GameInfo.PlayerParty.CurrentTile.Activity));
                }
             }
          }
