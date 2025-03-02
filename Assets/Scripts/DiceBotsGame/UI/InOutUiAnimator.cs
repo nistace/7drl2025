@@ -20,20 +20,18 @@ namespace DiceBotsGame.UI {
          rectTransform = GetComponent<RectTransform>();
          canvasGroup = GetComponent<CanvasGroup>();
          if (rectTransform) {
-            inPosition = new PositionInfo(rectTransform.anchorMin, rectTransform.anchorMax, rectTransform.offsetMin, rectTransform.offsetMax);
-            outPosition = new PositionInfo(rectTransform.anchorMin + Vector2.down, rectTransform.anchorMax + Vector2.down, rectTransform.offsetMin, rectTransform.offsetMax);
+            inPosition = new PositionInfo(rectTransform.anchorMin, rectTransform.anchorMax, rectTransform.offsetMin, rectTransform.offsetMax, 1);
+            outPosition = new PositionInfo(rectTransform.anchorMin + Vector2.down, rectTransform.anchorMax + Vector2.down, rectTransform.offsetMin, rectTransform.offsetMax, 0);
          }
       }
 
-      public void Enter() {
-         targetPosition = inPosition;
+      public void ChangeTargetPosition(bool moveIn) {
+         targetPosition = moveIn ? inPosition : outPosition;
          animationRoutine ??= StartCoroutine(DoAnimate());
       }
 
-      public void Exit() {
-         targetPosition = outPosition;
-         animationRoutine ??= StartCoroutine(DoAnimate());
-      }
+      public void Enter() => ChangeTargetPosition(true);
+      public void Exit() => ChangeTargetPosition(false);
 
       public void SnapIn() {
          targetPosition = inPosition;
@@ -86,11 +84,12 @@ namespace DiceBotsGame.UI {
 
          public PositionInfo() { }
 
-         public PositionInfo(Vector2 anchorMin, Vector2 anchorMax, Vector2 offsetMin, Vector2 offsetMax) {
+         public PositionInfo(Vector2 anchorMin, Vector2 anchorMax, Vector2 offsetMin, Vector2 offsetMax, float alpha) {
             this.anchorMin = anchorMin;
             this.anchorMax = anchorMax;
             this.offsetMin = offsetMin;
             this.offsetMax = offsetMax;
+            canvasGroupAlpha = alpha;
          }
 
          public void Snap(RectTransform rectTransform, CanvasGroup canvasGroup) {

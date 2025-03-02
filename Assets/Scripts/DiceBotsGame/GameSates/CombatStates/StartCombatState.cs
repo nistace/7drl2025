@@ -1,4 +1,5 @@
 ﻿using DiceBotsGame.Cameras;
+using DiceBotsGame.UI;
 using DiceBotsGame.WorldLevels;
 using UnityEngine;
 
@@ -13,6 +14,9 @@ namespace DiceBotsGame.GameSates.CombatStates {
 
       protected override void Enable() {
          MainCameraController.ActivateCamera(GameInfo.CombatGrid.CinemachineCamera);
+
+         MainUi.DiceBots.SetupEncounter(encounter.DiceBots);
+
          GameInfo.CombatGrid.PrepareCombat(encounter.transform, GameInfo.PlayerParty.DiceBotsInParty, encounter.DiceBots);
          GameInfo.CombatGrid.StartBattle();
       }

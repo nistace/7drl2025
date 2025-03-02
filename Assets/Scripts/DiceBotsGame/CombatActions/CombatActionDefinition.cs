@@ -9,6 +9,7 @@ namespace DiceBotsGame.CombatActions {
       [SerializeField] protected int variableStrength;
 
       public CombatAction Action => action;
+      public bool IsValidAction => action;
       public int ConstantStrength => constantStrength;
       public int VariableStrength => variableStrength;
    }

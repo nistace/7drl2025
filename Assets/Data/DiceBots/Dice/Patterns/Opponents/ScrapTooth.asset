@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: ScrapTooth
   m_EditorClassIdentifier: 
   data:
-    coreHealth: 3
-    coreCombatActions: []
+    coreHealth: 2
+    coreCombatActions:
+    - action: {fileID: 4863189043864608779, guid: 9d16545a2eb0be64d9fc90027f250c86,
+        type: 3}
+      constantStrength: 0
+      variableStrength: 1
   facePatterns:
   - {fileID: 11400000, guid: 8a0c26d0fe08e8a4c878ca61412ff323, type: 2}
   - {fileID: 11400000, guid: 8a0c26d0fe08e8a4c878ca61412ff323, type: 2}

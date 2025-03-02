@@ -19,6 +19,10 @@ MonoBehaviour:
         type: 3}
       constantStrength: 1
       variableStrength: 0
+    - action: {fileID: 4863189043864608779, guid: 9d16545a2eb0be64d9fc90027f250c86,
+        type: 3}
+      constantStrength: 2
+      variableStrength: 0
   facePatterns:
   - {fileID: 11400000, guid: 8a0c26d0fe08e8a4c878ca61412ff323, type: 2}
   - {fileID: 11400000, guid: 8a0c26d0fe08e8a4c878ca61412ff323, type: 2}

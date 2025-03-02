@@ -2,6 +2,7 @@
 using System.Linq;
 using DiceBotsGame.WorldLevels;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace DiceBotsGame.DiceBots {
    public class DiceBotsParty : MonoBehaviour {
@@ -13,10 +14,12 @@ namespace DiceBotsGame.DiceBots {
 
       public bool IsFull => diceBotsInParty.Count == diceBotSlots.Length;
       public bool AllBotsAtWorldTarget => diceBotsInParty.All(t => t.AtWorldTarget);
+      public UnityEvent<DiceBot> OnBotAdded { get; } = new UnityEvent<DiceBot>();
 
       public void AddToParty(DiceBot diceBot) {
          diceBotsInParty.Add(diceBot);
          diceBot.SetWorldTargetPosition(diceBotSlots[diceBotsInParty.Count - 1]);
+         OnBotAdded.Invoke(diceBot);
       }
 
       public void UpdateBotsWorldPosition() {

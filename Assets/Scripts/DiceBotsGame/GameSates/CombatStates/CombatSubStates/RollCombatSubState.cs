@@ -8,12 +8,14 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
 
       private List<DiceBot> rollingBots { get; } = new List<DiceBot>();
       public bool IsOver => rollingBots.Count == 0;
+      private float remainingMinTime = 1;
 
       public RollCombatSubState(DiceBot[] allBots) {
          this.allBots = allBots;
       }
 
       public void StartState() {
+         remainingMinTime = 1;
          rollingBots.Clear();
          foreach (var bot in allBots) {
             if (bot.HealthSystem.IsAlive) {
@@ -24,6 +26,9 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
       }
 
       public void Update() {
+         remainingMinTime -= Time.deltaTime;
+         if (remainingMinTime > 0) return;
+
          for (var i = rollingBots.Count - 1; i >= 0; i--) {
             var bot = rollingBots[i];
             if (bot.IsRolling()) {

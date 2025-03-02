@@ -40,7 +40,7 @@ namespace DiceBotsGame.DiceBots {
          }
 
          dice.SetUp(dicePattern.Data, faces.ToArray());
-         diceBot.SetUp(dice, diceBotEmissiveMaterial);
+         diceBot.SetUp(botPattern.DisplayName, dice, diceBotEmissiveMaterial);
          return diceBot;
       }
 

@@ -5,7 +5,7 @@ using UnityEngine.Events;
 namespace DiceBotsGame.DiceBots {
    [Serializable]
    public class HealthSystem {
-      [SerializeField] protected int maxHealth = 5;
+      [SerializeField] protected int maxHealth;
       [SerializeField] protected int currentHealth;
 
       public UnityEvent OnHealthChanged { get; } = new UnityEvent();
@@ -21,10 +21,20 @@ namespace DiceBotsGame.DiceBots {
       public UnityEvent<int> OnChanged { get; } = new UnityEvent<int>();
       public UnityEvent OnDied { get; } = new UnityEvent();
       public UnityEvent OnResurrected { get; } = new UnityEvent();
+      public UnityEvent<int> OnMaxHealthChanged { get; } = new UnityEvent<int>();
 
       public HealthSystem(int maxHealth) {
          this.maxHealth = maxHealth;
          currentHealth = this.maxHealth;
+      }
+
+      public void ChangeMaxHealth(int maxHealth) {
+         this.maxHealth = maxHealth;
+         if (currentHealth > maxHealth) {
+            currentHealth = maxHealth;
+            OnChanged.Invoke(currentHealth);
+         }
+         OnMaxHealthChanged.Invoke(maxHealth);
       }
 
       public void Damage(int damage) {

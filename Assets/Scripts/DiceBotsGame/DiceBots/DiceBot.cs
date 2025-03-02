@@ -15,12 +15,15 @@ namespace DiceBotsGame.DiceBots {
       public bool AtWorldTarget => !WorldTarget || transform.position == WorldTarget.position;
       public HealthSystem HealthSystem => healthSystem;
       public DiceBotConfig Config => config;
+      public Color Color => emissive.Color;
+      public string DisplayName { get; private set; }
 
-      public void SetUp(CharacterDice newDice, DiceBotEmissiveMaterial emissive) {
+      public void SetUp(string name, CharacterDice newDice, DiceBotEmissiveMaterial emissive) {
          if (dice) {
             Destroy(dice.gameObject);
          }
 
+         DisplayName = name;
          dice = newDice;
          newDice.transform.SetParent(diceAnchor);
          newDice.transform.localPosition = Vector3.zero;
@@ -77,7 +80,6 @@ namespace DiceBotsGame.DiceBots {
 
       public bool IsRolling() => dice.IsRolling;
       public bool IsStuckWhileRolling() => dice.IsStuckWhileRolling;
-
       public void SaveRolledFace() => dice.SaveRolledFace();
    }
 }

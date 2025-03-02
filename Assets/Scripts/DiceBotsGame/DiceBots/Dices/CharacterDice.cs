@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DiceBotsGame.CombatActions;
 using DiceBotsGame.DiceBots.Dices.Faces;
 using DiceBotsGame.Utils;
 using UnityEngine;
@@ -11,10 +13,12 @@ namespace DiceBotsGame.DiceBots.Dices {
       [SerializeField] protected CharacterDiceFace[] faces = new CharacterDiceFace[Cubes.FaceCount];
       [SerializeField] protected Transform facesContainer;
       public CharacterDiceFace LastRolledFace { get; private set; }
+      public IReadOnlyList<CombatActionDefinition> CoreActions => data.CoreCombatActions;
       public bool IsAttached => diceBody.isKinematic;
       public bool IsRolling => !IsAttached && (!diceBody.linearVelocity.sqrMagnitude.Approximately(0) || !diceBody.angularVelocity.sqrMagnitude.Approximately(0));
       public bool IsStuckWhileRolling => !IsAttached && !IsRolling && !HasValidRolledFace();
 
+      public UnityEvent OnStartedRolling = new UnityEvent();
       public UnityEvent<CharacterDiceFace> OnSavedRolledFace { get; } = new UnityEvent<CharacterDiceFace>();
 
       public void SetUp(CharacterDiceData data, CharacterDiceFace[] faces) {
@@ -45,6 +49,7 @@ namespace DiceBotsGame.DiceBots.Dices {
          diceBody.isKinematic = false;
          diceBody.AddForce(force, ForceMode.Impulse);
          diceBody.AddTorque(torque, ForceMode.Impulse);
+         OnStartedRolling.Invoke();
       }
 
       public void AttachToBody() {

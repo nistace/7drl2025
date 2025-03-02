@@ -3,6 +3,7 @@ using DiceBotsGame.CombatGrids;
 using DiceBotsGame.DiceBots;
 using DiceBotsGame.GameSates;
 using DiceBotsGame.GameSates.WorldStates;
+using DiceBotsGame.UI;
 using DiceBotsGame.WorldLevels;
 using UnityEngine;
 
@@ -22,10 +23,11 @@ namespace DiceBotsGame {
 
          MainCameraController.worldTarget = playerMainDiceBot.transform;
          MainCameraController.worldCenterPosition = new Vector3(0, worldCube.InnerSphereRadius);
+         MainUi.DiceBots.SetUp(playerParty);
 
          worldCube.Lerp(1);
          combatGrid.Lerp(0);
-         
+
          GameInfo.SetupGameData(worldCube, playerParty, combatGrid);
 
          GameState.ChangeState(WorldState.Instance);

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46b324747faa4b05bf729fe258f9e94b, type: 3}
   m_Name: Fighter
   m_EditorClassIdentifier: 
+  displayName: Fighter
   dicePattern:
   - {fileID: 11400000, guid: 24123cc634b13d4479c7ac212d2409fe, type: 2}
   colors:

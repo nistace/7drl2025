@@ -11,6 +11,7 @@ namespace DiceBotsGame.DiceBots {
       [SerializeField] protected Color color;
 
       public Material Material => material;
+      public Color Color => color;
       public HealthSystem ObservedHealthSystem { get; private set; }
 
       public static DiceBotEmissiveMaterial Instantiate(Material sourceMaterial, Color emissiveColor, float intensity) {

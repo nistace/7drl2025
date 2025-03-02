@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46b324747faa4b05bf729fe258f9e94b, type: 3}
   m_Name: ScrapTooth
   m_EditorClassIdentifier: 
+  displayName: Scraptooth
   dicePattern:
   - {fileID: 11400000, guid: 1b7560835b4c8c948b80c95ddafd7e3c, type: 2}
   colors:
