@@ -154,5 +154,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   center: {fileID: 2291773633962125350}
-  faceToShow: 0
   rotationSpeed: 3
+  lerpMinScale: 0.05
+  lerpMaxScale: 1

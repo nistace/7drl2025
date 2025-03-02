@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     healthPoints: 1
-    constantStrength: 0
-    variableStrength: 0
-    combatAction: {fileID: 0}
+    combatAction:
+      action: {fileID: 0}
+      constantStrength: 0
+      variableStrength: 0

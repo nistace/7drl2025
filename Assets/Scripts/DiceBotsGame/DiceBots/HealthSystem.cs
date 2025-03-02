@@ -13,7 +13,8 @@ namespace DiceBotsGame.DiceBots {
       public int MaxHealth => maxHealth;
       public int CurrentHealth => currentHealth;
       public float HealthRatio => (float)currentHealth / maxHealth;
-      public bool IsDead => currentHealth <= 0;
+      public bool IsAlive => currentHealth > 0;
+      public bool IsDead => !IsAlive;
 
       public UnityEvent<int> OnDamaged { get; } = new UnityEvent<int>();
       public UnityEvent<int> OnHealed { get; } = new UnityEvent<int>();

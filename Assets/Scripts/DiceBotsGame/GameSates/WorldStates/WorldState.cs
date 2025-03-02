@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DiceBotsGame.Cameras;
+using DiceBotsGame.GameSates.InputUtils;
 using DiceBotsGame.WorldLevels;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,37 +10,31 @@ namespace DiceBotsGame.GameSates.WorldStates {
    public class WorldState : GameState {
       public static WorldState Instance { get; } = new WorldState();
 
-      private readonly InputAction aimAction;
-      private readonly InputAction interactAction;
-
       private WorldCubeTile hoveredTile;
       private List<WorldCubeTile> pathToHoveredTile;
       private readonly Dictionary<WorldCubeTile, List<WorldCubeTile>> paths = new Dictionary<WorldCubeTile, List<WorldCubeTile>>();
 
-      private WorldState() {
-         aimAction = InputSystem.actions.FindAction("Aim");
-         interactAction = InputSystem.actions.FindAction("Interact");
-      }
+      private WorldState() { }
 
       protected override void Enable() {
          MainCameraController.ActivateWorldCamera();
-         aimAction.Enable();
-         interactAction.performed += HandleInteractPerformed;
-         interactAction.Enable();
+
+         WorldInputUtils.ActionMap.Enable();
+         WorldInputUtils.Interact.performed += HandleInteractPerformed;
 
          UpdatePaths();
       }
 
       protected override void Disable() {
-         aimAction.Disable();
-         interactAction.performed -= HandleInteractPerformed;
-         interactAction.Disable();
+         WorldInputUtils.ActionMap.Disable();
+         WorldInputUtils.Interact.performed -= HandleInteractPerformed;
 
          UnHoverCurrentTile();
       }
 
       protected override void Update() {
          UpdateHoveredTile();
+         GameInfo.PlayerParty.UpdateBotsWorldPosition();
       }
 
       private void HandleInteractPerformed(InputAction.CallbackContext obj) {
@@ -54,7 +49,7 @@ namespace DiceBotsGame.GameSates.WorldStates {
       }
 
       private void UpdateHoveredTile() {
-         if (Physics.Raycast(MainCameraController.MainCamera.ScreenPointToRay(aimAction.ReadValue<Vector2>()), out var hit, Mathf.Infinity, LayerMask.GetMask("WorldTile"))) {
+         if (Physics.Raycast(MainCameraController.MainCamera.ScreenPointToRay(WorldInputUtils.Aim.ReadValue<Vector2>()), out var hit, Mathf.Infinity, LayerMask.GetMask("WorldTile"))) {
             if (!hoveredTile || hit.collider.gameObject != hoveredTile.gameObject) {
                UnHoverCurrentTile();
 

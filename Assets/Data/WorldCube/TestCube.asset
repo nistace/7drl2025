@@ -22,10 +22,45 @@ MonoBehaviour:
   defaultTilePrefab: {fileID: 732580884703210401, guid: da62921abf4d9fa4e8bc1db67fcdb7a8,
     type: 3}
   facePresets:
+  - mandatoryFaces:
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    possibleEncounters:
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+  - mandatoryFaces:
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    possibleEncounters:
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+  - mandatoryFaces:
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    possibleEncounters:
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
   - mandatoryFaces: []
-  - mandatoryFaces: []
-  - mandatoryFaces: []
-  - mandatoryFaces: []
-  - mandatoryFaces: []
-  - mandatoryFaces: []
+    possibleEncounters:
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+  - mandatoryFaces:
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    possibleEncounters:
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+  - mandatoryFaces:
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    possibleEncounters:
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
   tileOffset: 3.1

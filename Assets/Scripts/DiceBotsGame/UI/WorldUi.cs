@@ -1,15 +1,11 @@
 ﻿using UnityEngine;
 
 namespace DiceBotsGame.UI {
-   public class WorldUi : MonoBehaviour {
-      private static WorldUi instance { get; set; }
-
+   public class WorldUi : MonoBehaviour, IMainScreenUi {
       [SerializeField] protected PromptUi prompt;
 
-      public static PromptUi Prompt => instance.prompt;
+      public PromptUi Prompt => prompt;
 
-      private void Awake() {
-         instance = this;
-      }
+      public void Hide() => prompt.Hide();
    }
 }

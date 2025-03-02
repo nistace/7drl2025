@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc5c161121d1413a8c3e205bc310723f, type: 3}
   m_Name: DefaultDiceBotConfig
   m_EditorClassIdentifier: 
+  rollMinForce: 150
+  rollMaxForce: 180
+  rollMinAngle: 5
+  rollMaxAngle: 30
+  rollMinTorque: 120
+  rollMaxTorque: 180
   worldMovementSpeed: 4
   worldMovementMaxAngle: 20
   worldRotationSpeed: 180

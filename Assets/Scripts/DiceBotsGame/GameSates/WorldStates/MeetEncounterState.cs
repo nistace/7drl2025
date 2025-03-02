@@ -1,4 +1,5 @@
 ﻿using DiceBotsGame.Cameras;
+using DiceBotsGame.GameSates.CombatStates;
 using DiceBotsGame.WorldLevels;
 
 namespace DiceBotsGame.GameSates.WorldStates {
@@ -17,6 +18,9 @@ namespace DiceBotsGame.GameSates.WorldStates {
 
       protected override void Disable() { }
 
-      protected override void Update() { }
+      protected override void Update() {
+         while (!MainCameraController.AtAnchorPosition) return;
+         ChangeState(new StartCombatState(encounter));
+      }
    }
 }

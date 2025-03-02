@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     healthPoints: 0
-    constantStrength: 1
-    variableStrength: 0
-    combatAction: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
-      type: 3}
+    combatAction:
+      action: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
+        type: 3}
+      constantStrength: 1
+      variableStrength: 0

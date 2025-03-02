@@ -8,14 +8,14 @@ namespace DiceBotsGame.DiceBots.Dices {
    [Serializable]
    public class CharacterDiceData {
       [SerializeField] protected int coreHealth = 3;
-      [SerializeField] protected CombatAction[] coreCombatActions;
+      [SerializeField] protected CombatActionDefinition[] coreCombatActions;
 
       public int CoreHealth => coreHealth;
-      public IReadOnlyList<CombatAction> CoreCombatActions => coreCombatActions;
+      public IReadOnlyList<CombatActionDefinition> CoreCombatActions => coreCombatActions;
 
       public CharacterDiceData() { }
 
-      public CharacterDiceData(int coreHealth, CombatAction[] coreCombatActions) {
+      public CharacterDiceData(int coreHealth, CombatActionDefinition[] coreCombatActions) {
          this.coreHealth = coreHealth;
          this.coreCombatActions = coreCombatActions;
       }

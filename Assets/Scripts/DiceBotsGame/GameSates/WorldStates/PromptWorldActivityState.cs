@@ -13,7 +13,7 @@ namespace DiceBotsGame.GameSates.WorldStates {
       protected override void Enable() {
          if (activity.IsOptional(out var optionalInfo)) {
             MainCameraController.ActivateCamera(activity.ActivityCamera);
-            WorldUi.Prompt.ShowPrompt(optionalInfo.PromptText, (optionalInfo.ContinueLabel, HandleContinueClicked), (optionalInfo.CancelLabel, HandleCancelClicked));
+            MainUi.World.Prompt.ShowPrompt(optionalInfo.PromptText, (optionalInfo.ContinueLabel, HandleContinueClicked), (optionalInfo.CancelLabel, HandleCancelClicked));
          }
          else {
             ChangeToWorldActivity(activity);
@@ -22,7 +22,7 @@ namespace DiceBotsGame.GameSates.WorldStates {
 
       private void HandleContinueClicked() => ChangeState(GetWorldActivityState(activity));
       private static void HandleCancelClicked() => ChangeState(WorldState.Instance);
-      protected override void Disable() => WorldUi.Prompt.Hide();
+      protected override void Disable() => MainUi.World.Prompt.Hide();
       protected override void Update() { }
    }
 }

@@ -9,6 +9,7 @@ namespace DiceBotsGame.DiceBots {
 
       public WorldCubeTile CurrentTile { get; private set; }
       private readonly List<DiceBot> diceBotsInParty = new List<DiceBot>();
+      public IReadOnlyList<DiceBot> DiceBotsInParty => diceBotsInParty;
 
       public bool IsFull => diceBotsInParty.Count == diceBotSlots.Length;
       public bool AllBotsAtWorldTarget => diceBotsInParty.All(t => t.AtWorldTarget);

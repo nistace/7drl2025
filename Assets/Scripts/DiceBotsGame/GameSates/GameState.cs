@@ -24,7 +24,8 @@ namespace DiceBotsGame.GameSates {
          return activity.Type switch {
             WorldCubeTileActivity.EType.None => WorldState.Instance,
             WorldCubeTileActivity.EType.ExitFace => new ExitFaceState(activity),
-            WorldCubeTileActivity.EType.EnterFace => new MeetEncounterState(activity),
+            WorldCubeTileActivity.EType.MeetEncounter => new MeetEncounterState(activity),
+            WorldCubeTileActivity.EType.EnterFace => throw new ArgumentException($"Activities of type {activity.GetType().Name} are not supported."),
             _ => throw new ArgumentException($"Activities of type {activity.GetType().Name} are not supported.")
          };
       }

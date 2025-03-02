@@ -20,7 +20,10 @@ namespace DiceBotsGame.DiceBots {
          instance = this;
       }
 
-      public static DiceBot Instantiate(CharacterDicePattern dicePattern, Color color) {
+      public static DiceBot Instantiate(DiceBotPattern botPattern) {
+         var dicePattern = botPattern.RollDicePattern();
+         var color = botPattern.RollColor();
+
          var diceBot = Instantiate(instance.botPrefab);
          var dice = Instantiate(instance.dicePrefab);
          var diceBotEmissiveMaterial = DiceBotEmissiveMaterial.Instantiate(instance.emissiveMaterial, color, 1);
@@ -29,7 +32,9 @@ namespace DiceBotsGame.DiceBots {
          foreach (var facePattern in dicePattern.FacePatterns) {
             var face = Instantiate(instance.facePrefab);
             face.SetUp(facePattern.Data, diceBotEmissiveMaterial.Material);
-            instance.faceValueBuilderConfig.Build(face.ValueContainer, facePattern.Data.ConstantStrength, diceBotEmissiveMaterial.Material);
+            if (facePattern.Data.HasCombatAction) {
+               instance.faceValueBuilderConfig.Build(face.ValueContainer, facePattern.Data.CombatAction.ConstantStrength, diceBotEmissiveMaterial.Material);
+            }
 
             faces.Add(face);
          }

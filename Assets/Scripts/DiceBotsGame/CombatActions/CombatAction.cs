@@ -1,13 +1,19 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DiceBotsGame.CombatActions.Conditions;
+using DiceBotsGame.CombatGrids;
+using DiceBotsGame.DiceBots;
+using UnityEngine;
 
 namespace DiceBotsGame.CombatActions {
    public class CombatAction : MonoBehaviour {
       [SerializeField] protected MeshRenderer model;
-      [SerializeField] protected CombatActionTarget target;
 
-      public CombatActionTarget Target => target;
       public MeshRenderer Model => model;
 
-      public void Execute() { }
+      public IReadOnlyList<ICombatActionEffect> Effects => GetComponents<ICombatActionEffect>();
+      private IReadOnlyList<ICombatActionCondition> Conditions => GetComponents<ICombatActionCondition>();
+
+      public bool CheckConditions(CombatGrid grid, DiceBot actor, CombatGridTile tile, int value) => Conditions.All(t => t.Check(grid, actor, tile, value));
    }
 }

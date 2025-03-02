@@ -8,7 +8,7 @@ namespace DiceBotsGame.DiceBots.Dices.Faces {
       [SerializeField] protected Transform combatActionModelAnchor;
 
       public CharacterDiceFaceData Data => data;
-      public bool Playable => data.CombatAction;
+      public bool Playable => data.HasCombatAction;
       public Transform ValueContainer => valueContainer;
 
       public void SetUp(CharacterDiceFaceData data, Material emissiveMaterial) {
@@ -21,8 +21,8 @@ namespace DiceBotsGame.DiceBots.Dices.Faces {
             emissiveRenderer.material = emissiveMaterial;
          }
 
-         if (data.CombatAction) {
-            var combatModel = Instantiate(data.CombatAction.Model, combatActionModelAnchor);
+         if (data.HasCombatAction) {
+            var combatModel = Instantiate(data.CombatActionModel, combatActionModelAnchor);
             combatModel.material = emissiveMaterial;
          }
       }

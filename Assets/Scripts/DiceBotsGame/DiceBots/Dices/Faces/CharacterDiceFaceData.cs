@@ -1,29 +1,25 @@
 ﻿using System;
 using DiceBotsGame.CombatActions;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace DiceBotsGame.DiceBots.Dices.Faces {
    [Serializable]
    public class CharacterDiceFaceData {
       [SerializeField] protected int healthPoints;
-      [SerializeField] protected int constantStrength = 1;
-      [SerializeField] protected int variableStrength;
-      [SerializeField] protected CombatAction combatAction;
+      [SerializeField] private CombatActionDefinition combatAction;
 
       public int HealthPoints => healthPoints;
-      public int ConstantStrength => constantStrength;
-      public int VariableStrength => variableStrength;
-      public CombatAction CombatAction => combatAction;
+      public bool HasCombatAction => combatAction.Action;
+      public MeshRenderer CombatActionModel => combatAction.Action.Model;
+      public CombatActionDefinition CombatAction => combatAction;
 
       public CharacterDiceFaceData() { }
 
-      public CharacterDiceFaceData(int healthPoints, int constantStrength, int variableStrength, CombatAction combatAction) {
+      public CharacterDiceFaceData(int healthPoints, CombatActionDefinition combatAction) {
          this.healthPoints = healthPoints;
-         this.constantStrength = constantStrength;
-         this.variableStrength = variableStrength;
-         this.combatAction = combatAction;
       }
 
-      public CharacterDiceFaceData(CharacterDiceFaceData source) : this(source.healthPoints, source.constantStrength, source.variableStrength, source.combatAction) { }
+      public CharacterDiceFaceData(CharacterDiceFaceData source) : this(source.healthPoints, source.combatAction) { }
    }
 }

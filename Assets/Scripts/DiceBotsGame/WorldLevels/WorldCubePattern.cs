@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DiceBotsGame.DiceBots;
 using DiceBotsGame.Utils;
 using UnityEngine;
 
@@ -25,8 +26,10 @@ namespace DiceBotsGame.WorldLevels {
 
       [Serializable] public class FacePreset {
          [SerializeField] protected WorldCubeTile[] mandatoryFaces;
+         [SerializeField] protected EncounterPreset[] possibleEncounters;
 
          public IReadOnlyList<WorldCubeTile> MandatoryFaces => mandatoryFaces;
+         public IReadOnlyCollection<EncounterPreset> PossibleEncounters => possibleEncounters;
       }
    }
 }

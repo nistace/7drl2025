@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     coreHealth: 3
-    coreCombatActions: []
+    coreCombatActions:
+    - action: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
+        type: 3}
+      constantStrength: 1
+      variableStrength: 0
   facePatterns:
   - {fileID: 11400000, guid: 8a0c26d0fe08e8a4c878ca61412ff323, type: 2}
   - {fileID: 11400000, guid: 8a0c26d0fe08e8a4c878ca61412ff323, type: 2}

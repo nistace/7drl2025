@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DiceBotsGame.DiceBots;
 using DiceBotsGame.Utils;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,6 +11,8 @@ namespace DiceBotsGame.WorldLevels {
    public class WorldCube : MonoBehaviour {
       [SerializeField] protected Transform center;
       [SerializeField] protected float rotationSpeed = 30;
+      [SerializeField] protected float lerpMinScale = .1f;
+      [SerializeField] protected float lerpMaxScale = 1;
 
       public int CurrentFaceIndex { get; private set; }
       private int Size { get; set; }
@@ -73,6 +76,18 @@ namespace DiceBotsGame.WorldLevels {
             tiles.AddRange(pattern.FacePresets[faceIndex].MandatoryFaces.Take(Size * Size - tiles.Count).Select(t => Instantiate(t, face.transform)));
             tiles.AddRange(Enumerable.Repeat(pattern.DefaultTilePrefab, Size * Size - tiles.Count).Select(t => Instantiate(t, face.transform)));
 
+            var tilesWithEncounter = tiles.Select(t => t.GetComponent<WorldCubeTileEncounter>()).Where(t => t).ToArray();
+            var encountersQueue = new Queue<EncounterPreset>();
+            while (encountersQueue.Count < tilesWithEncounter.Length) {
+               foreach (var randomEncounter in pattern.FacePresets[faceIndex].PossibleEncounters.OrderBy(_ => Random.value)) {
+                  encountersQueue.Enqueue(randomEncounter);
+               }
+            }
+            foreach (var tileWithEncounter in tilesWithEncounter) {
+               var encounterPreset = encountersQueue.Dequeue();
+               tileWithEncounter.SetUp(encounterPreset.DiceBotPatterns.Select(DiceBotFactory.Instantiate).ToArray());
+            }
+
             var tileQueue = new Queue<WorldCubeTile>(tiles.OrderBy(_ => Random.value));
 
             for (var x = 0; x < pattern.CubeSize; ++x)
@@ -107,5 +122,9 @@ namespace DiceBotsGame.WorldLevels {
       }
 
       public WorldCubeTile GetFaceEntryInCurrentFace() => EntryTiles[CurrentFaceIndex];
+
+      public void Lerp(float lerp) {
+         transform.localScale = Mathf.Lerp(lerpMinScale, lerpMaxScale, lerp) * Vector3.one;
+      }
    }
 }
