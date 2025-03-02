@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DiceBotsGame.DiceBots.Dices.Faces;
 using UnityEngine;
 
 namespace DiceBotsGame.DiceBots.Dices {
-   [CreateAssetMenu]
-   public class CharacterDicePattern : ScriptableObject {
+   [Serializable]
+   public class CharacterDicePattern {
       [SerializeField] protected CharacterDiceData data;
-      [SerializeField] protected CharacterDiceFacePattern[] facePatterns = new CharacterDiceFacePattern[6];
+      [SerializeField] protected CharacterDiceFaceData[] facePatterns = new CharacterDiceFaceData[6];
 
       public CharacterDiceData Data => data;
-      public IReadOnlyList<CharacterDiceFacePattern> FacePatterns => facePatterns;
+      public IReadOnlyList<CharacterDiceFaceData> FacePatterns => facePatterns;
    }
 }

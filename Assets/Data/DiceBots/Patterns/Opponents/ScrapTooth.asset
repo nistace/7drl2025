@@ -14,7 +14,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Scraptooth
   dicePattern:
-  - {fileID: 11400000, guid: 1b7560835b4c8c948b80c95ddafd7e3c, type: 2}
+    data:
+      coreHealth: 3
+      coreCombatActions:
+      - action: {fileID: 4863189043864608779, guid: 9d16545a2eb0be64d9fc90027f250c86,
+          type: 3}
+        constantStrength: 1
+    facePatterns:
+    - combatAction:
+        action: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
+          type: 3}
+        constantStrength: 2
+    - combatAction:
+        action: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
+          type: 3}
+        constantStrength: 1
+    - combatAction:
+        action: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
+          type: 3}
+        constantStrength: 1
+    - combatAction:
+        action: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
+          type: 3}
+        constantStrength: 1
+    - combatAction:
+        action: {fileID: 4863189043864608779, guid: 9d16545a2eb0be64d9fc90027f250c86,
+          type: 3}
+        constantStrength: 2
+    - combatAction:
+        action: {fileID: 0}
+        constantStrength: 0
   colors:
   - {r: 0.6603774, g: 0, b: 0, a: 1}
   - {r: 0.6981132, g: 0.29966182, b: 0.29966182, a: 1}

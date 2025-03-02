@@ -40,7 +40,7 @@ namespace DiceBotsGame.Visuals3D.TileHighlights {
             material.SetColor(emissionColorShaderId, targetColor);
             changeProgress = 1;
          }
-         else {
+         else if (targetColor != originColor) {
             changeProgress = 0;
             changeColorRoutine ??= StartCoroutine(DoChangeHighlight());
          }

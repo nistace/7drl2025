@@ -23,12 +23,14 @@ namespace DiceBotsGame {
 
          MainCameraController.worldTarget = playerMainDiceBot.transform;
          MainCameraController.worldCenterPosition = new Vector3(0, worldCube.InnerSphereRadius);
-         MainUi.DiceBots.SetUp(playerParty);
 
          worldCube.Lerp(1);
          combatGrid.Lerp(0);
 
          GameInfo.SetupGameData(worldCube, playerParty, combatGrid);
+
+         MainUi.DiceBots.SetUp(playerParty);
+         MainUi.Log.Show();
 
          GameState.ChangeState(WorldState.Instance);
       }

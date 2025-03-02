@@ -5,21 +5,18 @@ using UnityEngine;
 namespace DiceBotsGame.DiceBots.Dices.Faces {
    [Serializable]
    public class CharacterDiceFaceData {
-      [SerializeField] protected int healthPoints;
       [SerializeField] private CombatActionDefinition combatAction;
 
-      public int HealthPoints => healthPoints;
       public bool HasCombatAction => combatAction.Action;
-      public MeshRenderer CombatActionModel => combatAction.Action.Model;
+      public Mesh CombatActionMesh => combatAction.Action.Mesh;
       public CombatActionDefinition CombatAction => combatAction;
 
       public CharacterDiceFaceData() { }
 
-      public CharacterDiceFaceData(int healthPoints, CombatActionDefinition combatAction) {
-         this.healthPoints = healthPoints;
+      public CharacterDiceFaceData(CombatActionDefinition combatAction) {
          this.combatAction = combatAction;
       }
 
-      public CharacterDiceFaceData(CharacterDiceFaceData source) : this(source.healthPoints, source.combatAction) { }
+      public CharacterDiceFaceData(CharacterDiceFaceData source) : this(source.combatAction) { }
    }
 }

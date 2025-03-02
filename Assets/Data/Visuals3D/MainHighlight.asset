@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MainHighlight
   m_EditorClassIdentifier: 
   color: {r: 0.9212953, g: 1, b: 0, a: 1}
-  intensity: 2.64
+  intensity: 2.5

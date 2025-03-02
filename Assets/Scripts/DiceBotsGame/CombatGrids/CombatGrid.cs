@@ -17,6 +17,7 @@ namespace DiceBotsGame.CombatGrids {
 
       public CinemachineCamera CinemachineCamera => cinemachineCamera;
       private List<CombatGridTile> Tiles { get; } = new List<CombatGridTile>();
+      public IReadOnlyCollection<CombatGridTile> AllTiles => Tiles;
       public CombatGridTile this[int x, int y] => Tiles[x * Size + y];
       public CombatGridTile this[Vector2Int coordinates] => this[coordinates.x, coordinates.y];
       private Map<DiceBot, CombatGridTile> PositionPerBot { get; } = new Map<DiceBot, CombatGridTile>();
@@ -125,7 +126,13 @@ namespace DiceBotsGame.CombatGrids {
          PositionPerBot.Add(actor, targetTile);
       }
 
-      public DiceBot GetDiceBotAtPosition(CombatGridTile targetTile) => PositionPerBot[targetTile];
+      public DiceBot GetDiceBotAtPosition(CombatGridTile targetTile) => PositionPerBot.GetValueOrDefault(targetTile);
       public bool AreInSameTeam(DiceBot first, DiceBot second) => PlayerBots.Contains(first) == PlayerBots.Contains(second);
+
+      public void UnHoverAllTiles() {
+         foreach (var tile in AllTiles) {
+            tile.SetHighlight(CombatGridTileConfig.HighlightType.None);
+         }
+      }
    }
 }

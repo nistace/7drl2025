@@ -8,6 +8,7 @@ namespace DiceBotsGame.WorldLevels {
       [SerializeField] protected WorldCubeTileActivity activity;
       [SerializeField] protected Transform[] worldSlots;
 
+      public string DisplayName { get; private set; }
       private DiceBot[] diceBots;
 
       public WorldCubeTileActivity Activity => activity;
@@ -17,13 +18,18 @@ namespace DiceBotsGame.WorldLevels {
          activity = GetComponent<WorldCubeTileActivity>();
       }
 
-      public void SetUp(DiceBot[] encounterBots) {
+      public void SetUp(string displayName, DiceBot[] encounterBots) {
+         DisplayName = displayName;
          diceBots = encounterBots;
 
-         for (var i = 0; i < encounterBots.Length; i++) {
-            encounterBots[i].transform.SetParent(worldSlots[i]);
-            encounterBots[i].transform.localPosition = Vector3.zero;
-            encounterBots[i].transform.localRotation = Quaternion.identity;
+         SnapAllBotsToWorldSlots();
+      }
+
+      public void SnapAllBotsToWorldSlots() {
+         for (var i = 0; i < diceBots.Length; i++) {
+            diceBots[i].transform.SetParent(worldSlots[i]);
+            diceBots[i].transform.localPosition = Vector3.zero;
+            diceBots[i].transform.localRotation = Quaternion.identity;
          }
       }
    }

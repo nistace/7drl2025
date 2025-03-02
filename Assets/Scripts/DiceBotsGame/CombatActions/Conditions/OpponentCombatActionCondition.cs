@@ -8,7 +8,7 @@ namespace DiceBotsGame.CombatActions.Conditions {
          var botAtPosition = combatGrid.GetDiceBotAtPosition(targetTile);
          if (!botAtPosition) return false;
          if (botAtPosition == actor) return false;
-         return combatGrid.AreInSameTeam(actor, botAtPosition);
+         return !combatGrid.AreInSameTeam(actor, botAtPosition);
       }
    }
 }

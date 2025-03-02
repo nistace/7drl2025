@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d047352641f468bbd97b7badd15ddd9, type: 3}
-  m_Name: None
+  m_Script: {fileID: 11500000, guid: bbe9c31f4192454d9c5b13a08348a424, type: 3}
+  m_Name: HighlightAlly
   m_EditorClassIdentifier: 
-  data:
-    healthPoints: 0
-    combatAction:
-      action: {fileID: 0}
-      constantStrength: 0
-      variableStrength: 0
+  color: {r: 0.32280168, g: 0.5668751, b: 0.735849, a: 1}
+  intensity: 1

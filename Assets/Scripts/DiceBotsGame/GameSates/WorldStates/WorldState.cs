@@ -2,6 +2,7 @@
 using System.Linq;
 using DiceBotsGame.Cameras;
 using DiceBotsGame.GameSates.InputUtils;
+using DiceBotsGame.UI;
 using DiceBotsGame.WorldLevels;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,6 +19,7 @@ namespace DiceBotsGame.GameSates.WorldStates {
 
       protected override void Enable() {
          MainCameraController.ActivateWorldCamera();
+         MainUi.Log.SetTexts(WorldActionName, string.Empty);
 
          WorldInputUtils.ActionMap.Enable();
          WorldInputUtils.Interact.performed += HandleInteractPerformed;
@@ -55,6 +57,8 @@ namespace DiceBotsGame.GameSates.WorldStates {
 
                hoveredTile = hit.collider.gameObject.GetComponentInParent<WorldCubeTile>();
                if (hoveredTile.FaceIndex == GameInfo.WorldCube.CurrentFaceIndex) {
+                  MainUi.Log.SetTexts(WorldActionName, hoveredTile.Activity && !hoveredTile.Activity.Solved ? $"Intrigued by {hoveredTile.Activity.DisplayName}" : string.Empty);
+
                   if (paths.TryGetValue(hoveredTile, out pathToHoveredTile)) {
                      foreach (var pathTile in pathToHoveredTile) {
                         pathTile.SetHighlight(WorldCubeTileConfig.HighlightType.Path);

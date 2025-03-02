@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DiceBotsGame.Cameras;
+using DiceBotsGame.UI;
 using DiceBotsGame.WorldLevels;
 
 namespace DiceBotsGame.GameSates.WorldStates {
@@ -11,6 +12,7 @@ namespace DiceBotsGame.GameSates.WorldStates {
       }
 
       protected override void Enable() {
+         MainUi.Log.SetTexts(WorldActionName, "On the way!");
          MainCameraController.ActivateWorldCamera();
       }
 

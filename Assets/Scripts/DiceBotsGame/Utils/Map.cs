@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DiceBotsGame.CombatGrids;
+using DiceBotsGame.DiceBots;
 
 namespace DiceBotsGame.Utils {
    public class Map<T1, T2> : IEnumerable<KeyValuePair<T1, T2>> {
@@ -45,5 +47,8 @@ namespace DiceBotsGame.Utils {
          forward.Clear();
          reverse.Clear();
       }
+
+      public T2 GetValueOrDefault(T1 targetTile, T2 defaultValue = default) => forward.GetValueOrDefault(targetTile, defaultValue);
+      public T1 GetValueOrDefault(T2 targetTile, T1 defaultValue = default) => reverse.GetValueOrDefault(targetTile, defaultValue);
    }
 }

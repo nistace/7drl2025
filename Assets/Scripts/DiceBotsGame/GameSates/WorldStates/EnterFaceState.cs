@@ -1,4 +1,5 @@
 ﻿using DiceBotsGame.Cameras;
+using DiceBotsGame.UI;
 using DiceBotsGame.WorldLevels;
 
 namespace DiceBotsGame.GameSates.WorldStates {
@@ -10,6 +11,7 @@ namespace DiceBotsGame.GameSates.WorldStates {
       }
 
       protected override void Enable() {
+         MainUi.Log.SetTexts(WorldActionName, "Entering the face");
          MainCameraController.ActivateCamera(entryFace.Activity.ActivityCamera);
          GameInfo.PlayerParty.SetWorldPosition(entryFace);
          GameInfo.PlayerParty.SnapBotsToWorldPosition();

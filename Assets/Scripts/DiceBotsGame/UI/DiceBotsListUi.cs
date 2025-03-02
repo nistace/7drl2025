@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DiceBotsGame.CombatActions;
 using DiceBotsGame.DiceBots;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace DiceBotsGame.UI {
    public class DiceBotsListUi : MonoBehaviour {
@@ -12,6 +14,10 @@ namespace DiceBotsGame.UI {
       private readonly List<DiceBotBoxUi> boxes = new List<DiceBotBoxUi>();
       private int activeBoxes;
 
+      public UnityEvent<DiceBot, CombatActionDefinition> OnBotActionHoverStarted { get; } = new UnityEvent<DiceBot, CombatActionDefinition>();
+      public UnityEvent<DiceBot, CombatActionDefinition> OnBotActionHoverStopped { get; } = new UnityEvent<DiceBot, CombatActionDefinition>();
+      public UnityEvent<DiceBot, CombatActionDefinition> OnBotActionClicked { get; } = new UnityEvent<DiceBot, CombatActionDefinition>();
+
       public void AddBot(DiceBot bot) {
          if (boxes.Any(t => t.Bot == bot)) return;
 
@@ -21,6 +27,9 @@ namespace DiceBotsGame.UI {
          var box = boxes[activeBoxes];
          box.SetUp(bot);
          box.SetVisible(true);
+         box.OnBotActionHoverStarted.AddListener(OnBotActionHoverStarted.Invoke);
+         box.OnBotActionHoverStopped.AddListener(OnBotActionHoverStopped.Invoke);
+         box.OnBotActionClicked.AddListener(OnBotActionClicked.Invoke);
 
          activeBoxes++;
       }
@@ -33,6 +42,9 @@ namespace DiceBotsGame.UI {
          boxes.Remove(box);
          boxes.Add(box);
          box.SetVisible(false);
+         box.OnBotActionHoverStarted.RemoveListener(OnBotActionHoverStarted.Invoke);
+         box.OnBotActionHoverStopped.RemoveListener(OnBotActionHoverStopped.Invoke);
+         box.OnBotActionClicked.RemoveListener(OnBotActionClicked.Invoke);
 
          activeBoxes--;
       }

@@ -15,6 +15,7 @@ namespace DiceBotsGame.GameSates.CombatStates {
 
       protected override void Enable() {
          MainCameraController.ActivateCamera(GameInfo.CombatGrid.CinemachineCamera);
+         MainUi.Log.SetTexts("Battle is won!", "");
 
          MainUi.DiceBots.EndEncounter();
       }
@@ -33,6 +34,7 @@ namespace DiceBotsGame.GameSates.CombatStates {
          if (Mathf.Approximately(lerp, 0)) {
             encounter.Activity.Solved = true;
             GameInfo.CombatGrid.EndBattle();
+            encounter.SnapAllBotsToWorldSlots();
             ChangeState(WorldState.Instance);
          }
       }

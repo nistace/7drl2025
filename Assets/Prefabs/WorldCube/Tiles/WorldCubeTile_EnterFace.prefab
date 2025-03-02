@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
+  displayName: The entrance of the face
   optionalActivityInfo: {fileID: 0}
   activityCamera: {fileID: 4543878566339707018}
 --- !u!4 &2431259429274674880 stripped

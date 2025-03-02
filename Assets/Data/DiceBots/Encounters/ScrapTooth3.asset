@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c018ed64c43941e490c72dfc0bf079db, type: 3}
   m_Name: ScrapTooth3
   m_EditorClassIdentifier: 
+  displayName: Medium group of Scrapteeth
   diceBotPatterns:
   - {fileID: 11400000, guid: ac94b21ac57d8ea4890a185800d8b7a3, type: 2}
   - {fileID: 11400000, guid: ac94b21ac57d8ea4890a185800d8b7a3, type: 2}

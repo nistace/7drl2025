@@ -5,6 +5,7 @@ using DiceBotsGame.WorldLevels;
 namespace DiceBotsGame.GameSates {
    public abstract class GameState {
       public static GameState CurrentState { get; private set; }
+      protected static string WorldActionName = $"Roaming face {GameInfo.WorldCube.CurrentFaceIndex + 1} of the cube";
 
       public static void ChangeState(GameState nextState) {
          CurrentState?.Disable();

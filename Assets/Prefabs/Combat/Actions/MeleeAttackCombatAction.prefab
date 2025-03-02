@@ -10,6 +10,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1620059463527213344, guid: ad852b3393ea3a544ba96c27e0d5f57d,
         type: 3}
+      propertyPath: mesh
+      value: 
+      objectReference: {fileID: -3997903123089231754, guid: 17d4fa6690c6a974ca03da998553ccd8,
+        type: 3}
+    - target: {fileID: 1620059463527213344, guid: ad852b3393ea3a544ba96c27e0d5f57d,
+        type: 3}
       propertyPath: model
       value: 
       objectReference: {fileID: 6957138187729537377, guid: 1440fe3f01d0b73429e62f66cc92f9d3,
@@ -20,10 +26,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 80c4fa073e2eb954dbd27337a096c532,
         type: 3}
+    - target: {fileID: 1620059463527213344, guid: ad852b3393ea3a544ba96c27e0d5f57d,
+        type: 3}
+      propertyPath: actionName
+      value: Attacking
+      objectReference: {fileID: 0}
     - target: {fileID: 3386761976105399039, guid: ad852b3393ea3a544ba96c27e0d5f57d,
         type: 3}
       propertyPath: m_Name
-      value: AttackCombatAction
+      value: MeleeAttackCombatAction
       objectReference: {fileID: 0}
     - target: {fileID: 5857309148594961602, guid: ad852b3393ea3a544ba96c27e0d5f57d,
         type: 3}
@@ -86,6 +97,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3386761976105399039, guid: ad852b3393ea3a544ba96c27e0d5f57d,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 6863547456931711335}
+    - targetCorrespondingSourceObject: {fileID: 3386761976105399039, guid: ad852b3393ea3a544ba96c27e0d5f57d,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 3847171689989185947}
   m_SourcePrefab: {fileID: 100100000, guid: ad852b3393ea3a544ba96c27e0d5f57d, type: 3}
 --- !u!1 &8792765651469761492 stripped
@@ -106,6 +121,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36442f8df3774df99a52abc739b7d2d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6863547456931711335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8792765651469761492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35afaec3bc4848d7a72677df709f41ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 1
 --- !u!114 &3847171689989185947
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using DiceBotsGame.CombatActions;
 using DiceBotsGame.DiceBots;
 using DiceBotsGame.DiceBots.Dices.Faces;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace DiceBotsGame.UI {
@@ -21,11 +23,21 @@ namespace DiceBotsGame.UI {
       private readonly List<HealthPointUi> healthPoints = new List<HealthPointUi>();
       private readonly List<DiceBotActionUi> coreActions = new List<DiceBotActionUi>();
 
+      public UnityEvent<DiceBot, CombatActionDefinition> OnBotActionHoverStarted { get; } = new UnityEvent<DiceBot, CombatActionDefinition>();
+      public UnityEvent<DiceBot, CombatActionDefinition> OnBotActionHoverStopped { get; } = new UnityEvent<DiceBot, CombatActionDefinition>();
+      public UnityEvent<DiceBot, CombatActionDefinition> OnBotActionClicked { get; } = new UnityEvent<DiceBot, CombatActionDefinition>();
+
+      private void Start() {
+         diceRollAction.OnClicked.AddListener(HandleActionClicked);
+         diceRollAction.OnPointerEntered.AddListener(HandleActionPointerEntered);
+         diceRollAction.OnPointerExited.AddListener(HandleActionPointerExited);
+      }
+
       public void SetUp(DiceBot bot) {
          CleanUp();
          this.bot = bot;
 
-         botName.name = bot.DisplayName;
+         botName.text = bot.DisplayName;
 
          foreach (var itemColoredWithBotColor in itemsColoredWithBotColor) {
             itemColoredWithBotColor.color = bot.Color;
@@ -61,7 +73,11 @@ namespace DiceBotsGame.UI {
 
       private void RebuildActions() {
          while (coreActions.Count < bot.Dice.CoreActions.Count) {
-            coreActions.Add(Instantiate(diceBotActionPrefab, actionsParent));
+            var action = Instantiate(diceBotActionPrefab, actionsParent);
+            action.OnClicked.AddListener(HandleActionClicked);
+            action.OnPointerEntered.AddListener(HandleActionPointerEntered);
+            action.OnPointerExited.AddListener(HandleActionPointerExited);
+            coreActions.Add(action);
          }
 
          for (var i = 0; i < bot.Dice.CoreActions.Count; ++i) {
@@ -74,6 +90,30 @@ namespace DiceBotsGame.UI {
          }
 
          diceRollAction.transform.SetSiblingIndex(diceRollAction.transform.parent.childCount - 1);
+      }
+
+      private void HandleActionClicked(DiceBotActionUi actionUi) => InvokeEventForAction(OnBotActionClicked, actionUi);
+      private void HandleActionPointerEntered(DiceBotActionUi actionUi) => InvokeEventForAction(OnBotActionHoverStarted, actionUi);
+      private void HandleActionPointerExited(DiceBotActionUi actionUi) => InvokeEventForAction(OnBotActionHoverStopped, actionUi);
+
+      private void InvokeEventForAction(UnityEvent<DiceBot, CombatActionDefinition> eventToInvoke, DiceBotActionUi actionUi) {
+         if (TryGetAction(actionUi, out var action)) {
+            eventToInvoke.Invoke(bot, action);
+         }
+      }
+
+      private bool TryGetAction(DiceBotActionUi actionUi, out CombatActionDefinition action) {
+         if (diceRollAction == actionUi) {
+            action = bot.Dice.LastRolledFace.Data.CombatAction;
+            return true;
+         }
+         var actionIndex = coreActions.IndexOf(actionUi);
+         if (actionIndex > -1) {
+            action = bot.Dice.CoreActions[actionIndex];
+            return true;
+         }
+         action = default;
+         return false;
       }
 
       private void RefreshHealthBar() {

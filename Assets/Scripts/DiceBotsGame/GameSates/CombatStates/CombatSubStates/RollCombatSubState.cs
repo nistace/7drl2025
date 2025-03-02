@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DiceBotsGame.DiceBots;
+using DiceBotsGame.UI;
 using UnityEngine;
 
 namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
@@ -15,6 +16,8 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
       }
 
       public void StartState() {
+         MainUi.Log.SetTexts("Battle continues", "Dice are rolling");
+
          remainingMinTime = 1;
          rollingBots.Clear();
          foreach (var bot in allBots) {
@@ -39,7 +42,6 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
                continue;
             }
             bot.SaveRolledFace();
-            Debug.Log(bot.Dice.LastRolledFace.Data.CombatAction);
             rollingBots.RemoveAt(i);
          }
       }

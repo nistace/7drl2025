@@ -11,6 +11,7 @@ namespace DiceBotsGame.GameSates.WorldStates {
       }
 
       protected override void Enable() {
+         MainUi.Log.SetTexts(WorldActionName, $"Pondering over this {activity.DisplayName}...");
          if (activity.IsOptional(out var optionalInfo)) {
             MainCameraController.ActivateCamera(activity.ActivityCamera);
             MainUi.World.Prompt.ShowPrompt(optionalInfo.PromptText, (optionalInfo.ContinueLabel, HandleContinueClicked), (optionalInfo.CancelLabel, HandleCancelClicked));

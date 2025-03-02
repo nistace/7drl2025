@@ -190,6 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  displayName: The exit of this face
   optionalActivityInfo: {fileID: 11400000, guid: d2ec31905352b7f439e699f3baaf8567,
     type: 2}
   activityCamera: {fileID: 4396906704837563497}

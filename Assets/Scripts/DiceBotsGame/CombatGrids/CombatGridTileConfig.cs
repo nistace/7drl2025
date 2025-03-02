@@ -8,6 +8,7 @@ namespace DiceBotsGame.CombatGrids {
    public class CombatGridTileConfig : ScriptableObject {
       public enum HighlightType {
          None = 0,
+         HoveredNone = 7,
          DefaultSelectable = 1,
          HoveredDefaultSelectable = 2,
          AllySelectable = 3,

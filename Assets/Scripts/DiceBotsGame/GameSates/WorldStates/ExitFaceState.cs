@@ -1,4 +1,5 @@
 ﻿using DiceBotsGame.Cameras;
+using DiceBotsGame.UI;
 using DiceBotsGame.WorldLevels;
 
 namespace DiceBotsGame.GameSates.WorldStates {
@@ -10,6 +11,7 @@ namespace DiceBotsGame.GameSates.WorldStates {
       }
 
       protected override void Enable() {
+         MainUi.Log.SetTexts(WorldActionName, "Moving on to the next face of the cube!");
          MainCameraController.ActivateWorldCamera();
          GameInfo.WorldCube.RotateToFace(GameInfo.WorldCube.CurrentFaceIndex + 1, HandleCubeRotated);
       }

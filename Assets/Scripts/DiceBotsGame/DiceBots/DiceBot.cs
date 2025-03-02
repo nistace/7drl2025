@@ -31,7 +31,7 @@ namespace DiceBotsGame.DiceBots {
          newDice.transform.localScale = Vector3.one;
 
          this.emissive = emissive;
-         healthSystem = new HealthSystem(newDice.EvaluateMaxHealth());
+         healthSystem = new HealthSystem(newDice.Data.CoreHealth);
          this.emissive.SetObservedHealthSystem(healthSystem);
       }
 
@@ -77,6 +77,8 @@ namespace DiceBotsGame.DiceBots {
                             * coefficient;
          dice.Roll(randomForce, randomTorque);
       }
+
+      public void Reassemble() => dice.AttachToBody();
 
       public bool IsRolling() => dice.IsRolling;
       public bool IsStuckWhileRolling() => dice.IsStuckWhileRolling;

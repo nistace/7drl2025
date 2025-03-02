@@ -385,6 +385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
+  displayName: An encounter
   optionalActivityInfo: {fileID: 0}
   activityCamera: {fileID: 8991899241673938838}
 --- !u!114 &1637497300620586828

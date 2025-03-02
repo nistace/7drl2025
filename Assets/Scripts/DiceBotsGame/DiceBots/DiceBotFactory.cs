@@ -21,7 +21,7 @@ namespace DiceBotsGame.DiceBots {
       }
 
       public static DiceBot Instantiate(DiceBotPattern botPattern) {
-         var dicePattern = botPattern.RollDicePattern();
+         var dicePattern = botPattern.DicePattern;
          var color = botPattern.RollColor();
 
          var diceBot = Instantiate(instance.botPrefab);
@@ -31,9 +31,9 @@ namespace DiceBotsGame.DiceBots {
          var faces = new List<CharacterDiceFace>();
          foreach (var facePattern in dicePattern.FacePatterns) {
             var face = Instantiate(instance.facePrefab);
-            face.SetUp(facePattern.Data, diceBotEmissiveMaterial.Material);
-            if (facePattern.Data.HasCombatAction) {
-               instance.faceValueBuilderConfig.Build(face.ValueContainer, facePattern.Data.CombatAction.ConstantStrength, diceBotEmissiveMaterial.Material);
+            face.SetUp(facePattern, diceBotEmissiveMaterial.Material);
+            if (facePattern.HasCombatAction) {
+               instance.faceValueBuilderConfig.Build(face.ValueContainer, facePattern.CombatAction.ConstantStrength, diceBotEmissiveMaterial.Material);
             }
 
             faces.Add(face);

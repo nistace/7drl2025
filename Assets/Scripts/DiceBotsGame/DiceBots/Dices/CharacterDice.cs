@@ -17,6 +17,7 @@ namespace DiceBotsGame.DiceBots.Dices {
       public bool IsAttached => diceBody.isKinematic;
       public bool IsRolling => !IsAttached && (!diceBody.linearVelocity.sqrMagnitude.Approximately(0) || !diceBody.angularVelocity.sqrMagnitude.Approximately(0));
       public bool IsStuckWhileRolling => !IsAttached && !IsRolling && !HasValidRolledFace();
+      public CharacterDiceData Data => data;
 
       public UnityEvent OnStartedRolling = new UnityEvent();
       public UnityEvent<CharacterDiceFace> OnSavedRolledFace { get; } = new UnityEvent<CharacterDiceFace>();
@@ -39,10 +40,6 @@ namespace DiceBotsGame.DiceBots.Dices {
             faceTransform.localRotation = Cubes.faceRotations[i];
             faceTransform.localScale = Vector3.one;
          }
-      }
-
-      public int EvaluateMaxHealth() {
-         return data.CoreHealth + faces.Sum(t => t.Data.HealthPoints);
       }
 
       public void Roll(Vector3 force, Vector3 torque) {

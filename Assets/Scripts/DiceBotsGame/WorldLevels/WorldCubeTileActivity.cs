@@ -12,12 +12,15 @@ namespace DiceBotsGame.WorldLevels {
       }
 
       [SerializeField] protected EType type;
+      [SerializeField] protected string displayName = "This Activity";
       [SerializeField] protected OptionalActivityInfo optionalActivityInfo;
       [SerializeField] protected CinemachineCamera activityCamera;
 
       public bool Solved { get; set; }
       public EType Type => type;
       public CinemachineCamera ActivityCamera => activityCamera;
+      public object DisplayName => displayName;
+
       public bool IsOptional(out OptionalActivityInfo optional) => optional = optionalActivityInfo;
 
       private void Start() {

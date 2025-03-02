@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using DiceBotsGame.CombatActions;
 using DiceBotsGame.DiceBots;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace DiceBotsGame.UI {
    [RequireComponent(typeof(InOutUiAnimator))]
@@ -11,11 +13,17 @@ namespace DiceBotsGame.UI {
 
       private DiceBotsParty playerParty;
 
+      public UnityEvent<DiceBot, CombatActionDefinition> OnPlayerBotActionHoverStarted { get; } = new UnityEvent<DiceBot, CombatActionDefinition>();
+      public UnityEvent<DiceBot, CombatActionDefinition> OnPlayerBotActionHoverStopped { get; } = new UnityEvent<DiceBot, CombatActionDefinition>();
+      public UnityEvent<DiceBot, CombatActionDefinition> OnPlayerBotActionClicked { get; } = new UnityEvent<DiceBot, CombatActionDefinition>();
+
       private void Start() {
          playerBotsList.SetInteractable(false);
-         encounterBotsList.SetInteractable(false);
+         playerBotsList.OnBotActionHoverStarted.AddListener(OnPlayerBotActionHoverStarted.Invoke);
+         playerBotsList.OnBotActionHoverStopped.AddListener(OnPlayerBotActionHoverStopped.Invoke);
+         playerBotsList.OnBotActionClicked.AddListener(OnPlayerBotActionClicked.Invoke);
 
-         playerBotsList.SetVisible(false);
+         encounterBotsList.SetInteractable(false);
          encounterBotsList.SetVisible(false);
       }
 

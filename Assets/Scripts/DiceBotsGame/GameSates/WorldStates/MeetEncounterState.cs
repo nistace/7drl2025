@@ -1,5 +1,6 @@
 ﻿using DiceBotsGame.Cameras;
 using DiceBotsGame.GameSates.CombatStates;
+using DiceBotsGame.UI;
 using DiceBotsGame.WorldLevels;
 
 namespace DiceBotsGame.GameSates.WorldStates {
@@ -13,6 +14,7 @@ namespace DiceBotsGame.GameSates.WorldStates {
       }
 
       protected override void Enable() {
+         MainUi.Log.SetTexts(WorldActionName, $"Encountering {encounter.DisplayName}");
          MainCameraController.ActivateCamera(activity.ActivityCamera);
       }
 
