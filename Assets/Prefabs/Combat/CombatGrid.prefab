@@ -220,6 +220,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offsetTransform: {fileID: 1950075206571332219}
   tileContainer: {fileID: 7346462587724510147}
+  tileContainerLerpMinScale: 0.1
+  tileContainerLerpMaxScale: 1
   cinemachineCamera: {fileID: 4036549818070625741}
   upMovementOffset: 3
-  transitionLerpSpeed: 0.4
+  transitionLerpSpeed: 0.6

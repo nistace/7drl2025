@@ -15,9 +15,9 @@ MonoBehaviour:
   decreasingValueBars:
   - prefab: {fileID: 4911276850359179790, guid: 057eaa39aeed7654fa0493dfbc3bc867,
       type: 3}
-    offset: {x: 0.055, y: 0, z: 0}
+    offset: {x: 0.0032, y: 0, z: 0}
     value: 5
   - prefab: {fileID: 3948254744787216564, guid: aafab715322c69b4fab84296d20562bb,
       type: 3}
-    offset: {x: 0.026, y: 0, z: 0}
+    offset: {x: 0.0015, y: 0, z: 0}
     value: 1

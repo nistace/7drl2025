@@ -1,5 +1,6 @@
 ﻿using DiceBotsGame.DiceBots.Dices;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace DiceBotsGame.DiceBots {
    public class DiceBot : MonoBehaviour {
@@ -13,6 +14,7 @@ namespace DiceBotsGame.DiceBots {
       private Transform WorldTarget { get; set; }
       public bool AtWorldTarget => !WorldTarget || transform.position == WorldTarget.position;
       public HealthSystem HealthSystem => healthSystem;
+      public DiceBotConfig Config => config;
 
       public void SetUp(CharacterDice newDice, DiceBotEmissiveMaterial emissive) {
          if (dice) {
@@ -62,16 +64,20 @@ namespace DiceBotsGame.DiceBots {
          transform.rotation = target.rotation;
       }
 
-      public void Roll() {
+      public void Roll(float coefficient = 1) {
          var randomForce = Quaternion.Euler(0, Random.Range(0, 360f), 0)
                            * Vector3.Slerp(Vector3.up, Vector3.forward, Random.Range(config.RollMinAngle, config.RollMaxAngle) / 90)
-                           * Random.Range(config.RollMinForce, config.RollMaxForce);
+                           * (Random.Range(config.RollMinForce, config.RollMaxForce) * coefficient);
          var randomTorque = new Vector3((Random.Range(0, 2) - 1) * Random.Range(config.RollMinTorque, config.RollMaxTorque),
-            (Random.Range(0, 2) - 1) * Random.Range(config.RollMinTorque, config.RollMaxTorque),
-            (Random.Range(0, 2) - 1) * Random.Range(config.RollMinTorque, config.RollMaxTorque));
+                               (Random.Range(0, 2) - 1) * Random.Range(config.RollMinTorque, config.RollMaxTorque),
+                               (Random.Range(0, 2) - 1) * Random.Range(config.RollMinTorque, config.RollMaxTorque))
+                            * coefficient;
          dice.Roll(randomForce, randomTorque);
       }
 
       public bool IsRolling() => dice.IsRolling;
+      public bool IsStuckWhileRolling() => dice.IsStuckWhileRolling;
+
+      public void SaveRolledFace() => dice.SaveRolledFace();
    }
 }

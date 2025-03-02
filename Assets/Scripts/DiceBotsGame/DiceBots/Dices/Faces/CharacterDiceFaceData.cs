@@ -1,7 +1,6 @@
 ﻿using System;
 using DiceBotsGame.CombatActions;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace DiceBotsGame.DiceBots.Dices.Faces {
    [Serializable]
@@ -18,6 +17,7 @@ namespace DiceBotsGame.DiceBots.Dices.Faces {
 
       public CharacterDiceFaceData(int healthPoints, CombatActionDefinition combatAction) {
          this.healthPoints = healthPoints;
+         this.combatAction = combatAction;
       }
 
       public CharacterDiceFaceData(CharacterDiceFaceData source) : this(source.healthPoints, source.combatAction) { }

@@ -2,6 +2,7 @@
 using DiceBotsGame.DiceBots.Dices.Faces;
 using DiceBotsGame.Utils;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace DiceBotsGame.DiceBots.Dices {
    public class CharacterDice : MonoBehaviour {
@@ -9,8 +10,12 @@ namespace DiceBotsGame.DiceBots.Dices {
       [SerializeField] protected CharacterDiceData data;
       [SerializeField] protected CharacterDiceFace[] faces = new CharacterDiceFace[Cubes.FaceCount];
       [SerializeField] protected Transform facesContainer;
+      public CharacterDiceFace LastRolledFace { get; private set; }
       public bool IsAttached => diceBody.isKinematic;
-      public bool IsRolling => !IsAttached && !diceBody.linearVelocity.sqrMagnitude.Approximately(0);
+      public bool IsRolling => !IsAttached && (!diceBody.linearVelocity.sqrMagnitude.Approximately(0) || !diceBody.angularVelocity.sqrMagnitude.Approximately(0));
+      public bool IsStuckWhileRolling => !IsAttached && !IsRolling && !HasValidRolledFace();
+
+      public UnityEvent<CharacterDiceFace> OnSavedRolledFace { get; } = new UnityEvent<CharacterDiceFace>();
 
       public void SetUp(CharacterDiceData data, CharacterDiceFace[] faces) {
          this.data = new CharacterDiceData(data);
@@ -44,6 +49,13 @@ namespace DiceBotsGame.DiceBots.Dices {
 
       public void AttachToBody() {
          diceBody.isKinematic = true;
+      }
+
+      public bool HasValidRolledFace() => faces.Min(t => Vector3.Angle(t.transform.up, Vector3.up)) < 5f;
+
+      public void SaveRolledFace() {
+         LastRolledFace = faces.OrderBy(t => Vector3.Angle(t.transform.up, Vector3.up)).First();
+         OnSavedRolledFace.Invoke(LastRolledFace);
       }
    }
 }
