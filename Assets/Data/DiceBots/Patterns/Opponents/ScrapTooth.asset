@@ -44,7 +44,29 @@ MonoBehaviour:
     - combatAction:
         action: {fileID: 0}
         constantStrength: 0
-  colors:
-  - {r: 0.6603774, g: 0, b: 0, a: 1}
-  - {r: 0.6981132, g: 0.29966182, b: 0.29966182, a: 1}
-  - {r: 0.509434, g: 0.29556784, b: 0.29556784, a: 1}
+  color: {r: 0.5, g: 0.27320912, b: 0.13443395, a: 1}
+  combatAi:
+    scoringPerAction:
+      _serializedList:
+      - Key: {fileID: 4863189043864608779, guid: 9d16545a2eb0be64d9fc90027f250c86,
+          type: 3}
+        Value:
+          scorePerValue: 2
+          scorePerSelfHealthPoints: 0
+          scorePerSelfMissingHealthPoints: 0
+          scorePerTargetHealthPoints: 0
+          scorePerTargetMissingHealthPoints: 0
+          scorePerDistanceWithSelf: 0
+          scorePerDistanceWithAlly: 0
+          scorePerDistanceWithOpponent: -1
+      - Key: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
+          type: 3}
+        Value:
+          scorePerValue: 20
+          scorePerSelfHealthPoints: 0
+          scorePerSelfMissingHealthPoints: 0
+          scorePerTargetHealthPoints: -1
+          scorePerTargetMissingHealthPoints: 0
+          scorePerDistanceWithSelf: 0
+          scorePerDistanceWithAlly: 0
+          scorePerDistanceWithOpponent: 0

@@ -1,4 +1,5 @@
-﻿using DiceBotsGame.DiceBots.Dices;
+﻿using DiceBotsGame.CombatActions.AI;
+using DiceBotsGame.DiceBots.Dices;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,13 +18,15 @@ namespace DiceBotsGame.DiceBots {
       public DiceBotConfig Config => config;
       public Color Color => emissive.Color;
       public string DisplayName { get; private set; }
+      public CombatAi CombatAi { get; private set; }
 
-      public void SetUp(string name, CharacterDice newDice, DiceBotEmissiveMaterial emissive) {
+      public void SetUp(string name, CombatAi combatAi, CharacterDice newDice, DiceBotEmissiveMaterial emissive) {
          if (dice) {
             Destroy(dice.gameObject);
          }
 
          DisplayName = name;
+         CombatAi = combatAi;
          dice = newDice;
          newDice.transform.SetParent(diceAnchor);
          newDice.transform.localPosition = Vector3.zero;
@@ -69,12 +72,12 @@ namespace DiceBotsGame.DiceBots {
 
       public void Roll(float coefficient = 1) {
          var randomForce = Quaternion.Euler(0, Random.Range(0, 360f), 0)
-                           * Vector3.Slerp(Vector3.up, Vector3.forward, Random.Range(config.RollMinAngle, config.RollMaxAngle) / 90)
-                           * (Random.Range(config.RollMinForce, config.RollMaxForce) * coefficient);
+            * Vector3.Slerp(Vector3.up, Vector3.forward, Random.Range(config.RollMinAngle, config.RollMaxAngle) / 90)
+            * (Random.Range(config.RollMinForce, config.RollMaxForce) * coefficient);
          var randomTorque = new Vector3((Random.Range(0, 2) - 1) * Random.Range(config.RollMinTorque, config.RollMaxTorque),
-                               (Random.Range(0, 2) - 1) * Random.Range(config.RollMinTorque, config.RollMaxTorque),
-                               (Random.Range(0, 2) - 1) * Random.Range(config.RollMinTorque, config.RollMaxTorque))
-                            * coefficient;
+               (Random.Range(0, 2) - 1) * Random.Range(config.RollMinTorque, config.RollMaxTorque),
+               (Random.Range(0, 2) - 1) * Random.Range(config.RollMinTorque, config.RollMaxTorque))
+            * coefficient;
          dice.Roll(randomForce, randomTorque);
       }
 

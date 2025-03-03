@@ -22,7 +22,7 @@ namespace DiceBotsGame.CombatGrids {
       public CombatGridTile this[Vector2Int coordinates] => this[coordinates.x, coordinates.y];
       private Map<DiceBot, CombatGridTile> PositionPerBot { get; } = new Map<DiceBot, CombatGridTile>();
       private IReadOnlyList<DiceBot> PlayerBots { get; set; }
-      private IReadOnlyList<DiceBot> OpponentBots { get; set; }
+      public IReadOnlyList<DiceBot> OpponentBots { get; private set; }
       public bool AreAllBotsAtTheirPosition => PositionPerBot.All(t => t.Key.transform.transform.position == t.Value.transform.position);
 
       private int Size { get; set; }
@@ -53,14 +53,14 @@ namespace DiceBotsGame.CombatGrids {
       public void Build(CombatGridPattern pattern) {
          Size = pattern.Size;
          for (var x = 0; x < Size; ++x)
-         for (var y = 0; y < Size; ++y) {
-            var tile = Instantiate(pattern.TilePrefab, tileContainer);
-            tile.transform.localPosition = new Vector3((x - (Size - 1) * .5f) * pattern.CellOffset, 0, (y - (pattern.Size - 1) * .5f) * pattern.CellOffset);
-            tile.transform.localRotation = Quaternion.identity;
-            tile.transform.localScale = Vector3.one;
-            tile.SetUp(x, y);
-            Tiles.Add(tile);
-         }
+            for (var y = 0; y < Size; ++y) {
+               var tile = Instantiate(pattern.TilePrefab, tileContainer);
+               tile.transform.localPosition = new Vector3((x - (Size - 1) * .5f) * pattern.CellOffset, 0, (y - (pattern.Size - 1) * .5f) * pattern.CellOffset);
+               tile.transform.localRotation = Quaternion.identity;
+               tile.transform.localScale = Vector3.one;
+               tile.SetUp(x, y);
+               Tiles.Add(tile);
+            }
       }
 
       public void UpdateAllBotsPosition() {
@@ -134,5 +134,10 @@ namespace DiceBotsGame.CombatGrids {
             tile.SetHighlight(CombatGridTileConfig.HighlightType.None);
          }
       }
+
+      public IReadOnlyList<DiceBot> GetBotTeam(DiceBot bot) => PlayerBots.Contains(bot) ? PlayerBots : OpponentBots;
+      public IReadOnlyList<DiceBot> GetBotOpponents(DiceBot bot) => PlayerBots.Contains(bot) ? OpponentBots : PlayerBots;
+
+      public static int Distance(Vector2Int first, Vector2Int second) => Mathf.Abs(first.x - second.x) + Mathf.Abs(first.y - second.y);
    }
 }

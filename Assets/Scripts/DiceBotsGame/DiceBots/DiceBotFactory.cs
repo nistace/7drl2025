@@ -22,7 +22,7 @@ namespace DiceBotsGame.DiceBots {
 
       public static DiceBot Instantiate(DiceBotPattern botPattern) {
          var dicePattern = botPattern.DicePattern;
-         var color = botPattern.RollColor();
+         var color = botPattern.Color;
 
          var diceBot = Instantiate(instance.botPrefab);
          var dice = Instantiate(instance.dicePrefab);
@@ -40,7 +40,7 @@ namespace DiceBotsGame.DiceBots {
          }
 
          dice.SetUp(dicePattern.Data, faces.ToArray());
-         diceBot.SetUp(botPattern.DisplayName, dice, diceBotEmissiveMaterial);
+         diceBot.SetUp(botPattern.DisplayName, botPattern.CombatAi, dice, diceBotEmissiveMaterial);
          return diceBot;
       }
 

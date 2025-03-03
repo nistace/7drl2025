@@ -1,4 +1,5 @@
-﻿using DiceBotsGame.DiceBots.Dices;
+﻿using DiceBotsGame.CombatActions.AI;
+using DiceBotsGame.DiceBots.Dices;
 using UnityEngine;
 
 namespace DiceBotsGame.DiceBots {
@@ -6,11 +7,12 @@ namespace DiceBotsGame.DiceBots {
    public class DiceBotPattern : ScriptableObject {
       [SerializeField] protected string displayName;
       [SerializeField] protected CharacterDicePattern dicePattern;
-      [SerializeField] protected Color[] colors;
+      [SerializeField] protected Color color;
+      [SerializeField] protected CombatAi combatAi;
 
       public string DisplayName => displayName;
       public CharacterDicePattern DicePattern => dicePattern;
-
-      public Color RollColor() => colors[Random.Range(0, colors.Length)];
+      public Color Color => color;
+      public CombatAi CombatAi => combatAi;
    }
 }

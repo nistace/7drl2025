@@ -47,5 +47,7 @@ MonoBehaviour:
     - combatAction:
         action: {fileID: 0}
         constantStrength: 0
-  colors:
-  - {r: 0, g: 0.7283535, b: 1, a: 1}
+  color: {r: 0, g: 0.51454735, b: 1, a: 1}
+  combatAi:
+    scoringPerAction:
+      _serializedList: []
