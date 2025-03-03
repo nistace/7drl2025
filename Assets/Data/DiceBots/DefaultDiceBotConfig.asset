@@ -19,5 +19,5 @@ MonoBehaviour:
   rollMinTorque: 120
   rollMaxTorque: 180
   worldMovementSpeed: 4
-  worldMovementMaxAngle: 20
-  worldRotationSpeed: 180
+  worldMovementMaxAngle: 60
+  worldRotationSpeed: 720

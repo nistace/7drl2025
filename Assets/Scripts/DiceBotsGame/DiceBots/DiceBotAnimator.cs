@@ -9,14 +9,18 @@ namespace DiceBotsGame.DiceBots {
       [SerializeField] protected float attachDiceSpeed = 2f;
 
       private Vector3 previousPosition;
+      private float smoothSpeed;
 
       private void Update() {
          var diceBotTransform = diceBot.transform;
          animator.SetBool(attachedAnimParam, diceBot.Dice.IsAttached);
 
-         var normalizedSpeed = (diceBotTransform.position == previousPosition) ? 0 : (diceBotTransform.position - previousPosition).magnitude / Time.deltaTime / diceBot.Config.WorldMovementSpeed;
+         var normalizedSpeed = diceBotTransform.position == previousPosition
+            ? 0
+            : (diceBotTransform.position - previousPosition).magnitude / Time.deltaTime / diceBot.Config.WorldMovementSpeed;
          previousPosition = diceBotTransform.position;
-         animator.SetFloat(normalizedSpeedAnimParam, normalizedSpeed);
+         smoothSpeed = Mathf.Lerp(smoothSpeed, normalizedSpeed, .3f);
+         animator.SetFloat(normalizedSpeedAnimParam, smoothSpeed);
       }
 
       private void LateUpdate() {
