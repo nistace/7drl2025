@@ -37,18 +37,27 @@ namespace DiceBotsGame.CombatGrids {
          OpponentBots = opponentBots;
 
          for (var i = 0; i < playerBots.Count; ++i) {
-            var tile = this[i, 0];
+            var tile = this[0, IndexToY(i)];
             var bot = playerBots[i];
             PositionPerBot.Add(bot, tile);
             bot.transform.SetParent(offsetTransform);
          }
-         for (var i = 0; i < playerBots.Count; ++i) {
-            var tile = this[Size - i - 1, Size - 1];
+         for (var i = 0; i < OpponentBots.Count; ++i) {
+            var tile = this[Size - 1, Size - IndexToY(i) - 1];
             var bot = opponentBots[i];
             PositionPerBot.Add(bot, tile);
             bot.transform.SetParent(offsetTransform);
          }
       }
+
+      private static int IndexToY(int x) => x switch {
+         <= 0 => 3,
+         1 => 2,
+         2 => 4,
+         3 => 1,
+         4 => 5,
+         _ => 0
+      };
 
       public void Build(CombatGridPattern pattern) {
          Size = pattern.Size;
@@ -105,7 +114,7 @@ namespace DiceBotsGame.CombatGrids {
             var node = openNodes.Dequeue();
 
             foreach (var neighbour in new[] { node + Vector2Int.left, node + Vector2Int.up, node + Vector2Int.right, node + Vector2Int.down }) {
-               if (Exists(neighbour) && !PositionPerBot.ContainsKey(this[neighbour.x, neighbour.y]) && origins.TryAdd(neighbour, node)) {
+               if (neighbour == to || Exists(neighbour) && !PositionPerBot.ContainsKey(this[neighbour.x, neighbour.y]) && origins.TryAdd(neighbour, node)) {
                   openNodes.Enqueue(neighbour);
                   if (neighbour == to) {
                      var pathList = new List<Vector2Int> { neighbour };

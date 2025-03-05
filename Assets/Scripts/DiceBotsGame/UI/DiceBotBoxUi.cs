@@ -18,8 +18,7 @@ namespace DiceBotsGame.UI {
       [SerializeField] protected DiceBotActionUi diceBotActionPrefab;
       [SerializeField] protected DiceBotActionUi diceRollAction;
 
-      private DiceBot bot;
-      public DiceBot Bot => bot;
+      public DiceBot Bot { get; private set; }
       private readonly List<HealthPointUi> healthPoints = new List<HealthPointUi>();
       private readonly List<DiceBotActionUi> coreActions = new List<DiceBotActionUi>();
 
@@ -35,7 +34,7 @@ namespace DiceBotsGame.UI {
 
       public void SetUp(DiceBot bot) {
          CleanUp();
-         this.bot = bot;
+         this.Bot = bot;
 
          botName.text = bot.DisplayName;
 
@@ -47,10 +46,10 @@ namespace DiceBotsGame.UI {
          RebuildActions();
          actionsAnimator.SnapOut();
 
-         this.bot.HealthSystem.OnChanged.AddListener(HandleHealthChanged);
-         this.bot.HealthSystem.OnMaxHealthChanged.AddListener(HandleMaxHealthChanged);
-         this.bot.Dice.OnStartedRolling.AddListener(HandleDiceStartedRolling);
-         this.bot.Dice.OnSavedRolledFace.AddListener(HandleDiceSavedRolledFace);
+         this.Bot.HealthSystem.OnChanged.AddListener(HandleHealthChanged);
+         this.Bot.HealthSystem.OnMaxHealthChanged.AddListener(HandleMaxHealthChanged);
+         this.Bot.Dice.OnStartedRolling.AddListener(HandleDiceStartedRolling);
+         this.Bot.Dice.OnSavedRolledFace.AddListener(HandleDiceSavedRolledFace);
       }
 
       public void SetVisible(bool visible) => boxAnimator.ChangeTargetPosition(visible);
@@ -60,19 +59,19 @@ namespace DiceBotsGame.UI {
       private void HandleDiceStartedRolling() => diceRollAction.MarkAsRolling();
 
       public void CleanUp() {
-         if (!bot) return;
-         bot.HealthSystem.OnChanged.RemoveListener(HandleHealthChanged);
-         bot.HealthSystem.OnMaxHealthChanged.RemoveListener(HandleMaxHealthChanged);
-         bot.Dice.OnStartedRolling.RemoveListener(HandleDiceStartedRolling);
-         bot.Dice.OnSavedRolledFace.RemoveListener(HandleDiceSavedRolledFace);
-         bot = null;
+         if (!Bot) return;
+         Bot.HealthSystem.OnChanged.RemoveListener(HandleHealthChanged);
+         Bot.HealthSystem.OnMaxHealthChanged.RemoveListener(HandleMaxHealthChanged);
+         Bot.Dice.OnStartedRolling.RemoveListener(HandleDiceStartedRolling);
+         Bot.Dice.OnSavedRolledFace.RemoveListener(HandleDiceSavedRolledFace);
+         Bot = null;
       }
 
       private void HandleMaxHealthChanged(int _) => RefreshHealthBar();
       private void HandleHealthChanged(int _) => RefreshHealthBar();
 
       private void RebuildActions() {
-         while (coreActions.Count < bot.Dice.CoreActions.Count) {
+         while (coreActions.Count < Bot.Dice.CoreActions.Count) {
             var action = Instantiate(diceBotActionPrefab, actionsParent);
             action.OnClicked.AddListener(HandleActionClicked);
             action.OnPointerEntered.AddListener(HandleActionPointerEntered);
@@ -80,12 +79,12 @@ namespace DiceBotsGame.UI {
             coreActions.Add(action);
          }
 
-         for (var i = 0; i < bot.Dice.CoreActions.Count; ++i) {
-            coreActions[i].SetAction(bot.Dice.CoreActions[i]);
+         for (var i = 0; i < Bot.Dice.CoreActions.Count; ++i) {
+            coreActions[i].SetAction(Bot.Dice.CoreActions[i]);
             coreActions[i].gameObject.SetActive(true);
          }
 
-         for (var i = bot.Dice.CoreActions.Count; i < coreActions.Count; ++i) {
+         for (var i = Bot.Dice.CoreActions.Count; i < coreActions.Count; ++i) {
             coreActions[i].gameObject.SetActive(false);
          }
 
@@ -98,18 +97,18 @@ namespace DiceBotsGame.UI {
 
       private void InvokeEventForAction(UnityEvent<DiceBot, CombatActionDefinition> eventToInvoke, DiceBotActionUi actionUi) {
          if (TryGetAction(actionUi, out var action)) {
-            eventToInvoke.Invoke(bot, action);
+            eventToInvoke.Invoke(Bot, action);
          }
       }
 
       private bool TryGetAction(DiceBotActionUi actionUi, out CombatActionDefinition action) {
          if (diceRollAction == actionUi) {
-            action = bot.Dice.LastRolledFace.Data.CombatAction;
+            action = Bot.Dice.LastRolledFace.Data.CombatAction;
             return true;
          }
          var actionIndex = coreActions.IndexOf(actionUi);
          if (actionIndex > -1) {
-            action = bot.Dice.CoreActions[actionIndex];
+            action = Bot.Dice.CoreActions[actionIndex];
             return true;
          }
          action = default;
@@ -117,16 +116,16 @@ namespace DiceBotsGame.UI {
       }
 
       private void RefreshHealthBar() {
-         while (healthPoints.Count > bot.HealthSystem.MaxHealth) {
+         while (healthPoints.Count > Bot.HealthSystem.MaxHealth) {
             HealthBarManager.Release(healthPoints[0]);
             healthPoints.RemoveAt(0);
          }
-         while (healthPoints.Count < bot.HealthSystem.MaxHealth) {
+         while (healthPoints.Count < Bot.HealthSystem.MaxHealth) {
             healthPoints.Add(HealthBarManager.Get(healthPointsParent));
          }
 
          for (var i = 0; i < healthPoints.Count; ++i) {
-            HealthBarManager.SetFull(healthPoints[i], i < bot.HealthSystem.CurrentHealth);
+            HealthBarManager.SetFull(healthPoints[i], i < Bot.HealthSystem.CurrentHealth);
          }
       }
    }

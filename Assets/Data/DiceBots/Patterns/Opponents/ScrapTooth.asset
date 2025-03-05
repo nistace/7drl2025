@@ -51,22 +51,28 @@ MonoBehaviour:
       - Key: {fileID: 4863189043864608779, guid: 9d16545a2eb0be64d9fc90027f250c86,
           type: 3}
         Value:
-          scorePerValue: 2
+          scoreInitial: 0
+          scorePerValue: 0
           scorePerSelfHealthPoints: 0
           scorePerSelfMissingHealthPoints: 0
           scorePerTargetHealthPoints: 0
           scorePerTargetMissingHealthPoints: 0
-          scorePerDistanceWithSelf: 0
-          scorePerDistanceWithAlly: 0
-          scorePerDistanceWithOpponent: -1
+          scorePerDistanceBetweenActorAndAlly: 0
+          scorePerDistanceBetweenActorAndOpponent: 1
+          scorePerDistanceBetweenTileAndSelf: 0
+          scorePerDistanceBetweenTileAndAlly: 0
+          scorePerDistanceBetweenTileAndOpponent: -1
       - Key: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
           type: 3}
         Value:
-          scorePerValue: 20
+          scoreInitial: 0
+          scorePerValue: 100
           scorePerSelfHealthPoints: 0
           scorePerSelfMissingHealthPoints: 0
           scorePerTargetHealthPoints: -1
           scorePerTargetMissingHealthPoints: 0
-          scorePerDistanceWithSelf: 0
-          scorePerDistanceWithAlly: 0
-          scorePerDistanceWithOpponent: 0
+          scorePerDistanceBetweenActorAndAlly: 0
+          scorePerDistanceBetweenActorAndOpponent: 0
+          scorePerDistanceBetweenTileAndSelf: 0
+          scorePerDistanceBetweenTileAndAlly: 0
+          scorePerDistanceBetweenTileAndOpponent: 0

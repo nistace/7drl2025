@@ -7,9 +7,9 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace DiceBotsGame.CombatActions.AI {
-   [Serializable]
+   [ Serializable ]
    public class CombatAi {
-      [SerializeField] private SerializedDictionary<CombatAction, CombatAiScoring> scoringPerAction = new SerializedDictionary<CombatAction, CombatAiScoring>();
+      [ SerializeField ] private SerializedDictionary<CombatAction, CombatAiScoring> scoringPerAction = new SerializedDictionary<CombatAction, CombatAiScoring>();
 
       public bool TryChooseAction(CombatGrid grid,
          DiceBot actor,
@@ -18,24 +18,27 @@ namespace DiceBotsGame.CombatActions.AI {
          choice = default;
          if (options.Count == 0) return false;
 
+         var data = new CombatAiScoringData(grid, actor);
+
          choice = default;
-         var choiceScore = int.MinValue;
+         var choiceScore = 0;
 
          foreach (var action in options) {
             if (scoringPerAction.TryGetValue(action.Key.Action, out var scoring)) {
                foreach (var actionTile in action.Value) {
-                  var actionTileScore = Mathf.Max(choiceScore, scoring.EvaluateScore(grid, actor, actionTile, action.Key.ConstantStrength));
-                  if (actionTileScore > choiceScore || Random.value > .5f) {
+                  var actionTileScore = scoring.EvaluateScore(data, actionTile, action.Key.ConstantStrength);
+                  if (actionTileScore > choiceScore || actionTileScore > 0 && Random.value > .5f) {
                      choice = (action.Key, actionTile);
                      choiceScore = actionTileScore;
                   }
+                  Debug.Log($"{action.Key.DisplayName} {actionTile.Coordinates} : {actionTileScore}");
                }
 
             }
          }
 
          Debug.Log(choiceScore);
-         return choiceScore > int.MinValue;
+         return choiceScore > 0;
       }
 
    }
