@@ -12,7 +12,7 @@ PrefabInstance:
         type: 3}
       propertyPath: mesh
       value: 
-      objectReference: {fileID: -3997903123089231754, guid: 17d4fa6690c6a974ca03da998553ccd8,
+      objectReference: {fileID: 4486697058990960074, guid: 5ae5e1b3d93685949971b89f0a6e7f5f,
         type: 3}
     - target: {fileID: 1620059463527213344, guid: ad852b3393ea3a544ba96c27e0d5f57d,
         type: 3}
@@ -30,6 +30,16 @@ PrefabInstance:
         type: 3}
       propertyPath: actionName
       value: Attacking
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620059463527213344, guid: ad852b3393ea3a544ba96c27e0d5f57d,
+        type: 3}
+      propertyPath: displayEffects
+      value: Deals {value} damage(s)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620059463527213344, guid: ad852b3393ea3a544ba96c27e0d5f57d,
+        type: 3}
+      propertyPath: displayConditions
+      value: Targets an opponent on an adjacent tile
       objectReference: {fileID: 0}
     - target: {fileID: 3386761976105399039, guid: ad852b3393ea3a544ba96c27e0d5f57d,
         type: 3}
@@ -162,3 +172,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95672ae237a34e52a1325235d380cb26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: 1
+  outputValue: 0

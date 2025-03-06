@@ -12,7 +12,7 @@ PrefabInstance:
         type: 3}
       propertyPath: mesh
       value: 
-      objectReference: {fileID: -446985032237858758, guid: 5ae5e1b3d93685949971b89f0a6e7f5f,
+      objectReference: {fileID: 1817308256273462591, guid: 5ae5e1b3d93685949971b89f0a6e7f5f,
         type: 3}
     - target: {fileID: 1620059463527213344, guid: ad852b3393ea3a544ba96c27e0d5f57d,
         type: 3}
@@ -24,27 +24,27 @@ PrefabInstance:
         type: 3}
       propertyPath: sprite
       value: 
-      objectReference: {fileID: -989351889, guid: a87213824c2d24c45bab42f7ff47c4b5,
+      objectReference: {fileID: 614271085, guid: a87213824c2d24c45bab42f7ff47c4b5,
         type: 3}
     - target: {fileID: 1620059463527213344, guid: ad852b3393ea3a544ba96c27e0d5f57d,
         type: 3}
       propertyPath: actionName
-      value: Moving
+      value: Healing
       objectReference: {fileID: 0}
     - target: {fileID: 1620059463527213344, guid: ad852b3393ea3a544ba96c27e0d5f57d,
         type: 3}
       propertyPath: displayEffects
-      value: Moves to that position
+      value: Heals by up to {value} hit points
       objectReference: {fileID: 0}
     - target: {fileID: 1620059463527213344, guid: ad852b3393ea3a544ba96c27e0d5f57d,
         type: 3}
       propertyPath: displayConditions
-      value: Targets a reachable tile at range {value}
+      value: Targets self
       objectReference: {fileID: 0}
     - target: {fileID: 3386761976105399039, guid: ad852b3393ea3a544ba96c27e0d5f57d,
         type: 3}
       propertyPath: m_Name
-      value: MoveCombatAction
+      value: HealCombatAction
       objectReference: {fileID: 0}
     - target: {fileID: 5857309148594961602, guid: ad852b3393ea3a544ba96c27e0d5f57d,
         type: 3}
@@ -103,15 +103,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3386761976105399039, guid: ad852b3393ea3a544ba96c27e0d5f57d,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8925924059010460271}
+      addedObject: {fileID: 6098797040699388064}
     - targetCorrespondingSourceObject: {fileID: 3386761976105399039, guid: ad852b3393ea3a544ba96c27e0d5f57d,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3554699976884009235}
+      addedObject: {fileID: 1648001610897791492}
     - targetCorrespondingSourceObject: {fileID: 3386761976105399039, guid: ad852b3393ea3a544ba96c27e0d5f57d,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2024693765818156222}
+      addedObject: {fileID: 2764334306854345120}
   m_SourcePrefab: {fileID: 100100000, guid: ad852b3393ea3a544ba96c27e0d5f57d, type: 3}
 --- !u!1 &8792765651469761492 stripped
 GameObject:
@@ -119,7 +119,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6126619342463535403}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8925924059010460271
+--- !u!114 &6098797040699388064
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,10 +128,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8792765651469761492}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 315d1583165d47b9877f059cf955757a, type: 3}
+  m_Script: {fileID: 11500000, guid: 65dd68a115c94546bd937673bbd86cc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3554699976884009235
+--- !u!114 &1648001610897791492
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,10 +140,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8792765651469761492}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89446afab1be48f498492e2320e62fc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 505fead75f064087b8e92992f695ec61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2024693765818156222
+  check: 1
+--- !u!114 &2764334306854345120
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,8 +153,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8792765651469761492}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0038df8b9424b9fb5ca6cc42a4ca957, type: 3}
+  m_Script: {fileID: 11500000, guid: 550e060e723344059e6c3cee54e20e2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outputType: 0
-  stopNodesBeforeEndOfPath: 0
+  target: 1
+  resurrect: 0
+  outputValue: 0

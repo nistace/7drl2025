@@ -67,8 +67,9 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
 
          MainUi.Log.SetTexts(ICombatSubState.BattleTitle, $"{playingBot.DisplayName} is {action.DisplayName}...");
 
+         var value = action.ConstantStrength;
          foreach (var actionEffect in CombatActionHelper.GetEffects(action.Action)) {
-            yield return playingBot.StartCoroutine(actionEffect.Execute(GameInfo.CombatGrid, playingBot, tile, action.ConstantStrength));
+            yield return playingBot.StartCoroutine(actionEffect.Execute(GameInfo.CombatGrid, playingBot, tile, value, t => value = t));
          }
 
          playedBots.Add(playingBot);

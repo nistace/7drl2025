@@ -7,23 +7,24 @@ using UnityEngine.Events;
 
 namespace DiceBotsGame.CombatActions.Effects {
    [RequireComponent(typeof(CombatAction))]
-   public class DamageCombatActionEffect : MonoBehaviour, ICombatActionEffect {
+   public class HealCombatActionEffect : MonoBehaviour, ICombatActionEffect {
       private enum EOutputValue {
          Unchanged = 0,
-         DealtDamage = 1
+         HealedDamage = 1
       }
 
       [SerializeField] private EEffectTarget target = EEffectTarget.BotOnTile;
+      [SerializeField] private bool resurrect;
       [SerializeField] private EOutputValue outputValue = EOutputValue.Unchanged;
 
       public IEnumerator Execute(CombatGrid combatGrid, DiceBot actor, CombatGridTile targetTile, int value, UnityAction<int> outputValueCallback) {
          var bot = CombatEffectHelper.GetTarget(combatGrid, actor, targetTile, target);
-         var dealtDamage = bot.HealthSystem.Damage(value);
+         var healedDamage = bot.HealthSystem.Heal(value, resurrect);
          yield return null;
 
          outputValueCallback?.Invoke(outputValue switch {
             EOutputValue.Unchanged => value,
-            EOutputValue.DealtDamage => dealtDamage,
+            EOutputValue.HealedDamage => healedDamage,
             _ => throw new ArgumentOutOfRangeException()
          });
       }

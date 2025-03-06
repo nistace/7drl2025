@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -123,16 +123,16 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: windowBackground_0
+      name: window
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 256
         width: 256
-        height: 249
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 24, y: 24, z: 24, w: 24}
       customData: 
       outline: []
       physicsShape: []
@@ -145,13 +145,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: windowBackground_1
+      name: arrow_right
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 256
-        height: 256
+        x: 260
+        y: 424
+        width: 58
+        height: 84
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,8 +160,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ee9121bca300a54b9954e383241b868
-      internalID: 2033726853
+      spriteID: b508eee4e59d072498e473630a20e395
+      internalID: 557946324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arrow_left
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 425
+        width: 56
+        height: 84
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6dd3573f104a03c43afc6acb02dd8b5f
+      internalID: 1715000976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arrow_down
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 456
+        width: 84
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb60123e5286e2c4b8894961decacfda
+      internalID: 1541812904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arrow_up
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 395
+        width: 84
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ca5ff07a71ba6443b51e3793949879e
+      internalID: 163084387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: window_opaque
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 24, y: 24, z: 24, w: 24}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 054b6f5400fbd21439c642f5f34f3b4b
+      internalID: -1013352744
       vertices: []
       indices: 
       edges: []
@@ -180,8 +268,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      windowBackground_0: 502365402
+      arrow_down: 1541812904
+      arrow_left: 1715000976
+      arrow_right: 557946324
+      arrow_up: 163084387
+      window: 502365402
       windowBackground_1: 2033726853
+      window_opaque: -1013352744
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

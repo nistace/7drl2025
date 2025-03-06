@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DiceBotsGame.Utils;
+using UnityEngine;
 
 namespace DiceBotsGame.CombatActions {
    public class CombatAction : MonoBehaviour {
@@ -11,7 +12,8 @@ namespace DiceBotsGame.CombatActions {
       public Mesh Mesh => mesh;
       public Sprite Sprite => sprite;
       public string ActionName => actionName;
-      public string DisplayConditions => displayConditions;
-      public string DisplayEffects => displayEffects;
+
+      public string GetDisplayConditions(int value) => displayConditions.WithInjectedParameters(("value", value));
+      public string GetDisplayEffects(int value) => displayEffects.WithInjectedParameters(("value", value));
    }
 }

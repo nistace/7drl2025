@@ -25,14 +25,14 @@ namespace DiceBotsGame.GameSates.CombatStates {
 
          currentSubStateIndex = 0;
          currentSubState.StartState();
-         CombatTipsHelper.EnableTips();
+         CombatInfoHelper.EnableTooltips();
 
          CombatInputUtils.ActionMap.Enable();
       }
 
       protected override void Disable() {
          CombatInputUtils.ActionMap.Disable();
-         CombatTipsHelper.DisableTips();
+         CombatInfoHelper.DisableTooltips();
       }
 
       protected override void Update() {

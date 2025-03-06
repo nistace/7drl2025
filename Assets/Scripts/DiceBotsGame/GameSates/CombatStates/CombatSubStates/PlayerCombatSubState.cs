@@ -64,6 +64,7 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
          CombatInputUtils.Interact.performed += HandleInteractPerformed;
          CombatInputUtils.Cancel.performed += HandleCancelPerformed;
 
+         CombatInfoHelper.EnableLog();
          MainUi.Combat.SetEndTurnButtonVisible(true);
          MainUi.Combat.OnEndTurnClicked.AddListener(HandleEndTurnClicked);
          MainUi.DiceBots.SetPlayerActionsInteractable(true);
@@ -92,7 +93,6 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
          playingAction = action;
          playingTileOptions = optionsPerBotAttack.GetValueOrDefault((playingBot, playingAction), NoTile);
          RefreshAllHighlights();
-         MainUi.Log.SetTexts(ICombatSubState.BattleTitle, $"{bot.DisplayName} considers {action.DisplayName}");
       }
 
       private void HandlePlayerBotActionClicked(DiceBot bot, CombatActionDefinition action) {
@@ -103,14 +103,14 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
          playingTileOptions = optionsPerBotAttack.GetValueOrDefault((playingBot, playingAction), NoTile);
 
          if (playingTileOptions.Count == 0) {
-            MainUi.Log.SetTexts(ICombatSubState.BattleTitle, $"{bot.DisplayName} cannot start {action.DisplayName} from that position");
+            CombatInfoHelper.ShowLog($"{bot.DisplayName} cannot start {action.DisplayName} from that position");
             return;
          }
 
          CurrentPhase = Phase.SelectTile;
+         CombatInfoHelper.DisableLog();
          RefreshAllHighlights();
-
-         MainUi.Log.SetTexts(ICombatSubState.BattleTitle, $"{bot.DisplayName} initiates {action.DisplayName}");
+         CombatInfoHelper.ShowLog($"{bot.DisplayName} initiates {action.DisplayName}");
       }
 
       private void HandleInteractPerformed(InputAction.CallbackContext obj) {
@@ -119,7 +119,7 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
          if (!playingBot) return;
          if (playingAction is not { IsValidAction: true }) return;
          if (!playingTileOptions.Contains(hoveredTile)) {
-            MainUi.Log.SetTexts(ICombatSubState.BattleTitle, $"This is not a valid target for {playingAction.DisplayName}");
+            CombatInfoHelper.ShowLog($"This is not a valid target for {playingAction.DisplayName}");
             return;
          }
 
@@ -144,11 +144,14 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
 
          MainUi.Log.SetTexts(ICombatSubState.BattleTitle, $"{playingBot.DisplayName} is {playingAction.DisplayName}");
 
+         var value = playingAction.ConstantStrength;
          foreach (var actionEffect in CombatActionHelper.GetEffects(playingAction.Action)) {
-            yield return playingBot.StartCoroutine(actionEffect.Execute(GameInfo.CombatGrid, playingBot, playingTile, playingAction.ConstantStrength));
+            yield return playingBot.StartCoroutine(actionEffect.Execute(GameInfo.CombatGrid, playingBot, playingTile, value, t => value = t));
          }
 
          CurrentPhase = Phase.SelectAction;
+         CombatInfoHelper.HideLog();
+         CombatInfoHelper.EnableLog();
          PlayedBots.Add(playingBot);
          RefreshOptionsPerBotAttack();
          IsOver = GameInfo.PlayerParty.DiceBotsInParty.All(t => t.HealthSystem.IsDead || PlayedBots.Contains(t));
@@ -195,6 +198,7 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
       }
 
       public void EndState() {
+         CombatInfoHelper.DisableLog();
          MainUi.DiceBots.SetPlayerActionsInteractable(false);
          MainUi.Combat.SetEndTurnButtonVisible(false);
          MainUi.Combat.OnEndTurnClicked.RemoveListener(HandleEndTurnClicked);

@@ -38,31 +38,35 @@ namespace DiceBotsGame.DiceBots {
          OnMaxHealthChanged.Invoke(maxHealth);
       }
 
-      public void Damage(int damage) {
-         if (IsDead) return;
+      public int Damage(int damage) {
+         if (IsDead) return 0;
 
          var actualDamage = Mathf.Min(currentHealth, Mathf.Max(0, damage));
-         if (actualDamage <= 0) return;
+         if (actualDamage <= 0) return 0;
 
          currentHealth -= actualDamage;
 
          OnDamaged.Invoke(actualDamage);
          OnChanged.Invoke(-actualDamage);
          if (IsDead) OnDied.Invoke();
+
+         return actualDamage;
       }
 
-      public void Heal(int amount, bool resurrect) {
-         if (IsDead && !resurrect) return;
+      public int Heal(int amount, bool resurrect) {
+         if (IsDead && !resurrect) return 0;
 
          var actualHeal = Mathf.Min(MaxHealth - currentHealth, Mathf.Max(0, amount));
 
-         if (actualHeal <= 0) return;
+         if (actualHeal <= 0) return 0;
 
          currentHealth += actualHeal;
 
          OnHealed.Invoke(actualHeal);
          OnChanged.Invoke(actualHeal);
          if (currentHealth == actualHeal) OnResurrected.Invoke();
+
+         return actualHeal;
       }
    }
 }

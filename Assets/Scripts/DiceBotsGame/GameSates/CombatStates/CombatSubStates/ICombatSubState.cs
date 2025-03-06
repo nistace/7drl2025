@@ -1,10 +1,9 @@
 ﻿namespace DiceBotsGame.GameSates.CombatStates {
    public interface ICombatSubState {
-
       public const string BattleTitle = "Battle continues";
-      public abstract void StartState();
-      public abstract void Update();
-      public abstract bool IsOver { get; }
-      public abstract void EndState();
+      public void StartState();
+      public void Update();
+      public bool IsOver { get; }
+      public void EndState();
    }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DiceBotsGame.CombatActions.Conditions;
+using DiceBotsGame.CombatActions.Effects;
 using DiceBotsGame.CombatGrids;
 using DiceBotsGame.DiceBots;
 

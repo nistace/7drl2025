@@ -25,28 +25,29 @@ MonoBehaviour:
         constantStrength: 2
     facePatterns:
     - combatAction:
-        action: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
+        action: {fileID: 4863189043864608779, guid: b07611f804be1484183b6c921c723092,
+          type: 3}
+        constantStrength: 1
+    - combatAction:
+        action: {fileID: 4863189043864608779, guid: b07611f804be1484183b6c921c723092,
+          type: 3}
+        constantStrength: 2
+    - combatAction:
+        action: {fileID: 4863189043864608779, guid: b07611f804be1484183b6c921c723092,
+          type: 3}
+        constantStrength: 2
+    - combatAction:
+        action: {fileID: 4863189043864608779, guid: b07611f804be1484183b6c921c723092,
+          type: 3}
+        constantStrength: 2
+    - combatAction:
+        action: {fileID: 4863189043864608779, guid: b07611f804be1484183b6c921c723092,
+          type: 3}
+        constantStrength: 2
+    - combatAction:
+        action: {fileID: 4863189043864608779, guid: b07611f804be1484183b6c921c723092,
           type: 3}
         constantStrength: 3
-    - combatAction:
-        action: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
-          type: 3}
-        constantStrength: 2
-    - combatAction:
-        action: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
-          type: 3}
-        constantStrength: 2
-    - combatAction:
-        action: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
-          type: 3}
-        constantStrength: 2
-    - combatAction:
-        action: {fileID: 4863189043864608779, guid: 9d16545a2eb0be64d9fc90027f250c86,
-          type: 3}
-        constantStrength: 3
-    - combatAction:
-        action: {fileID: 0}
-        constantStrength: 0
   color: {r: 0, g: 0.51454735, b: 1, a: 1}
   combatAi:
     scoringPerAction:

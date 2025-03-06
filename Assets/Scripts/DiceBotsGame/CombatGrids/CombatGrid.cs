@@ -136,6 +136,7 @@ namespace DiceBotsGame.CombatGrids {
       }
 
       public DiceBot GetDiceBotAtPosition(CombatGridTile targetTile) => PositionPerBot.GetValueOrDefault(targetTile);
+      public CombatGridTile GetTileAtPosition(Vector2Int coordinates) => this[coordinates.x, coordinates.y];
       public bool AreInSameTeam(DiceBot first, DiceBot second) => PlayerBots.Contains(first) == PlayerBots.Contains(second);
 
       public void UnHoverAllTiles() {
