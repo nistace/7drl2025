@@ -62,14 +62,14 @@ namespace DiceBotsGame.CombatGrids {
       public void Build(CombatGridPattern pattern) {
          Size = pattern.Size;
          for (var x = 0; x < Size; ++x)
-            for (var y = 0; y < Size; ++y) {
-               var tile = Instantiate(pattern.TilePrefab, tileContainer);
-               tile.transform.localPosition = new Vector3((x - (Size - 1) * .5f) * pattern.CellOffset, 0, (y - (pattern.Size - 1) * .5f) * pattern.CellOffset);
-               tile.transform.localRotation = Quaternion.identity;
-               tile.transform.localScale = Vector3.one;
-               tile.SetUp(x, y);
-               Tiles.Add(tile);
-            }
+         for (var y = 0; y < Size; ++y) {
+            var tile = Instantiate(pattern.TilePrefab, tileContainer);
+            tile.transform.localPosition = new Vector3((x - (Size - 1) * .5f) * pattern.CellOffset, 0, (y - (pattern.Size - 1) * .5f) * pattern.CellOffset);
+            tile.transform.localRotation = Quaternion.identity;
+            tile.transform.localScale = Vector3.one;
+            tile.SetUp(x, y);
+            Tiles.Add(tile);
+         }
       }
 
       public void UpdateAllBotsPosition() {
@@ -114,11 +114,11 @@ namespace DiceBotsGame.CombatGrids {
             var node = openNodes.Dequeue();
 
             foreach (var neighbour in new[] { node + Vector2Int.left, node + Vector2Int.up, node + Vector2Int.right, node + Vector2Int.down }) {
-               if (neighbour == to || Exists(neighbour) && !PositionPerBot.ContainsKey(this[neighbour.x, neighbour.y]) && origins.TryAdd(neighbour, node)) {
+               if (Exists(neighbour) && (neighbour == to || !PositionPerBot.ContainsKey(this[neighbour.x, neighbour.y])) && origins.TryAdd(neighbour, node)) {
                   openNodes.Enqueue(neighbour);
                   if (neighbour == to) {
                      var pathList = new List<Vector2Int> { neighbour };
-                     while (origins.TryGetValue(pathList[0], out var previous)) {
+                     while (pathList[0] != from && origins.TryGetValue(pathList[0], out var previous)) {
                         pathList.Insert(0, previous);
                      }
                      path = pathList;
