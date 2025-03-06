@@ -37,7 +37,7 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
          optionsPerBotAttack.Clear();
          foreach (var bot in GameInfo.PlayerParty.DiceBotsInParty.Except(PlayedBots).Where(t => t.HealthSystem.IsAlive)) {
             foreach (var action in bot.Dice.CoreActions.Union(new[] { bot.Dice.LastRolledFace.Data.CombatAction }).Where(t => t.IsValidAction)) {
-               var tileCandidates = GameInfo.CombatGrid.AllTiles.Where(t => action.Action.CheckConditions(GameInfo.CombatGrid, bot, t, action.ConstantStrength)).ToHashSet();
+               var tileCandidates = GameInfo.CombatGrid.AllTiles.Where(t => CombatActionHelper.CheckConditions(action.Action, GameInfo.CombatGrid, bot, t, action.ConstantStrength)).ToHashSet();
                if (tileCandidates.Count > 0) {
                   optionsPerBotAttack.Add((bot, action), tileCandidates);
                }
@@ -131,13 +131,12 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
          CurrentPhase = Phase.Resolve;
          playingBot.Reassemble();
 
-         var effects = playingAction.Action.Effects;
          MainUi.DiceBots.SetPlayerActionsInteractable(false);
 
          MainUi.Log.SetTexts(ICombatSubState.BattleTitle, $"{playingBot.DisplayName} is {playingAction.DisplayName}");
 
-         foreach (var effect in effects) {
-            yield return playingBot.StartCoroutine(effect.Execute(GameInfo.CombatGrid, playingBot, playingTile, playingAction.ConstantStrength));
+         foreach (var actionEffect in CombatActionHelper.GetEffects(playingAction.Action)) {
+            yield return playingBot.StartCoroutine(actionEffect.Execute(GameInfo.CombatGrid, playingBot, playingTile, playingAction.ConstantStrength));
          }
 
          CurrentPhase = Phase.SelectAction;
