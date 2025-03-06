@@ -19,7 +19,6 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
          Resolve = 2
       }
 
-      private readonly InputAction interactAction = InputSystem.actions.FindAction("Interact");
       private CombatGridTile hoveredTile;
       private bool overUi;
 
@@ -62,13 +61,18 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
 
          IsOver = false;
 
-         interactAction.performed += HandleInteractPerformed;
+         CombatInputUtils.Interact.performed += HandleInteractPerformed;
+         CombatInputUtils.Cancel.performed += HandleCancelPerformed;
 
+         MainUi.Combat.SetEndTurnButtonVisible(true);
+         MainUi.Combat.OnEndTurnClicked.AddListener(HandleEndTurnClicked);
          MainUi.DiceBots.SetPlayerActionsInteractable(true);
          MainUi.DiceBots.OnPlayerBotActionClicked.AddListener(HandlePlayerBotActionClicked);
          MainUi.DiceBots.OnPlayerBotActionHoverStarted.AddListener(HandlePlayerBotActionHoverStarted);
          MainUi.DiceBots.OnPlayerBotActionHoverStopped.AddListener(HandlePlayerBotActionHoverStopped);
       }
+
+      private void HandleEndTurnClicked() => IsOver = true;
 
       private void HandlePlayerBotActionHoverStopped(DiceBot bot, CombatActionDefinition action) {
          if (CurrentPhase != Phase.SelectAction) return;
@@ -124,6 +128,12 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
          RefreshAllHighlights();
 
          playingBot.StartCoroutine(DoResolve());
+      }
+
+      private void HandleCancelPerformed(InputAction.CallbackContext obj) {
+         if (CurrentPhase != Phase.SelectTile) return;
+         CurrentPhase = Phase.SelectAction;
+         RefreshAllHighlights();
       }
 
       private IEnumerator DoResolve() {
@@ -186,7 +196,10 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
 
       public void EndState() {
          MainUi.DiceBots.SetPlayerActionsInteractable(false);
-         interactAction.performed -= HandleInteractPerformed;
+         MainUi.Combat.SetEndTurnButtonVisible(false);
+         MainUi.Combat.OnEndTurnClicked.RemoveListener(HandleEndTurnClicked);
+         CombatInputUtils.Interact.performed -= HandleInteractPerformed;
+         CombatInputUtils.Cancel.performed -= HandleCancelPerformed;
          IsOver = false;
          if (hoveredTile) {
             hoveredTile.SetHighlight(CombatGridTileConfig.HighlightType.None);

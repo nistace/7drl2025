@@ -27,11 +27,11 @@ namespace DiceBotsGame.GameSates.CombatStates {
          currentSubState.StartState();
          CombatTipsHelper.EnableTips();
 
-         CombatInputUtils.CombatActionMap.Enable();
+         CombatInputUtils.ActionMap.Enable();
       }
 
       protected override void Disable() {
-         CombatInputUtils.CombatActionMap.Disable();
+         CombatInputUtils.ActionMap.Disable();
          CombatTipsHelper.DisableTips();
       }
 

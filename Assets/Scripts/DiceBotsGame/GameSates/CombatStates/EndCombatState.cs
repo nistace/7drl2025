@@ -17,6 +17,7 @@ namespace DiceBotsGame.GameSates.CombatStates {
          MainCameraController.ActivateCamera(GameInfo.CombatGrid.CinemachineCamera);
          MainUi.Log.SetTexts("Battle is won!", "");
 
+         MainUi.Combat.Hide();
          MainUi.DiceBots.EndEncounter();
       }
 

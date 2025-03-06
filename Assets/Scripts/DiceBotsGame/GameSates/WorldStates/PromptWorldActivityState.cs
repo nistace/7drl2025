@@ -14,7 +14,7 @@ namespace DiceBotsGame.GameSates.WorldStates {
          MainUi.Log.SetTexts(WorldActionName, $"Pondering over this {activity.DisplayName}...");
          if (activity.IsOptional(out var optionalInfo)) {
             MainCameraController.ActivateCamera(activity.ActivityCamera);
-            MainUi.World.Prompt.ShowPrompt(optionalInfo.PromptText, (optionalInfo.ContinueLabel, HandleContinueClicked), (optionalInfo.CancelLabel, HandleCancelClicked));
+            MainUi.Prompt.ShowPrompt(optionalInfo.PromptText, (optionalInfo.ContinueLabel, HandleContinueClicked), (optionalInfo.CancelLabel, HandleCancelClicked));
          }
          else {
             ChangeToWorldActivity(activity);
@@ -23,7 +23,7 @@ namespace DiceBotsGame.GameSates.WorldStates {
 
       private void HandleContinueClicked() => ChangeState(GetWorldActivityState(activity));
       private static void HandleCancelClicked() => ChangeState(WorldState.Instance);
-      protected override void Disable() => MainUi.World.Prompt.Hide();
+      protected override void Disable() => MainUi.Prompt.Hide();
       protected override void Update() { }
    }
 }

@@ -26,6 +26,7 @@ namespace DiceBotsGame.GameSates.CombatStates {
          MainCameraController.ActivateCamera(GameInfo.CombatGrid.CinemachineCamera);
          MainUi.Log.SetTexts("Battle is starting...", IntroductionSentences.Roll().Replace("{0}", encounter.DisplayName));
 
+         MainUi.Combat.Show();
          MainUi.DiceBots.SetupEncounter(encounter.DiceBots);
 
          GameInfo.CombatGrid.PrepareCombat(encounter.transform, GameInfo.PlayerParty.DiceBotsInParty, encounter.DiceBots);
