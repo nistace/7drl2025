@@ -1,5 +1,4 @@
-﻿using System;
-using DiceBotsGame.CombatActions;
+﻿using DiceBotsGame.CombatActions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -10,8 +9,8 @@ namespace DiceBotsGame.UI {
    public class DiceBotActionUi : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
       [SerializeField] protected Button button;
       [SerializeField] protected Image icon;
-      [SerializeField] protected Sprite noActionIcon;
-      [SerializeField] protected Sprite rollingIcon;
+      [SerializeField] protected Image value;
+      [SerializeField] protected DiceBotActionConfig config;
 
       public UnityEvent<DiceBotActionUi> OnClicked { get; } = new UnityEvent<DiceBotActionUi>();
       public UnityEvent<DiceBotActionUi> OnPointerEntered { get; } = new UnityEvent<DiceBotActionUi>();
@@ -26,12 +25,15 @@ namespace DiceBotsGame.UI {
       }
 
       public void SetAction(CombatActionDefinition combatAction) {
-         icon.sprite = combatAction.IsValidAction ? combatAction.Action.Sprite : noActionIcon;
+         icon.sprite = combatAction.IsValidAction ? combatAction.Action.Sprite : config.NoActionSprite;
+         value.sprite = config.Digit(combatAction.ConstantStrength);
+         value.enabled = combatAction.IsValidAction && value.sprite;
          button.interactable = combatAction.IsValidAction;
       }
 
       public void MarkAsRolling() {
-         icon.sprite = rollingIcon;
+         icon.sprite = config.RollingActionSprite;
+         value.enabled = false;
          button.interactable = false;
       }
 

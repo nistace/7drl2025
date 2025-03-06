@@ -24,7 +24,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 80c4fa073e2eb954dbd27337a096c532,
+      objectReference: {fileID: 1820471382, guid: a87213824c2d24c45bab42f7ff47c4b5,
         type: 3}
     - target: {fileID: 1620059463527213344, guid: ad852b3393ea3a544ba96c27e0d5f57d,
         type: 3}

@@ -366,8 +366,6 @@ MonoBehaviour:
     type: 3}
   facePrefab: {fileID: 7226231893314556655, guid: 17b3831f707edf04f8867e3853f6987c,
     type: 3}
-  faceValueBuilderConfig: {fileID: 11400000, guid: ba0e3b8f6ad78c84a91b29cc7e55b6db,
-    type: 2}
   emissiveMaterial: {fileID: 2100000, guid: 14e4bfc7086e01e4082f5637ed5de707, type: 2}
 --- !u!114 &156464891
 MonoBehaviour:

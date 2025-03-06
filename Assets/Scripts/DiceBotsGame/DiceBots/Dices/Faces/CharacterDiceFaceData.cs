@@ -8,7 +8,6 @@ namespace DiceBotsGame.DiceBots.Dices.Faces {
       [SerializeField] private CombatActionDefinition combatAction;
 
       public bool HasCombatAction => combatAction.Action;
-      public Mesh CombatActionMesh => combatAction.Action.Mesh;
       public CombatActionDefinition CombatAction => combatAction;
 
       public CharacterDiceFaceData() { }

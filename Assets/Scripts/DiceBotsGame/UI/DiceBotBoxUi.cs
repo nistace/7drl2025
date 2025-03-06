@@ -103,8 +103,8 @@ namespace DiceBotsGame.UI {
 
       private bool TryGetAction(DiceBotActionUi actionUi, out CombatActionDefinition action) {
          if (diceRollAction == actionUi) {
-            action = Bot.Dice.LastRolledFace.Data.CombatAction;
-            return true;
+            action = Bot.Dice.LastRolledFace?.Data?.CombatAction;
+            return action != null;
          }
          var actionIndex = coreActions.IndexOf(actionUi);
          if (actionIndex > -1) {

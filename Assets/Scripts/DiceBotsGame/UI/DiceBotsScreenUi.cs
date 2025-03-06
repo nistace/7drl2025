@@ -16,12 +16,16 @@ namespace DiceBotsGame.UI {
       public UnityEvent<DiceBot, CombatActionDefinition> OnPlayerBotActionHoverStarted { get; } = new UnityEvent<DiceBot, CombatActionDefinition>();
       public UnityEvent<DiceBot, CombatActionDefinition> OnPlayerBotActionHoverStopped { get; } = new UnityEvent<DiceBot, CombatActionDefinition>();
       public UnityEvent<DiceBot, CombatActionDefinition> OnPlayerBotActionClicked { get; } = new UnityEvent<DiceBot, CombatActionDefinition>();
+      public UnityEvent<DiceBot, CombatActionDefinition> OnOpponentActionHoverStarted { get; } = new UnityEvent<DiceBot, CombatActionDefinition>();
+      public UnityEvent<DiceBot, CombatActionDefinition> OnOpponentActionHoverStopped { get; } = new UnityEvent<DiceBot, CombatActionDefinition>();
 
       private void Start() {
          playerBotsList.SetInteractable(false);
          playerBotsList.OnBotActionHoverStarted.AddListener(OnPlayerBotActionHoverStarted.Invoke);
          playerBotsList.OnBotActionHoverStopped.AddListener(OnPlayerBotActionHoverStopped.Invoke);
          playerBotsList.OnBotActionClicked.AddListener(OnPlayerBotActionClicked.Invoke);
+         encounterBotsList.OnBotActionHoverStarted.AddListener(OnOpponentActionHoverStarted.Invoke);
+         encounterBotsList.OnBotActionHoverStopped.AddListener(OnOpponentActionHoverStopped.Invoke);
 
          encounterBotsList.SetInteractable(false);
          encounterBotsList.SetVisible(false);
@@ -61,6 +65,15 @@ namespace DiceBotsGame.UI {
          encounterBotsList.CleanUpAllBots();
          encounterBotsList.SetActionsVisible(false);
          playerBotsList.SetActionsVisible(false);
+      }
+
+      private void OnDestroy() {
+         playerBotsList.SetInteractable(false);
+         playerBotsList.OnBotActionHoverStarted.RemoveListener(OnPlayerBotActionHoverStarted.Invoke);
+         playerBotsList.OnBotActionHoverStopped.RemoveListener(OnPlayerBotActionHoverStopped.Invoke);
+         playerBotsList.OnBotActionClicked.RemoveListener(OnPlayerBotActionClicked.Invoke);
+         encounterBotsList.OnBotActionHoverStarted.RemoveListener(OnOpponentActionHoverStarted.Invoke);
+         encounterBotsList.OnBotActionHoverStopped.RemoveListener(OnOpponentActionHoverStopped.Invoke);
       }
 
       public void Hide() => animator.Exit();

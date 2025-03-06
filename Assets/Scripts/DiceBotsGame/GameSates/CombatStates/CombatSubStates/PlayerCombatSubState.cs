@@ -77,7 +77,6 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
             playingBot = default;
             playingAction = default;
             playingTileOptions = NoTile;
-            MainUi.Log.SetTexts(ICombatSubState.BattleTitle, "Thinking hard...");
             RefreshAllHighlights();
          }
       }

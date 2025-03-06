@@ -6,7 +6,6 @@ using DiceBotsGame.CombatGrids;
 using DiceBotsGame.DiceBots;
 using DiceBotsGame.UI;
 using DiceBotsGame.Utils;
-using UnityEngine;
 
 namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
    public class OpponentCombatSubState : ICombatSubState {

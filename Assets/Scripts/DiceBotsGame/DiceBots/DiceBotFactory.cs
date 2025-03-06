@@ -10,7 +10,6 @@ namespace DiceBotsGame.DiceBots {
       [SerializeField] protected DiceBot botPrefab;
       [SerializeField] protected CharacterDice dicePrefab;
       [SerializeField] protected CharacterDiceFace facePrefab;
-      [SerializeField] protected CharacterDiceFaceValueBuilderConfig faceValueBuilderConfig;
       [SerializeField] protected Material emissiveMaterial;
 
       private static DiceBotFactory instance { get; set; }
@@ -32,9 +31,6 @@ namespace DiceBotsGame.DiceBots {
          foreach (var facePattern in dicePattern.FacePatterns) {
             var face = Instantiate(instance.facePrefab);
             face.SetUp(facePattern, diceBotEmissiveMaterial.Material);
-            if (facePattern.HasCombatAction) {
-               instance.faceValueBuilderConfig.Build(face.ValueContainer, facePattern.CombatAction.ConstantStrength, diceBotEmissiveMaterial.Material);
-            }
 
             faces.Add(face);
          }
