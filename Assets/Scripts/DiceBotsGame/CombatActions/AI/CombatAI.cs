@@ -7,9 +7,9 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace DiceBotsGame.CombatActions.AI {
-   [ Serializable ]
+   [Serializable]
    public class CombatAi {
-      [ SerializeField ] private SerializedDictionary<CombatAction, CombatAiScoring> scoringPerAction = new SerializedDictionary<CombatAction, CombatAiScoring>();
+      [SerializeField] private SerializedDictionary<CombatAction, CombatAiScoring> scoringPerAction = new SerializedDictionary<CombatAction, CombatAiScoring>();
 
       public bool TryChooseAction(CombatGrid grid,
          DiceBot actor,
@@ -31,15 +31,11 @@ namespace DiceBotsGame.CombatActions.AI {
                      choice = (action.Key, actionTile);
                      choiceScore = actionTileScore;
                   }
-                  Debug.Log($"{action.Key.DisplayName} {actionTile.Coordinates} : {actionTileScore}");
                }
-
             }
          }
 
-         Debug.Log(choiceScore);
          return choiceScore > 0;
       }
-
    }
 }

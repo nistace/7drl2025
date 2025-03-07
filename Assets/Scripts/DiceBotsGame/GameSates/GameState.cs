@@ -1,4 +1,5 @@
 ﻿using System;
+using DiceBotsGame.BotUpgrades;
 using DiceBotsGame.GameSates.WorldStates;
 using DiceBotsGame.WorldLevels;
 
@@ -27,6 +28,7 @@ namespace DiceBotsGame.GameSates {
             WorldCubeTileActivity.EType.ExitFace => new ExitFaceState(activity),
             WorldCubeTileActivity.EType.MeetEncounter => new MeetEncounterState(activity),
             WorldCubeTileActivity.EType.EnterFace => throw new ArgumentException($"Activities of type {activity.GetType().Name} are not supported."),
+            WorldCubeTileActivity.EType.DiceSmith => new LevelUpState(PartyUpgrade.GenerateForLevelUp(GameInfo.PlayerParty)),
             _ => throw new ArgumentException($"Activities of type {activity.GetType().Name} are not supported.")
          };
       }

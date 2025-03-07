@@ -1,5 +1,4 @@
-﻿using System;
-using Unity.Cinemachine;
+﻿using Unity.Cinemachine;
 using UnityEngine;
 
 namespace DiceBotsGame.WorldLevels {
@@ -8,7 +7,8 @@ namespace DiceBotsGame.WorldLevels {
          None = 0,
          ExitFace = 1,
          EnterFace = 2,
-         MeetEncounter = 3
+         MeetEncounter = 3,
+         DiceSmith = 4
       }
 
       [SerializeField] protected EType type;

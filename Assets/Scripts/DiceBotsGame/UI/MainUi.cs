@@ -1,3 +1,4 @@
+using DiceBotsGame.UI.Forge;
 using UnityEngine;
 
 namespace DiceBotsGame.UI {
@@ -10,6 +11,7 @@ namespace DiceBotsGame.UI {
       [SerializeField] protected GameOverUi gameOver;
       [SerializeField] protected LogUI log;
       [SerializeField] protected TooltipUi tooltip;
+      [SerializeField] protected ForgeUi forge;
 
       public static PromptUi Prompt => instance.prompt;
       public static CombatUi Combat => instance.combat;
@@ -17,6 +19,7 @@ namespace DiceBotsGame.UI {
       public static GameOverUi GameOver => instance.gameOver;
       public static LogUI Log => instance.log;
       public static TooltipUi Tooltip => instance.tooltip;
+      public static ForgeUi Forge => instance.forge;
 
       private void Awake() {
          instance = this;

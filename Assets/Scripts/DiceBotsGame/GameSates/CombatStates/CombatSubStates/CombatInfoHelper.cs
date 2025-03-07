@@ -19,32 +19,11 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
       }
 
       public static void EnableTooltips() {
-         MainUi.DiceBots.OnPlayerBotActionHoverStarted.AddListener(ShowTooltip);
-         MainUi.DiceBots.OnPlayerBotActionHoverStopped.AddListener(HideTooltip);
-         MainUi.DiceBots.OnOpponentActionHoverStarted.AddListener(ShowTooltip);
-         MainUi.DiceBots.OnOpponentActionHoverStopped.AddListener(HideTooltip);
       }
 
       public static void DisableTooltips() {
-         MainUi.DiceBots.OnPlayerBotActionHoverStarted.RemoveListener(ShowTooltip);
-         MainUi.DiceBots.OnPlayerBotActionHoverStopped.RemoveListener(HideTooltip);
-         MainUi.DiceBots.OnOpponentActionHoverStarted.RemoveListener(ShowTooltip);
-         MainUi.DiceBots.OnOpponentActionHoverStopped.RemoveListener(HideTooltip);
       }
 
-      private static void HideTooltip(DiceBot bot, CombatActionDefinition action) => MainUi.Tooltip.Hide(action);
-
-      private static void ShowTooltip(DiceBot bot, CombatActionDefinition action) {
-         if (action.IsValidAction) {
-            MainUi.Tooltip.Show($"{action.Action.ActionName} ({action.ConstantStrength})\n"
-                                + $"  > {action.Action.GetDisplayConditions(action.ConstantStrength)}\n"
-                                + $"  > {action.Action.GetDisplayEffects(action.ConstantStrength)}",
-               action);
-         }
-         else {
-            MainUi.Tooltip.Hide();
-         }
-      }
 
       private static void HideLog(DiceBot bot, CombatActionDefinition action) => HideLog();
       private static void ShowLog(DiceBot bot, CombatActionDefinition action) => ShowLog($"{bot.DisplayName} considers {action.DisplayName}");

@@ -9,10 +9,12 @@ namespace DiceBotsGame.DiceBots {
       [SerializeField] protected CharacterDicePattern dicePattern;
       [SerializeField] protected Color color;
       [SerializeField] protected CombatAi combatAi;
+      [SerializeField] protected DiceBotUpgradeInfo upgradeInfo;
 
       public string DisplayName => displayName;
       public CharacterDicePattern DicePattern => dicePattern;
       public Color Color => color;
       public CombatAi CombatAi => combatAi;
+      public DiceBotUpgradeInfo UpgradeInfo => upgradeInfo;
    }
 }

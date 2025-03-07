@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace DiceBotsGame.UI {
+namespace DiceBotsGame.UI.Health {
    public class HealthBarManager : MonoBehaviour {
       private static HealthBarManager Instance { get; set; }
 

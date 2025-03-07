@@ -1,4 +1,5 @@
-﻿using DiceBotsGame.Cameras;
+﻿using DiceBotsGame.BotUpgrades;
+using DiceBotsGame.Cameras;
 using DiceBotsGame.GameSates.WorldStates;
 using DiceBotsGame.UI;
 using DiceBotsGame.WorldLevels;
@@ -36,7 +37,7 @@ namespace DiceBotsGame.GameSates.CombatStates {
             encounter.Activity.Solved = true;
             GameInfo.CombatGrid.EndBattle();
             encounter.SnapAllBotsToWorldSlots();
-            ChangeState(WorldState.Instance);
+            ChangeState(new LevelUpState(PartyUpgrade.GenerateForLevelUp(GameInfo.PlayerParty)));
          }
       }
    }

@@ -28,15 +28,15 @@ namespace DiceBotsGame.DiceBots {
          var diceBotEmissiveMaterial = DiceBotEmissiveMaterial.Instantiate(instance.emissiveMaterial, color, 1);
 
          var faces = new List<CharacterDiceFace>();
-         foreach (var facePattern in dicePattern.FacePatterns) {
+         foreach (var faceAction in dicePattern.FaceActions) {
             var face = Instantiate(instance.facePrefab);
-            face.SetUp(facePattern, diceBotEmissiveMaterial.Material);
+            face.SetUp(faceAction, diceBotEmissiveMaterial.Material);
 
             faces.Add(face);
          }
 
          dice.SetUp(dicePattern.Data, faces.ToArray());
-         diceBot.SetUp(botPattern.DisplayName, botPattern.CombatAi, dice, diceBotEmissiveMaterial);
+         diceBot.SetUp(botPattern.DisplayName, botPattern.CombatAi, botPattern.UpgradeInfo, dice, diceBotEmissiveMaterial);
          return diceBot;
       }
 

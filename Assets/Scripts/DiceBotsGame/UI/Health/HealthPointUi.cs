@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace DiceBotsGame.UI {
+namespace DiceBotsGame.UI.Health {
    public class HealthPointUi : MonoBehaviour {
       [SerializeField] protected Image image;
 

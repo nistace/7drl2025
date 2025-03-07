@@ -43,6 +43,8 @@ namespace DiceBotsGame.UI {
          animator.Enter();
       }
 
+      public void Show() => animator.Enter();
+
       private void CleanUp() {
          playerBotsList.CleanUpAllBots();
          encounterBotsList.CleanUpAllBots();

@@ -15,7 +15,5 @@ namespace DiceBotsGame.DiceBots.Dices.Faces {
       public CharacterDiceFaceData(CombatActionDefinition combatAction) {
          this.combatAction = combatAction;
       }
-
-      public CharacterDiceFaceData(CharacterDiceFaceData source) : this(source.combatAction) { }
    }
 }

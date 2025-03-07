@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using DiceBotsGame.CombatActions;
+using TMPro;
 using UnityEngine;
 
 namespace DiceBotsGame.UI {
@@ -15,15 +16,37 @@ namespace DiceBotsGame.UI {
       private void Start() {
          uiAnimator.SnapOut();
          Hide();
+
+         SharedUiEvents.OnActionHoverStarted.AddListener(ShowTooltip);
+         SharedUiEvents.OnActionHoverStopped.AddListener(HideTooltip);
       }
 
-      public void Show(string text, object source = null) {
+      private void OnDestroy() {
+         SharedUiEvents.OnActionHoverStarted.RemoveListener(ShowTooltip);
+         SharedUiEvents.OnActionHoverStopped.RemoveListener(HideTooltip);
+      }
+
+      private void HideTooltip(CombatActionDefinition action) => Hide(action);
+
+      private void ShowTooltip(CombatActionDefinition action) {
+         if (action.IsValidAction) {
+            Show($"{action.Action.ActionName} ({action.ConstantStrength})\n"
+                 + $"  > {action.Action.GetDisplayConditions(action.ConstantStrength)}\n"
+                 + $"  > {action.Action.GetDisplayEffects(action.ConstantStrength)}",
+               action);
+         }
+         else {
+            Hide();
+         }
+      }
+
+      private void Show(string text, object source = null) {
          tooltipLabel.text = text;
          uiAnimator.Enter();
          tooltipSource = source;
       }
 
-      public void Hide(object fromSource = null) {
+      private void Hide(object fromSource = null) {
          if (fromSource == null || tooltipSource == null || tooltipSource == fromSource) {
             uiAnimator.Exit();
          }

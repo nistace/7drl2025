@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DiceBotsGame.CombatActions;
 using DiceBotsGame.DiceBots.Dices.Faces;
@@ -12,6 +13,8 @@ namespace DiceBotsGame.DiceBots.Dices {
       [SerializeField] protected CharacterDiceData data;
       [SerializeField] protected CharacterDiceFace[] faces = new CharacterDiceFace[Cubes.FaceCount];
       [SerializeField] protected Transform facesContainer;
+
+      public IReadOnlyList<CharacterDiceFace> Faces => faces;
       public CharacterDiceFace LastRolledFace { get; private set; }
       public IReadOnlyList<CombatActionDefinition> CoreActions => data.CoreCombatActions;
       public bool IsAttached => diceBody.isKinematic;
@@ -59,5 +62,7 @@ namespace DiceBotsGame.DiceBots.Dices {
          LastRolledFace = faces.OrderBy(t => Vector3.Angle(t.transform.up, Vector3.up)).First();
          OnSavedRolledFace.Invoke(LastRolledFace);
       }
+
+      public int IndexOfFace(CharacterDiceFace face) => Array.IndexOf(faces, face);
    }
 }

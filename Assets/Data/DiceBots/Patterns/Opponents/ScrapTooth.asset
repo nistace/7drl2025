@@ -20,30 +20,24 @@ MonoBehaviour:
       - action: {fileID: 4863189043864608779, guid: 9d16545a2eb0be64d9fc90027f250c86,
           type: 3}
         constantStrength: 1
-    facePatterns:
-    - combatAction:
-        action: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
-          type: 3}
-        constantStrength: 2
-    - combatAction:
-        action: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
-          type: 3}
-        constantStrength: 1
-    - combatAction:
-        action: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
-          type: 3}
-        constantStrength: 1
-    - combatAction:
-        action: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
-          type: 3}
-        constantStrength: 1
-    - combatAction:
-        action: {fileID: 4863189043864608779, guid: 9d16545a2eb0be64d9fc90027f250c86,
-          type: 3}
-        constantStrength: 2
-    - combatAction:
-        action: {fileID: 0}
-        constantStrength: 0
+    faceActions:
+    - action: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
+        type: 3}
+      constantStrength: 2
+    - action: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
+        type: 3}
+      constantStrength: 1
+    - action: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
+        type: 3}
+      constantStrength: 1
+    - action: {fileID: 4863189043864608779, guid: 9d16545a2eb0be64d9fc90027f250c86,
+        type: 3}
+      constantStrength: 2
+    - action: {fileID: 4863189043864608779, guid: 9d16545a2eb0be64d9fc90027f250c86,
+        type: 3}
+      constantStrength: 2
+    - action: {fileID: 0}
+      constantStrength: 1
   color: {r: 0.5, g: 0.27320912, b: 0.13443395, a: 1}
   combatAi:
     scoringPerAction:
@@ -76,3 +70,8 @@ MonoBehaviour:
           scorePerDistanceBetweenTileAndSelf: 0
           scorePerDistanceBetweenTileAndAlly: 0
           scorePerDistanceBetweenTileAndOpponent: 0
+  upgradeInfo:
+    levelUpAdditionalHealth: 1
+    upgradableActions:
+      _serializedList: []
+    initialActions: []

@@ -12,6 +12,8 @@ namespace DiceBotsGame.UI {
       [SerializeField] protected Image value;
       [SerializeField] protected DiceBotActionConfig config;
 
+      private CombatActionDefinition combatAction;
+
       public UnityEvent<DiceBotActionUi> OnClicked { get; } = new UnityEvent<DiceBotActionUi>();
       public UnityEvent<DiceBotActionUi> OnPointerEntered { get; } = new UnityEvent<DiceBotActionUi>();
       public UnityEvent<DiceBotActionUi> OnPointerExited { get; } = new UnityEvent<DiceBotActionUi>();
@@ -25,6 +27,7 @@ namespace DiceBotsGame.UI {
       }
 
       public void SetAction(CombatActionDefinition combatAction) {
+         this.combatAction = combatAction;
          icon.sprite = combatAction.IsValidAction ? combatAction.Action.Sprite : config.NoActionSprite;
          value.sprite = config.Digit(combatAction.ConstantStrength);
          value.enabled = combatAction.IsValidAction && value.sprite;
@@ -37,8 +40,18 @@ namespace DiceBotsGame.UI {
          button.interactable = false;
       }
 
+      public void SetInteractable(bool interactable) => button.interactable = interactable;
+
       private void HandleClick() => OnClicked.Invoke(this);
-      public void OnPointerEnter(PointerEventData eventData) => OnPointerEntered.Invoke(this);
-      public void OnPointerExit(PointerEventData eventData) => OnPointerExited.Invoke(this);
+
+      public void OnPointerEnter(PointerEventData eventData) {
+         OnPointerEntered.Invoke(this);
+         SharedUiEvents.OnActionHoverStarted.Invoke(combatAction);
+      }
+
+      public void OnPointerExit(PointerEventData eventData) {
+         OnPointerExited.Invoke(this);
+         SharedUiEvents.OnActionHoverStopped.Invoke(combatAction);
+      }
    }
 }

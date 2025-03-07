@@ -25,6 +25,7 @@ MonoBehaviour:
   - mandatoryFaces:
     - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
     - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 108c7fd2ccdb6494197d064bedb9e19c, type: 3}
     possibleEncounters:
     - {fileID: 11400000, guid: ae7e3b093d2b99c4d9f2f96fcf7c606f, type: 2}
   - mandatoryFaces:

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using DiceBotsGame.DiceBots.Dices.Faces;
+using DiceBotsGame.CombatActions;
 using UnityEngine;
 
 namespace DiceBotsGame.DiceBots.Dices {
    [Serializable]
    public class CharacterDicePattern {
       [SerializeField] protected CharacterDiceData data;
-      [SerializeField] protected CharacterDiceFaceData[] facePatterns = new CharacterDiceFaceData[6];
+      [SerializeField] protected CombatActionDefinition[] faceActions = new CombatActionDefinition[6];
 
       public CharacterDiceData Data => data;
-      public IReadOnlyList<CharacterDiceFaceData> FacePatterns => facePatterns;
+      public IReadOnlyList<CombatActionDefinition> FaceActions => faceActions;
    }
 }

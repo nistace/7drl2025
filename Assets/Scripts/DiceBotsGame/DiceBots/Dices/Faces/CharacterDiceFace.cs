@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DiceBotsGame.CombatActions;
+using UnityEngine;
 
 namespace DiceBotsGame.DiceBots.Dices.Faces {
    public class CharacterDiceFace : MonoBehaviour {
@@ -11,12 +12,16 @@ namespace DiceBotsGame.DiceBots.Dices.Faces {
       public CharacterDiceFaceData Data => data;
       public bool Playable => data.HasCombatAction;
 
-      public void SetUp(CharacterDiceFaceData data, Material emissiveMaterial) {
-         this.data = new CharacterDiceFaceData(data);
-
+      public void SetUp(CombatActionDefinition action, Material emissiveMaterial) {
          foreach (var emissiveRenderer in emissiveRenderers) {
             emissiveRenderer.material = emissiveMaterial;
          }
+
+         ChangeFace(action);
+      }
+
+      public void ChangeFace(CombatActionDefinition combatAction) {
+         data = new CharacterDiceFaceData(combatAction);
 
          faceActionRenderer.enabled = data.HasCombatAction;
          faceValueRenderer.enabled = data.HasCombatAction;

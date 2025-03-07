@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using DiceBotsGame.CombatActions;
 using DiceBotsGame.DiceBots;
 using DiceBotsGame.DiceBots.Dices.Faces;
+using DiceBotsGame.UI.Health;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,14 +13,13 @@ namespace DiceBotsGame.UI {
       [SerializeField] protected InOutUiAnimator boxAnimator;
       [SerializeField] protected TMP_Text botName;
       [SerializeField] protected Graphic[] itemsColoredWithBotColor;
-      [SerializeField] protected Transform healthPointsParent;
+      [SerializeField] private HealthBarUi healthBar;
       [SerializeField] protected Transform actionsParent;
       [SerializeField] protected InOutUiAnimator actionsAnimator;
       [SerializeField] protected DiceBotActionUi diceBotActionPrefab;
       [SerializeField] protected DiceBotActionUi diceRollAction;
 
       public DiceBot Bot { get; private set; }
-      private readonly List<HealthPointUi> healthPoints = new List<HealthPointUi>();
       private readonly List<DiceBotActionUi> coreActions = new List<DiceBotActionUi>();
 
       public UnityEvent<DiceBot, CombatActionDefinition> OnBotActionHoverStarted { get; } = new UnityEvent<DiceBot, CombatActionDefinition>();
@@ -115,18 +115,6 @@ namespace DiceBotsGame.UI {
          return false;
       }
 
-      private void RefreshHealthBar() {
-         while (healthPoints.Count > Bot.HealthSystem.MaxHealth) {
-            HealthBarManager.Release(healthPoints[0]);
-            healthPoints.RemoveAt(0);
-         }
-         while (healthPoints.Count < Bot.HealthSystem.MaxHealth) {
-            healthPoints.Add(HealthBarManager.Get(healthPointsParent));
-         }
-
-         for (var i = 0; i < healthPoints.Count; ++i) {
-            HealthBarManager.SetFull(healthPoints[i], i < Bot.HealthSystem.CurrentHealth);
-         }
-      }
+      private void RefreshHealthBar() => healthBar.Refresh(Bot.HealthSystem.CurrentHealth, Bot.HealthSystem.MaxHealth);
    }
 }
