@@ -6,6 +6,7 @@ using DiceBotsGame.CombatGrids;
 using DiceBotsGame.DiceBots;
 using DiceBotsGame.UI;
 using DiceBotsGame.Utils;
+using UnityEngine;
 
 namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
    public class OpponentCombatSubState : ICombatSubState {
@@ -18,25 +19,30 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
       }
 
       private EPhase Phase { get; set; }
-      private readonly HashSet<DiceBot> playedBots = new HashSet<DiceBot>();
+      private readonly HashSet<DiceBot> playableBots = new HashSet<DiceBot>();
 
       private Dictionary<DiceBot, Dictionary<CombatActionDefinition, HashSet<CombatGridTile>>> optionsPerBotAttack { get; } =
          new Dictionary<DiceBot, Dictionary<CombatActionDefinition, HashSet<CombatGridTile>>>();
 
       public void StartState() {
          MainUi.Log.SetTexts(ICombatSubState.BattleTitle, "Opponents counter-attack!");
-         playedBots.Clear();
+         playableBots.Clear();
+         foreach (var playableBot in GameInfo.CombatGrid.ListOfOpponentBots.Where(t => t.HealthSystem.IsAlive)) {
+            playableBots.Add(playableBot);
+         }
          Phase = EPhase.RefreshingActions;
       }
 
       private void RefreshOptionsPerBotAttack() {
          optionsPerBotAttack.Clear();
-         foreach (var bot in GameInfo.CombatGrid.OpponentBots.Where(t => !playedBots.Contains(t) && t.HealthSystem.IsAlive)) {
-            foreach (var action in bot.Dice.CoreActions.Union(new[] { bot.Dice.LastRolledFace.Data.CombatAction }).Where(t => t.IsValidAction)) {
-               var tileCandidates = GameInfo.CombatGrid.AllTiles.Where(t => CombatActionHelper.CheckConditions(action.Action, GameInfo.CombatGrid, bot, t, action.ConstantStrength)).ToHashSet();
-               if (tileCandidates.Count > 0) {
-                  if (!optionsPerBotAttack.ContainsKey(bot)) optionsPerBotAttack.Add(bot, new Dictionary<CombatActionDefinition, HashSet<CombatGridTile>>());
-                  optionsPerBotAttack[bot].Add(action, tileCandidates);
+         foreach (var bot in playableBots) {
+            if (bot.HealthSystem.IsAlive) {
+               foreach (var action in bot.Dice.CoreActions.Union(new[] { bot.Dice.LastRolledFace.Data.CombatAction }).Where(t => t.IsValidAction)) {
+                  var tileCandidates = GameInfo.CombatGrid.AllTiles.Where(t => CombatActionHelper.CheckConditions(action.Action, GameInfo.CombatGrid, bot, t, action.ConstantStrength)).ToHashSet();
+                  if (tileCandidates.Count > 0) {
+                     if (!optionsPerBotAttack.ContainsKey(bot)) optionsPerBotAttack.Add(bot, new Dictionary<CombatActionDefinition, HashSet<CombatGridTile>>());
+                     optionsPerBotAttack[bot].Add(action, tileCandidates);
+                  }
                }
             }
          }
@@ -54,7 +60,7 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
                   playingBot.StartCoroutine(PlayBotTurn(playingBot, choice.action, choice.tile));
                }
                else {
-                  playedBots.Add(playingBot);
+                  playableBots.Remove(playingBot);
                   Phase = EPhase.RefreshingActions;
                }
             }
@@ -72,7 +78,9 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
             yield return playingBot.StartCoroutine(actionEffect.Execute(GameInfo.CombatGrid, playingBot, tile, value, t => value = t));
          }
 
-         playedBots.Add(playingBot);
+         yield return new WaitForSeconds(.5f);
+
+         playableBots.Remove(playingBot);
 
          Phase = EPhase.RefreshingActions;
       }

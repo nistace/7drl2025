@@ -15,6 +15,7 @@ namespace DiceBotsGame.DiceBots {
       [SerializeField] protected MeshRenderer[] emissiveRenderers;
       [SerializeField] private MetallicRendererCategory[] metallicRendererCategories;
 
+      public bool IsSetUp => HealthSystem != null;
       public CharacterDice Dice => dice;
       private Transform WorldTarget { get; set; }
       public bool AtWorldTarget => !WorldTarget || transform.position == WorldTarget.position;
@@ -26,6 +27,7 @@ namespace DiceBotsGame.DiceBots {
       public DiceBotUpgradeInfo UpgradeInfo { get; private set; }
 
       public UnityEvent<float> OnMovementDone { get; } = new UnityEvent<float>();
+      public UnityEvent OnSetupComplete { get; } = new UnityEvent();
 
       public void SetUp(DiceBotPattern pattern, DiceBotEmissiveMaterial emissive, Material[] metallicMaterial) {
          DisplayName = pattern.DisplayName;
@@ -37,16 +39,26 @@ namespace DiceBotsGame.DiceBots {
          dice.transform.localRotation = Quaternion.identity;
          dice.transform.localScale = Vector3.one;
 
-         this.emissive = emissive;
          healthSystem = new HealthSystem(dice.Data.CoreHealth);
+         healthSystem.OnDied.AddListener(HandleDied);
+
+         this.emissive = emissive;
          this.emissive.SetObservedHealthSystem(healthSystem);
          for (var index = 0; index < metallicRendererCategories.Length; index++) {
-            metallicRendererCategories[index].Apply(metallicMaterial.Length > index ? metallicMaterial[index] : metallicMaterial[0]);
+            metallicRendererCategories[index].Apply(metallicMaterial.Length > index ? metallicMaterial[index] : metallicMaterial[0], emissive.Material);
          }
          foreach (var emissiveRenderer in emissiveRenderers) {
             emissiveRenderer.material = emissive.Material;
          }
+
+         OnSetupComplete.Invoke();
       }
+
+      private void OnDestroy() {
+         healthSystem.OnDied.RemoveListener(HandleDied);
+      }
+
+      private void HandleDied() => dice.DetachFromBody();
 
       public void SetWorldTargetPosition(Transform worldTarget) => WorldTarget = worldTarget;
 
@@ -102,9 +114,9 @@ namespace DiceBotsGame.DiceBots {
       private class MetallicRendererCategory {
          [SerializeField] private MeshRenderer[] metallicRenderers;
 
-         public void Apply(Material material) {
+         public void Apply(Material material, Material emissive) {
             foreach (var metallicRenderer in metallicRenderers) {
-               metallicRenderer.material = material;
+               metallicRenderer.materials = new[] { material, emissive };
             }
          }
       }

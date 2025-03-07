@@ -66,6 +66,8 @@ namespace DiceBotsGame.GameSates.WorldStates {
          MainUi.Forge.Hide();
       }
 
-      protected override void Update() { }
+      protected override void Update() {
+         GameInfo.PlayerParty.UpdateBotsWorldPosition();
+      }
    }
 }

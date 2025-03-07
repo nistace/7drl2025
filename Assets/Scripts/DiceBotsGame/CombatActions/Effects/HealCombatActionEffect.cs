@@ -13,7 +13,7 @@ namespace DiceBotsGame.CombatActions.Effects {
          HealedDamage = 1
       }
 
-      [SerializeField] private EEffectTarget target = EEffectTarget.BotOnTile;
+      [SerializeField] private ETarget target = ETarget.BotOnTile;
       [SerializeField] private bool resurrect;
       [SerializeField] private EOutputValue outputValue = EOutputValue.Unchanged;
 

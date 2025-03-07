@@ -1,26 +1,21 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using DiceBotsGame.DiceBots;
 using DiceBotsGame.UI;
 using UnityEngine;
 
 namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
    public class RollCombatSubState : ICombatSubState {
-      private readonly DiceBot[] allBots;
-
       private List<DiceBot> rollingBots { get; } = new List<DiceBot>();
       public bool IsOver => rollingBots.Count == 0;
       private float remainingMinTime = 1;
-
-      public RollCombatSubState(DiceBot[] allBots) {
-         this.allBots = allBots;
-      }
 
       public void StartState() {
          MainUi.Log.SetTexts("Battle continues", "Dice are rolling");
 
          remainingMinTime = 1;
          rollingBots.Clear();
-         foreach (var bot in allBots) {
+         foreach (var bot in GameInfo.PlayerParty.DiceBotsInParty.Union(GameInfo.CombatGrid.ListOfOpponentBots)) {
             if (bot.HealthSystem.IsAlive) {
                bot.Roll();
                rollingBots.Add(bot);

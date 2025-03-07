@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DiceBotsGame.BotUpgrades;
 using DiceBotsGame.UI.Health;
@@ -20,7 +20,7 @@ namespace DiceBotsGame.UI.Forge {
       [SerializeField] protected UpgradeArrow[] upgradeArrows;
       [SerializeField] protected DiceBotActionUi[] upgradeActions;
 
-      private FaceUpgrade[] FaceUpgrades { get; set; }
+      private Dictionary<DiceBotActionUi, FaceUpgrade> UpgradePerAction { get; } = new Dictionary<DiceBotActionUi, FaceUpgrade>();
       public UnityEvent<IUpgrade> OnUpgradeClicked { get; } = new UnityEvent<IUpgrade>();
 
       private void Start() {
@@ -40,17 +40,20 @@ namespace DiceBotsGame.UI.Forge {
       private void HandleHealthUpgradeClicked(IUpgrade healthUpgrade) => OnUpgradeClicked.Invoke(healthUpgrade);
 
       private void HandleCurrentActionClicked(DiceBotActionUi action) {
-         var index = Array.IndexOf(currentActions, action);
-         OnUpgradeClicked.Invoke(FaceUpgrades[index]);
+         if (UpgradePerAction.TryGetValue(action, out var faceUpgrade)) {
+            OnUpgradeClicked.Invoke(faceUpgrade);
+         }
       }
 
       private void HandleUpgradeActionClicked(DiceBotActionUi action) {
-         var index = Array.IndexOf(upgradeActions, action);
-         OnUpgradeClicked.Invoke(FaceUpgrades[index]);
+         if (UpgradePerAction.TryGetValue(action, out var faceUpgrade)) {
+            OnUpgradeClicked.Invoke(faceUpgrade);
+         }
       }
 
       public void SetUp(BotUpgrade botUpgrade) {
-         FaceUpgrades = botUpgrade.FaceUpgrades.Values.OrderBy(t => botUpgrade.Bot.Dice.IndexOfFace(t.Face)).ToArray();
+         UpgradePerAction.Clear();
+
          foreach (var coloredImage in coloredImages) {
             coloredImage.color = botUpgrade.Bot.Color;
          }
@@ -71,6 +74,9 @@ namespace DiceBotsGame.UI.Forge {
             currentActions[faceIndex].SetAction(face.Data.CombatAction);
 
             if (botUpgrade.FaceUpgrades.TryGetValue(face, out var faceUpgrade)) {
+               UpgradePerAction.Add(currentActions[faceIndex], faceUpgrade);
+               UpgradePerAction.Add(upgradeActions[faceIndex], faceUpgrade);
+
                currentActions[faceIndex].SetInteractable(true);
                upgradeArrows[faceIndex].Show(faceUpgrade);
                upgradeActions[faceIndex].gameObject.SetActive(true);

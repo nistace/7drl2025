@@ -21,6 +21,7 @@ namespace DiceBotsGame.GameSates.WorldStates {
       protected override void Disable() { }
 
       protected override void Update() {
+         GameInfo.PlayerParty.UpdateBotsWorldPosition();
          while (!MainCameraController.AtAnchorPosition) return;
          ChangeState(new StartCombatState(encounter));
       }

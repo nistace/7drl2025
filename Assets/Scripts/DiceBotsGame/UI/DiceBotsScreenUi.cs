@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using DiceBotsGame.CombatActions;
+﻿using DiceBotsGame.CombatActions;
+using DiceBotsGame.CombatGrids;
 using DiceBotsGame.DiceBots;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,6 +12,7 @@ namespace DiceBotsGame.UI {
       [SerializeField] private DiceBotsListUi encounterBotsList;
 
       private DiceBotsParty playerParty;
+      private CombatGrid combatGrid;
 
       public UnityEvent<DiceBot, CombatActionDefinition> OnPlayerBotActionHoverStarted { get; } = new UnityEvent<DiceBot, CombatActionDefinition>();
       public UnityEvent<DiceBot, CombatActionDefinition> OnPlayerBotActionHoverStopped { get; } = new UnityEvent<DiceBot, CombatActionDefinition>();
@@ -53,17 +54,25 @@ namespace DiceBotsGame.UI {
 
       private void HandlePlayerPartyBotAdded(DiceBot newBot) => playerBotsList.AddBot(newBot);
 
-      public void SetupEncounter(IReadOnlyList<DiceBot> encounterBots) {
+      public void SetupEncounter(CombatGrid combatGrid) {
+         this.combatGrid = combatGrid;
          encounterBotsList.CleanUpAllBots();
-         foreach (var encounterBot in encounterBots) {
+         foreach (var encounterBot in combatGrid.ListOfOpponentBots) {
             encounterBotsList.AddBot(encounterBot);
          }
 
          encounterBotsList.SetActionsVisible(true);
          playerBotsList.SetActionsVisible(true);
+         combatGrid.OnNewOpponent.AddListener(HandleNewOpponent);
+      }
+
+      private void HandleNewOpponent(DiceBot newOpponent) {
+         encounterBotsList.AddBot(newOpponent);
+         encounterBotsList.SetActionsVisible(true);
       }
 
       public void EndEncounter() {
+         if (combatGrid) combatGrid.OnNewOpponent.RemoveListener(HandleNewOpponent);
          encounterBotsList.CleanUpAllBots();
          encounterBotsList.SetActionsVisible(false);
          playerBotsList.SetActionsVisible(false);

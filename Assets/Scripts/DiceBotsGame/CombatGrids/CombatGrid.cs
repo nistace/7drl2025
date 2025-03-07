@@ -4,6 +4,7 @@ using DiceBotsGame.DiceBots;
 using DiceBotsGame.Utils;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace DiceBotsGame.CombatGrids {
    public class CombatGrid : MonoBehaviour {
@@ -23,11 +24,13 @@ namespace DiceBotsGame.CombatGrids {
       public CombatGridTile this[Vector2Int coordinates] => this[coordinates.x, coordinates.y];
       private Map<DiceBot, CombatGridTile> PositionPerBot { get; } = new Map<DiceBot, CombatGridTile>();
       private IReadOnlyList<DiceBot> PlayerBots { get; set; }
-      public IReadOnlyList<DiceBot> OpponentBots { get; private set; }
+      private List<DiceBot> OpponentBots { get; set; }
+      public IReadOnlyList<DiceBot> ListOfOpponentBots => OpponentBots;
       public bool AreAllBotsAtTheirPosition => PositionPerBot.All(t => t.Key.transform.transform.position == t.Value.transform.position);
-
       private int Size { get; set; }
       public float TransitionLerpSpeed => transitionLerpSpeed;
+
+      public UnityEvent<DiceBot> OnNewOpponent { get; } = new UnityEvent<DiceBot>();
 
       public void PrepareCombat(Transform origin, IReadOnlyList<DiceBot> playerBots, IReadOnlyList<DiceBot> opponentBots) {
          transform.position = origin.position;
@@ -35,7 +38,7 @@ namespace DiceBotsGame.CombatGrids {
          tileContainer.localScale = Vector3.zero;
 
          PlayerBots = playerBots;
-         OpponentBots = opponentBots;
+         OpponentBots = opponentBots.ToList();
 
          for (var i = 0; i < playerBots.Count; ++i) {
             var tile = this[0, IndexToY(i)];
@@ -49,6 +52,13 @@ namespace DiceBotsGame.CombatGrids {
             PositionPerBot.Add(bot, tile);
             bot.transform.SetParent(offsetTransform);
          }
+      }
+
+      public void AddOpponentToBattle(DiceBot opponent, CombatGridTile tile) {
+         PositionPerBot.Add(opponent, tile);
+         opponent.transform.SetParent(offsetTransform);
+         OpponentBots.Add(opponent);
+         OnNewOpponent.Invoke(opponent);
       }
 
       private static int IndexToY(int x) => x switch {

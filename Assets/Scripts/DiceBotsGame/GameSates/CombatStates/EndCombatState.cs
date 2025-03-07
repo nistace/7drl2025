@@ -34,7 +34,7 @@ namespace DiceBotsGame.GameSates.CombatStates {
          }
 
          if (Mathf.Approximately(lerp, 0)) {
-            encounter.Activity.Solved = true;
+            encounter.Activity.SetSolved(true);
             GameInfo.CombatGrid.EndBattle();
             encounter.SnapAllBotsToWorldSlots();
             if (encounter.Boss) {

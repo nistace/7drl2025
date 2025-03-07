@@ -17,10 +17,8 @@ namespace DiceBotsGame.GameSates.CombatStates {
 
       public PlayCombatState(WorldCubeTileEncounter encounter) {
          this.encounter = encounter;
-         var allBots = GameInfo.PlayerParty.DiceBotsInParty.Union(this.encounter.DiceBots).ToArray();
-         subStatesSequence = new List<ICombatSubState> { new RollCombatSubState(allBots), new PlayerCombatSubState(), new OpponentCombatSubState() };
-
-         suddenDeathSubState = new SuddenDeathCombatSubState(allBots);
+         subStatesSequence = new List<ICombatSubState> { new RollCombatSubState(), new PlayerCombatSubState(), new OpponentCombatSubState() };
+         suddenDeathSubState = new SuddenDeathCombatSubState();
       }
 
       protected override void Enable() {
@@ -53,10 +51,10 @@ namespace DiceBotsGame.GameSates.CombatStates {
 
          if (currentSubStateIndex == subStatesSequence.Count - 1) {
             turn++;
-            if (turn == 5) {
+            if (turn == 8) {
                subStatesSequence.Add(suddenDeathSubState);
             }
-            else if (turn > 5 && (turn - 5) % 4 == 0) {
+            else if (turn > 8 && (turn - 8) % 8 == 0) {
                suddenDeathSubState.IncreaseEffect();
             }
          }

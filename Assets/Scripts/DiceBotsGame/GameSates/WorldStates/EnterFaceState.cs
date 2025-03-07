@@ -14,14 +14,16 @@ namespace DiceBotsGame.GameSates.WorldStates {
          MainUi.Log.SetTexts(WorldActionName, "Entering the face");
          MainCameraController.ActivateCamera(entryFace.Activity.ActivityCamera);
          GameInfo.PlayerParty.SetWorldPosition(entryFace);
-         GameInfo.PlayerParty.SnapBotsToWorldPosition();
       }
 
       protected override void Disable() { }
 
       protected override void Update() {
-         entryFace.Activity.Solved = true;
-         ChangeState(WorldState.Instance);
+         GameInfo.PlayerParty.UpdateBotsWorldPosition();
+         if (GameInfo.PlayerParty.AllBotsAtWorldTarget) {
+            entryFace.Activity.SetSolved(true);
+            ChangeState(WorldState.Instance);
+         }
       }
    }
 }

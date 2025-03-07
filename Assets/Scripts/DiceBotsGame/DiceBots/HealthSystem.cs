@@ -17,16 +17,24 @@ namespace DiceBotsGame.DiceBots {
       public bool IsAlive => currentHealth > 0;
       public bool IsDead => !IsAlive;
 
-      public UnityEvent<int> OnDamaged { get; } = new UnityEvent<int>();
-      public UnityEvent<int> OnHealed { get; } = new UnityEvent<int>();
-      public UnityEvent<int> OnChanged { get; } = new UnityEvent<int>();
-      public UnityEvent OnDied { get; } = new UnityEvent();
-      public UnityEvent OnResurrected { get; } = new UnityEvent();
-      public UnityEvent<int> OnMaxHealthChanged { get; } = new UnityEvent<int>();
+      public UnityEvent<int> OnDamaged { get; }
+      public UnityEvent<int> OnHealed { get; }
+      public UnityEvent<int> OnChanged { get; }
+      public UnityEvent OnDied { get; }
+      public UnityEvent OnResurrected { get; }
+      public UnityEvent<int> OnMaxHealthChanged { get; }
+
+      public HealthSystem() : this(5) { }
 
       public HealthSystem(int maxHealth) {
          this.maxHealth = maxHealth;
          currentHealth = this.maxHealth;
+         OnDamaged = new UnityEvent<int>();
+         OnHealed = new UnityEvent<int>();
+         OnChanged = new UnityEvent<int>();
+         OnDied = new UnityEvent();
+         OnResurrected = new UnityEvent();
+         OnMaxHealthChanged = new UnityEvent<int>();
       }
 
       public void ChangeMaxHealth(int maxHealth) {

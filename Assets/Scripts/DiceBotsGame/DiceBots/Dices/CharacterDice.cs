@@ -22,7 +22,7 @@ namespace DiceBotsGame.DiceBots.Dices {
       public bool IsStuckWhileRolling => !IsAttached && !IsRolling && !HasValidRolledFace();
       public CharacterDiceData Data => data;
 
-      public UnityEvent OnStartedRolling = new UnityEvent();
+      public UnityEvent OnStartedRolling { get; } = new UnityEvent();
       public UnityEvent<CharacterDiceFace> OnSavedRolledFace { get; } = new UnityEvent<CharacterDiceFace>();
 
       public void SetUp(CharacterDiceData data, CharacterDiceFace[] faces) {
@@ -52,9 +52,8 @@ namespace DiceBotsGame.DiceBots.Dices {
          OnStartedRolling.Invoke();
       }
 
-      public void AttachToBody() {
-         diceBody.isKinematic = true;
-      }
+      public void AttachToBody() => diceBody.isKinematic = true;
+      public void DetachFromBody() => diceBody.isKinematic = false;
 
       public bool HasValidRolledFace() => faces.Min(t => Vector3.Angle(t.transform.up, Vector3.up)) < 5f;
 

@@ -97,6 +97,11 @@ namespace DiceBotsGame.WorldLevels {
                tile.transform.localPosition = new Vector3((x - (pattern.CubeSize - 1) * .5f) * pattern.TileOffset, 0, (y - (pattern.CubeSize - 1) * .5f) * pattern.TileOffset);
                tile.transform.localRotation = Quaternion.identity;
                tile.transform.localScale = Vector3.one;
+
+               if (tile.TryGetComponent(out WorldCubeTileActivity activity)) {
+                  activity.Face = faceIndex;
+               }
+
                Tiles.Add(tile);
             }
          }
@@ -122,6 +127,7 @@ namespace DiceBotsGame.WorldLevels {
       }
 
       public WorldCubeTile GetFaceEntryInCurrentFace() => EntryTiles[CurrentFaceIndex];
+      public WorldCubeTile GetFaceEntryInNextFace() => EntryTiles[CurrentFaceIndex + 1];
 
       public void Lerp(float lerp) {
          transform.localScale = Mathf.Lerp(lerpMinScale, lerpMaxScale, lerp) * Vector3.one;

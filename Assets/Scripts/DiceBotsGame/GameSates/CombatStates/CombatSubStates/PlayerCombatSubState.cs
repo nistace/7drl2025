@@ -6,6 +6,7 @@ using DiceBotsGame.CombatActions;
 using DiceBotsGame.CombatGrids;
 using DiceBotsGame.DiceBots;
 using DiceBotsGame.UI;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
@@ -148,6 +149,8 @@ namespace DiceBotsGame.GameSates.CombatStates.CombatSubStates {
          foreach (var actionEffect in CombatActionHelper.GetEffects(playingAction.Action)) {
             yield return playingBot.StartCoroutine(actionEffect.Execute(GameInfo.CombatGrid, playingBot, playingTile, value, t => value = t));
          }
+
+         yield return new WaitForSeconds(.5f);
 
          CurrentPhase = Phase.SelectAction;
          CombatInfoHelper.HideLog();

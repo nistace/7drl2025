@@ -417,7 +417,7 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -439,7 +439,7 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -448,6 +448,28 @@ TextureImporter:
       bones: []
       spriteID: 7161c194ef10a0b4680f8f5af516817b
       internalID: 1089141940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: summon_scraptooth
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e30077d8b3b6b84b999bfd8a095c1f6
+      internalID: 928058824
       vertices: []
       indices: 
       edges: []
@@ -480,6 +502,7 @@ TextureImporter:
       move: -989351889
       no_action: -684340530
       rolling: 570957193
+      summon_scraptooth: 928058824
       teleport: 1089141940
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

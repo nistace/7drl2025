@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf9c69082b52465fa49172de79e80147, type: 3}
   m_Name: TestCube
   m_EditorClassIdentifier: 
-  cubeSize: 5
+  cubeSize: 3
   spawnTilePrefab: {fileID: 1780359259837258534, guid: 63d0baaec63ccc44ba2c7489d3021ee4,
     type: 3}
   faceExitTilePrefab: {fileID: 1780359259837258534, guid: b1f169fa8c072b5488486bac33bcda01,
@@ -25,8 +25,9 @@ MonoBehaviour:
   - mandatoryFaces:
     - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
     - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 108c7fd2ccdb6494197d064bedb9e19c, type: 3}
     possibleEncounters:
-    - {fileID: 11400000, guid: 4da1c18a7a5ac7b48a8d6796aa9f87d5, type: 2}
+    - {fileID: 11400000, guid: da62a1abf9b0df049acf7cfe426dd1fa, type: 2}
   - mandatoryFaces:
     - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
     - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
@@ -40,6 +41,7 @@ MonoBehaviour:
     - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
     - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
     - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 108c7fd2ccdb6494197d064bedb9e19c, type: 3}
     possibleEncounters:
     - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
     - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
@@ -48,6 +50,7 @@ MonoBehaviour:
     - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
     - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
     - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 108c7fd2ccdb6494197d064bedb9e19c, type: 3}
     possibleEncounters:
     - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
     - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
@@ -56,6 +59,7 @@ MonoBehaviour:
     - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
     - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
     - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 108c7fd2ccdb6494197d064bedb9e19c, type: 3}
     possibleEncounters:
     - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
     - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}

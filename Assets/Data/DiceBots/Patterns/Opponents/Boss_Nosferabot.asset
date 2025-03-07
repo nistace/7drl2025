@@ -49,20 +49,6 @@ MonoBehaviour:
   combatAi:
     scoringPerAction:
       _serializedList:
-      - Key: {fileID: 4863189043864608779, guid: 60c2fcee05b3d00498845553fb72d481,
-          type: 3}
-        Value:
-          scoreInitial: 0
-          scorePerValue: 0
-          scorePerSelfHealthPoints: 0
-          scorePerSelfMissingHealthPoints: 0
-          scorePerTargetHealthPoints: 0
-          scorePerTargetMissingHealthPoints: 0
-          scorePerDistanceBetweenActorAndAlly: 0
-          scorePerDistanceBetweenActorAndOpponent: 1
-          scorePerDistanceBetweenTileAndSelf: 0
-          scorePerDistanceBetweenTileAndAlly: 0
-          scorePerDistanceBetweenTileAndOpponent: -1
       - Key: {fileID: 4863189043864608779, guid: 504f1230358e76945be195fefc122fa1,
           type: 3}
         Value:
@@ -77,6 +63,20 @@ MonoBehaviour:
           scorePerDistanceBetweenTileAndSelf: 0
           scorePerDistanceBetweenTileAndAlly: 0
           scorePerDistanceBetweenTileAndOpponent: 0
+      - Key: {fileID: 4863189043864608779, guid: 60c2fcee05b3d00498845553fb72d481,
+          type: 3}
+        Value:
+          scoreInitial: 0
+          scorePerValue: 0
+          scorePerSelfHealthPoints: 0
+          scorePerSelfMissingHealthPoints: 0
+          scorePerTargetHealthPoints: 0
+          scorePerTargetMissingHealthPoints: 0
+          scorePerDistanceBetweenActorAndAlly: 0
+          scorePerDistanceBetweenActorAndOpponent: 1
+          scorePerDistanceBetweenTileAndSelf: 0
+          scorePerDistanceBetweenTileAndAlly: 0
+          scorePerDistanceBetweenTileAndOpponent: -1
   upgradeInfo:
     levelUpAdditionalHealth: 1
     upgradableActions:

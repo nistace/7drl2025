@@ -27,9 +27,11 @@ namespace DiceBotsGame.GameSates.CombatStates {
          MainUi.Log.SetTexts("Battle is starting...", IntroductionSentences.Roll().Replace("{0}", encounter.DisplayName));
 
          MainUi.Combat.Show();
-         MainUi.DiceBots.SetupEncounter(encounter.DiceBots);
 
          GameInfo.CombatGrid.PrepareCombat(encounter.transform, GameInfo.PlayerParty.DiceBotsInParty, encounter.DiceBots);
+
+         MainUi.DiceBots.SetupEncounter(GameInfo.CombatGrid);
+
          GameInfo.CombatGrid.StartBattle();
       }
 
