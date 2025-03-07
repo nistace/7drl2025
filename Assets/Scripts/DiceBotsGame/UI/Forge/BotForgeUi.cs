@@ -55,7 +55,7 @@ namespace DiceBotsGame.UI.Forge {
             coloredImage.color = botUpgrade.Bot.Color;
          }
 
-         botName.text = botUpgrade.Bot.name;
+         botName.text = botUpgrade.Bot.DisplayName;
          currentHealthBar.Refresh(botUpgrade.Bot.HealthSystem.CurrentHealth, botUpgrade.Bot.HealthSystem.MaxHealth);
          if (botUpgrade.HasHealthUpgrade) {
             upgradeHealthBar.Refresh(botUpgrade.HealthUpgrade.NewHealth, botUpgrade.HealthUpgrade.NewHealth);

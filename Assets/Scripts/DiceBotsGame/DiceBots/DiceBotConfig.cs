@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DiceBotsGame.Utils;
+using UnityEngine;
 
 namespace DiceBotsGame.DiceBots {
    [CreateAssetMenu]
@@ -13,6 +14,10 @@ namespace DiceBotsGame.DiceBots {
       [SerializeField] protected float worldMovementMaxAngle = 10;
       [SerializeField] protected float worldRotationSpeed = 30;
 
+      [Header("Audio")]
+      [SerializeField] protected AudioClip[] footstepClips;
+      [SerializeField] protected float footstepVolumeScale = 2f;
+
       public float WorldMovementSpeed => worldMovementSpeed;
       public float WorldMovementMaxAngle => worldMovementMaxAngle;
       public float WorldRotationSpeed => worldRotationSpeed;
@@ -22,5 +27,8 @@ namespace DiceBotsGame.DiceBots {
       public float RollMaxTorque => rollMaxTorque;
       public float RollMinForce => rollMinForce;
       public float RollMaxForce => rollMaxForce;
+
+      public AudioClip RandomFootstepClip => footstepClips.Roll();
+      public float FootstepVolumeScale => footstepVolumeScale;
    }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using DiceBotsGame.DiceBots.Dices;
 using DiceBotsGame.DiceBots.Dices.Faces;
 using DiceBotsGame.WorldLevels;
@@ -11,6 +12,7 @@ namespace DiceBotsGame.DiceBots {
       [SerializeField] protected CharacterDice dicePrefab;
       [SerializeField] protected CharacterDiceFace facePrefab;
       [SerializeField] protected Material emissiveMaterial;
+      [SerializeField] protected Material metallicMaterial;
 
       private static DiceBotFactory instance { get; set; }
       public bool IsReady => instance;
@@ -26,6 +28,7 @@ namespace DiceBotsGame.DiceBots {
          var diceBot = Instantiate(instance.botPrefab);
          var dice = Instantiate(instance.dicePrefab);
          var diceBotEmissiveMaterial = DiceBotEmissiveMaterial.Instantiate(instance.emissiveMaterial, color, 1);
+         var metallicMaterials = botPattern.MetallicColors.Select(t => new Material(instance.metallicMaterial) { color = t }).ToArray();
 
          var faces = new List<CharacterDiceFace>();
          foreach (var faceAction in dicePattern.FaceActions) {
@@ -35,8 +38,8 @@ namespace DiceBotsGame.DiceBots {
             faces.Add(face);
          }
 
-         dice.SetUp(dicePattern.Data, faces.ToArray());
-         diceBot.SetUp(botPattern.DisplayName, botPattern.CombatAi, botPattern.UpgradeInfo, dice, diceBotEmissiveMaterial);
+         diceBot.Dice.SetUp(dicePattern.Data, faces.ToArray());
+         diceBot.SetUp(botPattern, diceBotEmissiveMaterial, metallicMaterials);
          return diceBot;
       }
 

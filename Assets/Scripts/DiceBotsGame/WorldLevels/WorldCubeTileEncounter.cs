@@ -8,7 +8,11 @@ namespace DiceBotsGame.WorldLevels {
       [SerializeField] protected WorldCubeTileActivity activity;
       [SerializeField] protected Transform[] worldSlots;
 
-      public string DisplayName { get; private set; }
+      private EncounterPreset Preset { get; set; }
+      public string DisplayName => Preset.DisplayName;
+      public int Level => Preset.EncounterLevel;
+      public bool Boss => Preset.Boss;
+
       private DiceBot[] diceBots;
 
       public WorldCubeTileActivity Activity => activity;
@@ -18,11 +22,13 @@ namespace DiceBotsGame.WorldLevels {
          activity = GetComponent<WorldCubeTileActivity>();
       }
 
-      public void SetUp(string displayName, DiceBot[] encounterBots) {
-         DisplayName = displayName;
+      public void SetUp(EncounterPreset encounterPreset, DiceBot[] encounterBots) {
+         Preset = encounterPreset;
          diceBots = encounterBots;
 
          SnapAllBotsToWorldSlots();
+
+         activity.DisplayName = encounterPreset.DisplayName;
       }
 
       public void SnapAllBotsToWorldSlots() {

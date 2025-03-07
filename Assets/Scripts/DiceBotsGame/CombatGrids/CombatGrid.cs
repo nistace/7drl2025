@@ -12,6 +12,7 @@ namespace DiceBotsGame.CombatGrids {
       [SerializeField] protected float tileContainerLerpMinScale = .1f;
       [SerializeField] protected float tileContainerLerpMaxScale = 1;
       [SerializeField] protected CinemachineCamera cinemachineCamera;
+      [SerializeField] protected CinemachineBasicMultiChannelPerlin cameraShake;
       [SerializeField] protected float upMovementOffset = 5;
       [SerializeField] protected float transitionLerpSpeed = 1;
 

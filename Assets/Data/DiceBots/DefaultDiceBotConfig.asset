@@ -21,3 +21,12 @@ MonoBehaviour:
   worldMovementSpeed: 4
   worldMovementMaxAngle: 60
   worldRotationSpeed: 720
+  footstepClips:
+  - {fileID: 8300000, guid: 22eb4599760bdc74699a7a8c3906e1df, type: 3}
+  - {fileID: 8300000, guid: fdf7311e36a7e4645b17d8763a94a33a, type: 3}
+  - {fileID: 8300000, guid: 89db5e85467477445b773fcd06e70733, type: 3}
+  - {fileID: 8300000, guid: 9e418dcfca3d6f54fb250cacbedb20f6, type: 3}
+  - {fileID: 8300000, guid: 3e5fbbd429e663d4eb631b4e7991a922, type: 3}
+  - {fileID: 8300000, guid: b58b6d3f9b3254648909d636359e96ab, type: 3}
+  - {fileID: 8300000, guid: 071dbdbf31308e142918de302919940c, type: 3}
+  - {fileID: 8300000, guid: 6342dc8b9c218154186c9ec3e276afeb, type: 3}

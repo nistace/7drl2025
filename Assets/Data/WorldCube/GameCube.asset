@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9c69082b52465fa49172de79e80147, type: 3}
+  m_Name: GameCube
+  m_EditorClassIdentifier: 
+  cubeSize: 5
+  spawnTilePrefab: {fileID: 1780359259837258534, guid: 63d0baaec63ccc44ba2c7489d3021ee4,
+    type: 3}
+  faceExitTilePrefab: {fileID: 1780359259837258534, guid: b1f169fa8c072b5488486bac33bcda01,
+    type: 3}
+  faceEntryTilePrefab: {fileID: 1780359259837258534, guid: 80ba961596534a04baed2a30983dbe2c,
+    type: 3}
+  defaultTilePrefab: {fileID: 732580884703210401, guid: da62921abf4d9fa4e8bc1db67fcdb7a8,
+    type: 3}
+  facePresets:
+  - mandatoryFaces:
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    possibleEncounters:
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+  - mandatoryFaces:
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 108c7fd2ccdb6494197d064bedb9e19c, type: 3}
+    possibleEncounters:
+    - {fileID: 11400000, guid: ae7e3b093d2b99c4d9f2f96fcf7c606f, type: 2}
+    - {fileID: 11400000, guid: ae7e3b093d2b99c4d9f2f96fcf7c606f, type: 2}
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+  - mandatoryFaces:
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    possibleEncounters:
+    - {fileID: 11400000, guid: ae7e3b093d2b99c4d9f2f96fcf7c606f, type: 2}
+    - {fileID: 11400000, guid: ae7e3b093d2b99c4d9f2f96fcf7c606f, type: 2}
+    - {fileID: 11400000, guid: ae7e3b093d2b99c4d9f2f96fcf7c606f, type: 2}
+  - mandatoryFaces:
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    possibleEncounters:
+    - {fileID: 11400000, guid: ae7e3b093d2b99c4d9f2f96fcf7c606f, type: 2}
+    - {fileID: 11400000, guid: ae7e3b093d2b99c4d9f2f96fcf7c606f, type: 2}
+    - {fileID: 11400000, guid: ae7e3b093d2b99c4d9f2f96fcf7c606f, type: 2}
+  - mandatoryFaces:
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    possibleEncounters:
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+    - {fileID: 11400000, guid: 56b5163e32ba3894fa9f7a3a0eef2da4, type: 2}
+  - mandatoryFaces:
+    - {fileID: 1780359259837258534, guid: 414208e05c0232547a1261aea85a1845, type: 3}
+    possibleEncounters:
+    - {fileID: 11400000, guid: 4cd211a735b98954bb7145cd71a064a7, type: 2}
+  tileOffset: 3.1

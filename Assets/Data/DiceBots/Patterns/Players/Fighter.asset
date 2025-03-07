@@ -39,7 +39,12 @@ MonoBehaviour:
       constantStrength: 1
     - action: {fileID: 0}
       constantStrength: 1
-  color: {r: 0, g: 0.51454735, b: 1, a: 1}
+  metallicColors:
+  - {r: 0.023451408, g: 0.057642512, b: 0.2924528, a: 1}
+  - {r: 0.023529412, g: 0.05882353, b: 0.29411766, a: 1}
+  - {r: 0.8773585, g: 0.8773585, b: 0.8773585, a: 1}
+  - {r: 0.16340335, g: 0.17162226, b: 0.2264151, a: 1}
+  color: {r: 0, g: 0.41401777, b: 0.8018868, a: 1}
   combatAi:
     scoringPerAction:
       _serializedList: []

@@ -5,8 +5,8 @@ using DiceBotsGame.WorldLevels;
 
 namespace DiceBotsGame.GameSates {
    public abstract class GameState {
-      public static GameState CurrentState { get; private set; }
-      protected static string WorldActionName = $"Roaming face {GameInfo.WorldCube.CurrentFaceIndex + 1} of the cube";
+      private static GameState CurrentState { get; set; }
+      protected static string WorldActionName => $"Face {GameInfo.WorldCube.CurrentFaceIndex + 1} of the cube";
 
       public static void ChangeState(GameState nextState) {
          CurrentState?.Disable();
@@ -28,7 +28,7 @@ namespace DiceBotsGame.GameSates {
             WorldCubeTileActivity.EType.ExitFace => new ExitFaceState(activity),
             WorldCubeTileActivity.EType.MeetEncounter => new MeetEncounterState(activity),
             WorldCubeTileActivity.EType.EnterFace => throw new ArgumentException($"Activities of type {activity.GetType().Name} are not supported."),
-            WorldCubeTileActivity.EType.DiceSmith => new LevelUpState(PartyUpgrade.GenerateForLevelUp(GameInfo.PlayerParty)),
+            WorldCubeTileActivity.EType.DiceSmith => new ForgeState(PartyUpgrade.GenerateForSmith(GameInfo.PlayerParty, GameInfo.WorldCube.CurrentFaceIndex + 1)),
             _ => throw new ArgumentException($"Activities of type {activity.GetType().Name} are not supported.")
          };
       }

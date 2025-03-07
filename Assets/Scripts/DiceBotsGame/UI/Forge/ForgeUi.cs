@@ -6,6 +6,7 @@ using UnityEngine.UI;
 namespace DiceBotsGame.UI.Forge {
    [RequireComponent(typeof(InOutUiAnimator))]
    public class ForgeUi : MonoBehaviour, IMainScreenUi {
+      [SerializeField] private CanvasGroup canvasGroup;
       [SerializeField] protected InOutUiAnimator uiAnimator;
       [SerializeField] private BotForgeUi[] botPanels;
       [SerializeField] private Button validateButton;
@@ -49,5 +50,7 @@ namespace DiceBotsGame.UI.Forge {
       }
 
       public void Hide() => uiAnimator.Exit();
+
+      public void SetInteractable(bool interactable) => canvasGroup.interactable = interactable;
    }
 }

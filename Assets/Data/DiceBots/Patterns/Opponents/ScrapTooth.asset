@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ScrapTooth
   m_EditorClassIdentifier: 
   displayName: Scraptooth
+  size: 0.7
   dicePattern:
     data:
       coreHealth: 3
@@ -38,7 +39,12 @@ MonoBehaviour:
       constantStrength: 2
     - action: {fileID: 0}
       constantStrength: 1
-  color: {r: 0.5, g: 0.27320912, b: 0.13443395, a: 1}
+  metallicColors:
+  - {r: 0.3773585, g: 0.18872939, b: 0.0729797, a: 1}
+  - {r: 0.3679245, g: 0.20121941, b: 0.098923095, a: 1}
+  - {r: 0.2830189, g: 0.2391709, b: 0.21226417, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  color: {r: 0.7169812, g: 0.105010964, b: 0, a: 1}
   combatAi:
     scoringPerAction:
       _serializedList:

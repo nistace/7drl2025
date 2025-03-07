@@ -19,7 +19,11 @@ namespace DiceBotsGame.WorldLevels {
       public bool Solved { get; set; }
       public EType Type => type;
       public CinemachineCamera ActivityCamera => activityCamera;
-      public object DisplayName => displayName;
+
+      public string DisplayName {
+         get => displayName;
+         set => displayName = value;
+      }
 
       public bool IsOptional(out OptionalActivityInfo optional) => optional = optionalActivityInfo;
 

@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46b324747faa4b05bf729fe258f9e94b, type: 3}
+  m_Name: Bytefang
+  m_EditorClassIdentifier: 
+  displayName: Bytefang
+  size: 0.9
+  dicePattern:
+    data:
+      coreHealth: 7
+      coreCombatActions:
+      - action: {fileID: 4863189043864608779, guid: 504f1230358e76945be195fefc122fa1,
+          type: 3}
+        constantStrength: 1
+    faceActions:
+    - action: {fileID: 4863189043864608779, guid: 504f1230358e76945be195fefc122fa1,
+        type: 3}
+      constantStrength: 2
+    - action: {fileID: 4863189043864608779, guid: 60c2fcee05b3d00498845553fb72d481,
+        type: 3}
+      constantStrength: 2
+    - action: {fileID: 4863189043864608779, guid: 60c2fcee05b3d00498845553fb72d481,
+        type: 3}
+      constantStrength: 2
+    - action: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
+        type: 3}
+      constantStrength: 3
+    - action: {fileID: 0}
+      constantStrength: 0
+    - action: {fileID: 0}
+      constantStrength: 0
+  metallicColors:
+  - {r: 0, g: 0.03182626, b: 0.3301887, a: 1}
+  - {r: 0.06895041, g: 0, b: 0.3490566, a: 1}
+  - {r: 0.3034846, g: 0.28128338, b: 0.4056604, a: 1}
+  - {r: 0.19174972, g: 0.19188797, b: 0.2924528, a: 1}
+  color: {r: 0.6886792, g: 0.01190087, b: 0, a: 1}
+  combatAi:
+    scoringPerAction:
+      _serializedList:
+      - Key: {fileID: 4863189043864608779, guid: 504f1230358e76945be195fefc122fa1,
+          type: 3}
+        Value:
+          scoreInitial: 10
+          scorePerValue: 1
+          scorePerSelfHealthPoints: 0
+          scorePerSelfMissingHealthPoints: 2
+          scorePerTargetHealthPoints: -1
+          scorePerTargetMissingHealthPoints: 0
+          scorePerDistanceBetweenActorAndAlly: 0
+          scorePerDistanceBetweenActorAndOpponent: 1
+          scorePerDistanceBetweenTileAndSelf: 0
+          scorePerDistanceBetweenTileAndAlly: 0
+          scorePerDistanceBetweenTileAndOpponent: 0
+      - Key: {fileID: 4863189043864608779, guid: 321eff26691d59543a8a9cea20caaeb0,
+          type: 3}
+        Value:
+          scoreInitial: 10
+          scorePerValue: 1
+          scorePerSelfHealthPoints: 0
+          scorePerSelfMissingHealthPoints: 0
+          scorePerTargetHealthPoints: 0
+          scorePerTargetMissingHealthPoints: 0
+          scorePerDistanceBetweenActorAndAlly: 0
+          scorePerDistanceBetweenActorAndOpponent: 1
+          scorePerDistanceBetweenTileAndSelf: 0
+          scorePerDistanceBetweenTileAndAlly: 0
+          scorePerDistanceBetweenTileAndOpponent: 0
+      - Key: {fileID: 4863189043864608779, guid: 60c2fcee05b3d00498845553fb72d481,
+          type: 3}
+        Value:
+          scoreInitial: 0
+          scorePerValue: 0
+          scorePerSelfHealthPoints: 0
+          scorePerSelfMissingHealthPoints: 0
+          scorePerTargetHealthPoints: 0
+          scorePerTargetMissingHealthPoints: 0
+          scorePerDistanceBetweenActorAndAlly: 0
+          scorePerDistanceBetweenActorAndOpponent: 1
+          scorePerDistanceBetweenTileAndSelf: 0
+          scorePerDistanceBetweenTileAndAlly: 0
+          scorePerDistanceBetweenTileAndOpponent: -1
+  upgradeInfo:
+    levelUpAdditionalHealth: 1
+    upgradableActions:
+      _serializedList: []
+    initialActions: []

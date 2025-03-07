@@ -373,7 +373,7 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -395,7 +395,7 @@ TextureImporter:
         width: 512
         height: 512
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -404,6 +404,50 @@ TextureImporter:
       bones: []
       spriteID: cb62e2d2f1a49cf4d8faab42d3d4658d
       internalID: -1058125041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: actions_0
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 3584
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8004a83638a771f4fb05564c8b346df0
+      internalID: 522598184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: teleport
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2560
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7161c194ef10a0b4680f8f5af516817b
+      internalID: 1089141940
       vertices: []
       indices: 
       edges: []
@@ -429,12 +473,14 @@ TextureImporter:
       5: -886927821
       6: 1174420085
       absorb: -204809433
+      actions_0: 522598184
       charge: -1058125041
       damage: 1820471382
       heal: 614271085
       move: -989351889
       no_action: -684340530
       rolling: 570957193
+      teleport: 1089141940
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

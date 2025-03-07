@@ -85,7 +85,7 @@ namespace DiceBotsGame.WorldLevels {
             }
             foreach (var tileWithEncounter in tilesWithEncounter) {
                var encounterPreset = encountersQueue.Dequeue();
-               tileWithEncounter.SetUp(encounterPreset.DisplayName, encounterPreset.DiceBotPatterns.Select(DiceBotFactory.Instantiate).ToArray());
+               tileWithEncounter.SetUp(encounterPreset, encounterPreset.DiceBotPatterns.Select(DiceBotFactory.Instantiate).ToArray());
             }
 
             var tileQueue = new Queue<WorldCubeTile>(tiles.OrderBy(_ => Random.value));

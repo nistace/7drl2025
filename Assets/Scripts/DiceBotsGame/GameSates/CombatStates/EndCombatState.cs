@@ -37,7 +37,12 @@ namespace DiceBotsGame.GameSates.CombatStates {
             encounter.Activity.Solved = true;
             GameInfo.CombatGrid.EndBattle();
             encounter.SnapAllBotsToWorldSlots();
-            ChangeState(new LevelUpState(PartyUpgrade.GenerateForLevelUp(GameInfo.PlayerParty)));
+            if (encounter.Boss) {
+               ChangeState(new GameOverState(true));
+            }
+            else {
+               ChangeState(new ForgeState(PartyUpgrade.GenerateForLevelUp(GameInfo.PlayerParty, encounter.Level)));
+            }
          }
       }
    }

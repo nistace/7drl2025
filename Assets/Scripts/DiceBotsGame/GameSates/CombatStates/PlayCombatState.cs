@@ -8,16 +8,19 @@ namespace DiceBotsGame.GameSates.CombatStates {
    public class PlayCombatState : GameState {
       private readonly WorldCubeTileEncounter encounter;
       private float lerp;
+      private int turn;
 
-      private readonly IReadOnlyList<ICombatSubState> subStatesSequence;
+      private readonly List<ICombatSubState> subStatesSequence;
+      private readonly SuddenDeathCombatSubState suddenDeathSubState;
       private int currentSubStateIndex;
       private ICombatSubState currentSubState => subStatesSequence[currentSubStateIndex];
 
       public PlayCombatState(WorldCubeTileEncounter encounter) {
          this.encounter = encounter;
-         subStatesSequence = new ICombatSubState[] {
-            new RollCombatSubState(GameInfo.PlayerParty.DiceBotsInParty.Union(this.encounter.DiceBots).ToArray()), new PlayerCombatSubState(), new OpponentCombatSubState()
-         };
+         var allBots = GameInfo.PlayerParty.DiceBotsInParty.Union(this.encounter.DiceBots).ToArray();
+         subStatesSequence = new List<ICombatSubState> { new RollCombatSubState(allBots), new PlayerCombatSubState(), new OpponentCombatSubState() };
+
+         suddenDeathSubState = new SuddenDeathCombatSubState(allBots);
       }
 
       protected override void Enable() {
@@ -47,7 +50,19 @@ namespace DiceBotsGame.GameSates.CombatStates {
 
       private void NextSubState() {
          currentSubState.EndState();
+
+         if (currentSubStateIndex == subStatesSequence.Count - 1) {
+            turn++;
+            if (turn == 5) {
+               subStatesSequence.Add(suddenDeathSubState);
+            }
+            else if (turn > 5 && (turn - 5) % 4 == 0) {
+               suddenDeathSubState.IncreaseEffect();
+            }
+         }
+
          currentSubStateIndex = (currentSubStateIndex + 1) % subStatesSequence.Count;
+
          currentSubState.StartState();
       }
 

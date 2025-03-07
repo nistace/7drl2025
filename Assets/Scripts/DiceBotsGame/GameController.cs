@@ -1,3 +1,4 @@
+using System.Collections;
 using DiceBotsGame.Cameras;
 using DiceBotsGame.CombatGrids;
 using DiceBotsGame.DiceBots;
@@ -14,6 +15,10 @@ namespace DiceBotsGame {
       [SerializeField] private CombatGridPattern combatGridPattern;
 
       private void Start() {
+         StartCoroutine(StartNewGame());
+      }
+
+      private IEnumerator StartNewGame() {
          var playerMainDiceBot = DiceBotFactory.Instantiate(playerDicePattern);
          playerMainDiceBot.transform.position = Vector3.zero;
 
@@ -28,6 +33,8 @@ namespace DiceBotsGame {
          combatGrid.Lerp(0);
 
          GameInfo.SetupGameData(worldCube, playerParty, combatGrid);
+
+         yield return null;
 
          MainUi.DiceBots.SetUp(playerParty);
          MainUi.Log.Show();
