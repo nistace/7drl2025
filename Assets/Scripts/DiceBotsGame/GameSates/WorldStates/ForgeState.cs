@@ -34,7 +34,10 @@ namespace DiceBotsGame.GameSates.WorldStates {
          }
       }
 
-      private static void CancelValidated() => MainUi.Prompt.Hide();
+      private static void CancelValidated() {
+         MainUi.Prompt.Hide();
+         MainUi.Forge.SetInteractable(true);
+      }
 
       private void ConfirmValidated() {
          MainUi.Prompt.Hide();
